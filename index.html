@@ -2715,9 +2715,8 @@ a{
 .video-control{
     position:absolute;
     z-index:25;
-    left:50%;
+    right:14px;
     bottom:14px;
-    transform:translateX(-50%);
 
     width:38px;
     height:38px;
@@ -2746,7 +2745,7 @@ a{
 }
 
 .video-control:hover{
-    transform:translateX(-50%) scale(1.06);
+    transform:scale(1.06);
     background:rgba(15,18,25,.82);
 }
 
@@ -2774,6 +2773,7 @@ a{
     .video-control{
         width:34px;
         height:34px;
+        right:11px;
         bottom:11px;
     }
 
@@ -2904,24 +2904,36 @@ a{
 
                 <div class="dropdown-menu">
 
-                    <a href="#consumer-products" class="dropdown-link">
-                        Consumer Products
+                    <a
+                        href="#what-we-build"
+                        class="dropdown-link"
+                        data-product-jump="0"
+                    >
+                        Digital Products
                     </a>
 
-                    <a href="#commerce-platforms" class="dropdown-link">
-                        Commerce Platforms
+                    <a
+                        href="#what-we-build"
+                        class="dropdown-link"
+                        data-product-jump="1"
+                    >
+                        Fast Bill
                     </a>
 
-                    <a href="#business-platforms" class="dropdown-link">
-                        Business Platforms
+                    <a
+                        href="#what-we-build"
+                        class="dropdown-link"
+                        data-product-jump="2"
+                    >
+                        E-Commerce Applications
                     </a>
 
-                    <a href="#mobile-products" class="dropdown-link">
-                        Mobile Products
-                    </a>
-
-                    <a href="#future-products" class="dropdown-link">
-                        Future Products
+                    <a
+                        href="#what-we-build"
+                        class="dropdown-link"
+                        data-product-jump="3"
+                    >
+                        AI Chatbot
                     </a>
 
                 </div>
@@ -3384,6 +3396,7 @@ a{
 
             <div class="main-media active" data-main-media="0">
                 <video
+                    class="showcase-main-video"
                     src="one.mp4"
                     autoplay
                     muted
@@ -3449,6 +3462,7 @@ a{
 
         <article class="mobile-product-card" data-mobile-index="0">
             <video
+                class="showcase-main-video"
                 src="one.mp4"
                 muted
                 playsinline
@@ -3779,6 +3793,176 @@ document.addEventListener(
     }
 );
 
+
+
+
+/* =========================================================
+   VIDEO COVER IMAGE
+   Automatically capture the frame at 3 seconds from one.mp4
+   and use it as the video poster/cover on desktop + mobile.
+========================================================= */
+
+(function(){
+
+    const VIDEO_FILE = "one.mp4";
+    const COVER_SECOND = 3;
+
+    const targetVideos =
+        document.querySelectorAll(".showcase-main-video");
+
+    if(!targetVideos.length){
+        return;
+    }
+
+    const probe =
+        document.createElement("video");
+
+    probe.src = VIDEO_FILE;
+    probe.muted = true;
+    probe.preload = "auto";
+    probe.playsInline = true;
+
+    probe.style.position = "fixed";
+    probe.style.left = "-99999px";
+    probe.style.top = "-99999px";
+    probe.style.width = "1px";
+    probe.style.height = "1px";
+    probe.style.opacity = "0";
+    probe.style.pointerEvents = "none";
+
+    document.body.appendChild(probe);
+
+    function cleanup(){
+
+        try{
+            probe.pause();
+            probe.removeAttribute("src");
+            probe.load();
+        }catch(error){}
+
+        if(probe.parentNode){
+            probe.parentNode.removeChild(probe);
+        }
+    }
+
+    function captureFrame(){
+
+        if(
+            !probe.videoWidth ||
+            !probe.videoHeight
+        ){
+            cleanup();
+            return;
+        }
+
+        const canvas =
+            document.createElement("canvas");
+
+        canvas.width =
+            probe.videoWidth;
+
+        canvas.height =
+            probe.videoHeight;
+
+        const ctx =
+            canvas.getContext(
+                "2d",
+                {
+                    alpha:false
+                }
+            );
+
+        if(!ctx){
+            cleanup();
+            return;
+        }
+
+        try{
+
+            ctx.drawImage(
+                probe,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            const posterData =
+                canvas.toDataURL(
+                    "image/jpeg",
+                    0.88
+                );
+
+            targetVideos.forEach(function(video){
+
+                video.poster =
+                    posterData;
+
+            });
+
+        }catch(error){
+
+            console.warn(
+                "Could not create 3-second video cover:",
+                error
+            );
+        }
+
+        cleanup();
+    }
+
+    probe.addEventListener(
+        "loadedmetadata",
+        function(){
+
+            const duration =
+                Number.isFinite(probe.duration)
+                    ? probe.duration
+                    : COVER_SECOND;
+
+            const safeSecond =
+                Math.min(
+                    COVER_SECOND,
+                    Math.max(
+                        0,
+                        duration - 0.05
+                    )
+                );
+
+            try{
+
+                probe.currentTime =
+                    safeSecond;
+
+            }catch(error){
+
+                cleanup();
+            }
+        },
+        {
+            once:true
+        }
+    );
+
+    probe.addEventListener(
+        "seeked",
+        captureFrame,
+        {
+            once:true
+        }
+    );
+
+    probe.addEventListener(
+        "error",
+        cleanup,
+        {
+            once:true
+        }
+    );
+
+    probe.load();
+
+})();
 
 
 /* =========================================================
@@ -4767,6 +4951,48 @@ window.addEventListener(
         }
     }
 );
+
+
+
+/* =========================================================
+   WHAT WE BUILD NAV LINKS
+   Open the matching showcase item.
+========================================================= */
+
+document
+    .querySelectorAll("[data-product-jump]")
+    .forEach(function(link){
+
+        link.addEventListener(
+            "click",
+            function(){
+
+                const index =
+                    Number(
+                        link.dataset.productJump
+                    );
+
+                /*
+                   Wait for the anchor scroll to begin,
+                   then activate the requested product.
+                */
+                setTimeout(
+                    function(){
+
+                        setProduct(
+                            index,
+                            {
+                                scrollMobile:true,
+                                restartVideo:true
+                            }
+                        );
+
+                    },
+                    180
+                );
+            }
+        );
+    });
 
 
 /* =========================================================
