@@ -2889,6 +2889,326 @@ a{
     }
 }
 
+
+
+/* =========================================================
+   HOW WE BUILD
+   CLEAN EDITORIAL PROCESS LAYOUT
+========================================================= */
+
+.build-process{
+    position:relative;
+    width:100%;
+    padding:110px 24px 118px;
+    background:#fff;
+    overflow:hidden;
+}
+
+.build-process-inner{
+    width:100%;
+    max-width:1240px;
+    margin:0 auto;
+}
+
+/* -------------------------
+   HEADING
+------------------------- */
+
+.build-process-head{
+    display:grid;
+    grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+    gap:70px;
+    align-items:end;
+    margin-bottom:58px;
+}
+
+.build-process-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:#777;
+}
+
+.build-process-kicker::before{
+    content:"";
+    width:28px;
+    height:1px;
+    background:#bdbdbd;
+}
+
+.build-process-title{
+    max-width:740px;
+    font-size:52px;
+    font-weight:600;
+    line-height:1.06;
+    letter-spacing:-2.3px;
+    color:#151515;
+}
+
+.build-process-title span{
+    color:#777;
+    font-weight:500;
+}
+
+/* -------------------------
+   PROCESS LIST
+------------------------- */
+
+.process-list{
+    width:100%;
+    border-top:1px solid #e8e8e8;
+}
+
+.process-row{
+    position:relative;
+    display:grid;
+    grid-template-columns:90px minmax(220px,.85fr) minmax(320px,1.15fr) 44px;
+    gap:28px;
+    align-items:center;
+    min-height:150px;
+    padding:26px 4px;
+    border-bottom:1px solid #e8e8e8;
+    opacity:0;
+    transform:translateY(18px);
+    transition:
+        opacity .5s ease,
+        transform .5s cubic-bezier(.2,.7,.2,1),
+        background .25s ease;
+}
+
+.process-row.process-visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.process-row:hover{
+    background:#fafafa;
+}
+
+.process-number{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1.4px;
+    color:#929292;
+}
+
+.process-name{
+    font-size:28px;
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-1px;
+    color:#171717;
+}
+
+.process-copy{
+    max-width:520px;
+    font-size:14px;
+    line-height:1.72;
+    color:#6d6d6d;
+}
+
+.process-arrow{
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    justify-self:end;
+    border:1px solid #e2e2e2;
+    border-radius:50%;
+    color:#666;
+    font-size:15px;
+    transform:rotate(-45deg);
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+}
+
+.process-row:hover .process-arrow{
+    transform:rotate(0deg);
+    background:#111;
+    border-color:#111;
+    color:#fff;
+}
+
+/* -------------------------
+   FOOTER NOTE
+------------------------- */
+
+.process-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    padding-top:30px;
+}
+
+.process-footer p{
+    max-width:700px;
+    font-size:14px;
+    line-height:1.7;
+    color:#6a6a6a;
+}
+
+.process-contact{
+    flex-shrink:0;
+    min-height:44px;
+    padding:0 18px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:#111;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.process-contact:hover{
+    transform:translateY(-2px);
+    background:#2a2a2a;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .build-process{
+        padding:84px 20px 92px;
+    }
+
+    .build-process-head{
+        grid-template-columns:1fr;
+        gap:20px;
+        margin-bottom:40px;
+    }
+
+    .build-process-title{
+        max-width:720px;
+        font-size:42px;
+        letter-spacing:-1.8px;
+    }
+
+    .process-row{
+        grid-template-columns:62px minmax(180px,.8fr) minmax(260px,1.2fr) 40px;
+        gap:20px;
+        min-height:138px;
+    }
+
+    .process-name{
+        font-size:24px;
+    }
+
+    .process-copy{
+        font-size:13.5px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:520px){
+
+    .build-process{
+        padding:62px 14px 70px;
+    }
+
+    .build-process-head{
+        gap:14px;
+        margin-bottom:28px;
+    }
+
+    .build-process-kicker{
+        font-size:9px;
+        letter-spacing:2px;
+    }
+
+    .build-process-kicker::before{
+        width:22px;
+    }
+
+    .build-process-title{
+        font-size:31px;
+        line-height:1.09;
+        letter-spacing:-1.25px;
+    }
+
+    .process-list{
+        border-top:1px solid #e9e9e9;
+    }
+
+    .process-row{
+        grid-template-columns:42px 1fr 32px;
+        gap:10px 12px;
+        align-items:start;
+        min-height:0;
+        padding:21px 0 20px;
+    }
+
+    .process-number{
+        grid-column:1;
+        grid-row:1 / span 2;
+        padding-top:4px;
+        font-size:10px;
+    }
+
+    .process-name{
+        grid-column:2;
+        grid-row:1;
+        font-size:21px;
+        line-height:1.15;
+        letter-spacing:-.65px;
+    }
+
+    .process-copy{
+        grid-column:2 / 4;
+        grid-row:2;
+        max-width:none;
+        padding-right:4px;
+        font-size:12.5px;
+        line-height:1.6;
+    }
+
+    .process-arrow{
+        grid-column:3;
+        grid-row:1;
+        width:30px;
+        height:30px;
+        font-size:13px;
+    }
+
+    .process-footer{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+        padding-top:22px;
+    }
+
+    .process-footer p{
+        font-size:12.5px;
+        line-height:1.62;
+    }
+
+    .process-contact{
+        min-height:41px;
+        padding:0 16px;
+        font-size:11px;
+    }
+}
+
 </style>
 
 </head>
@@ -3637,6 +3957,154 @@ a{
             >
             <span class="mobile-card-count">04</span>
         </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW WE BUILD
+========================================================= -->
+
+<section class="build-process" id="how-we-build">
+
+    <div class="build-process-inner">
+
+        <div class="build-process-head">
+
+            <div class="build-process-kicker">
+                How we build
+            </div>
+
+            <h2 class="build-process-title">
+                From an idea to a product people can actually use.
+                <span>Simple process. Clear execution.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="process-list">
+
+
+            <!-- 01 -->
+
+            <article class="process-row">
+
+                <span class="process-number">
+                    01
+                </span>
+
+                <h3 class="process-name">
+                    Discover & Define
+                </h3>
+
+                <p class="process-copy">
+                    We understand the business, users and the exact problem
+                    before deciding what needs to be built.
+                </p>
+
+                <span class="process-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <!-- 02 -->
+
+            <article class="process-row">
+
+                <span class="process-number">
+                    02
+                </span>
+
+                <h3 class="process-name">
+                    Design & Prototype
+                </h3>
+
+                <p class="process-copy">
+                    We shape the product flow, interface and interactions
+                    so the experience feels simple before development starts.
+                </p>
+
+                <span class="process-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <!-- 03 -->
+
+            <article class="process-row">
+
+                <span class="process-number">
+                    03
+                </span>
+
+                <h3 class="process-name">
+                    Build & Integrate
+                </h3>
+
+                <p class="process-copy">
+                    We develop the application, connect the required systems
+                    and focus on speed, reliability and scalability.
+                </p>
+
+                <span class="process-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+
+            <!-- 04 -->
+
+            <article class="process-row">
+
+                <span class="process-number">
+                    04
+                </span>
+
+                <h3 class="process-name">
+                    Launch & Grow
+                </h3>
+
+                <p class="process-copy">
+                    We launch, observe real usage and continue improving
+                    the product as users and business needs evolve.
+                </p>
+
+                <span class="process-arrow">
+                    →
+                </span>
+
+            </article>
+
+
+        </div>
+
+
+        <div class="process-footer">
+
+            <p>
+                Whether it starts as a simple idea or a complete business
+                requirement, we help turn it into a practical digital product.
+            </p>
+
+            <a
+                href="#contact"
+                class="process-contact"
+            >
+                Start a Conversation
+            </a>
+
+        </div>
 
     </div>
 
@@ -5475,6 +5943,79 @@ if(isMobileShowcase()){
 }
 
 syncVideoButtons();
+
+
+/* =========================================================
+   HOW WE BUILD — SCROLL REVEAL
+========================================================= */
+
+(function(){
+
+    const cards =
+        document.querySelectorAll(
+            ".process-row"
+        );
+
+    if(!cards.length){
+        return;
+    }
+
+    const observer =
+        new IntersectionObserver(
+            function(entries){
+
+                entries.forEach(
+                    function(entry){
+
+                        if(
+                            !entry.isIntersecting
+                        ){
+                            return;
+                        }
+
+                        const card =
+                            entry.target;
+
+                        const index =
+                            Array.prototype.indexOf
+                                .call(
+                                    cards,
+                                    card
+                                );
+
+                        setTimeout(
+                            function(){
+
+                                card.classList.add(
+                                    "process-visible"
+                                );
+
+                            },
+                            index * 90
+                        );
+
+                        observer.unobserve(
+                            card
+                        );
+                    }
+                );
+            },
+            {
+                threshold:.18
+            }
+        );
+
+
+    cards.forEach(
+        function(card){
+
+            observer.observe(
+                card
+            );
+        }
+    );
+
+})();
 
 </script>
 
