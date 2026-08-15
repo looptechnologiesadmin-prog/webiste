@@ -3727,217 +3727,292 @@ a{
 }
 
 
+
+
+
 /* =========================================================
-   BUSINESS SOFTWARE — PRODUCT DEMO
+   BILLING PRODUCT TEASER
 ========================================================= */
 
-.business-software{
+.billing-teaser{
     position:relative;
     width:100%;
-    padding:92px 24px 104px;
+    padding:76px 24px 96px;
     background:#f7f8fa;
     overflow:hidden;
 }
 
-.business-software-inner{
+.billing-teaser-inner{
     width:100%;
-    max-width:1240px;
+    max-width:1180px;
     margin:0 auto;
 }
 
-.software-topline{
+.billing-teaser-frame{
+    position:relative;
+    width:100%;
+    height:560px;
+    overflow:hidden;
+    border-radius:28px;
+    background:#fff;
+    border:1px solid #e6e7ea;
+    box-shadow:0 22px 65px rgba(15,23,42,.08);
+}
+
+/* INTRO STAGE */
+
+.billing-sequence{
+    position:absolute;
+    inset:0;
+    z-index:8;
+    overflow:hidden;
+    background:#fff;
+    transition:
+        opacity .55s ease,
+        visibility .55s ease;
+}
+
+.billing-teaser-frame.video-ready .billing-sequence{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.billing-sequence-line{
+    position:absolute;
+    inset:0;
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:24px;
-    margin-bottom:34px;
+    justify-content:center;
+    padding:30px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(72px);
+    will-change:transform,opacity;
 }
 
-.software-kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    font-size:9px;
-    font-weight:600;
-    letter-spacing:2.1px;
+/* timing */
+.billing-sequence-line.step-one{
+    animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 0s forwards;
+}
+
+.billing-sequence-line.step-two{
+    animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 1.65s forwards;
+}
+
+.billing-sequence-line.step-three{
+    animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 3.3s forwards;
+}
+
+.billing-sequence-line.step-four{
+    animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 4.95s forwards;
+}
+
+.billing-sequence-line.step-five{
+    animation:billingScene 2.2s cubic-bezier(.22,.7,.2,1) 6.6s forwards;
+}
+
+.billing-sequence-line.step-six{
+    animation:billingScene 2.05s cubic-bezier(.22,.7,.2,1) 8.65s forwards;
+}
+
+.billing-sequence-line.step-seven{
+    animation:billingScene 2.5s cubic-bezier(.22,.7,.2,1) 10.55s forwards;
+}
+
+@keyframes billingScene{
+    0%{
+        opacity:0;
+        transform:translateY(72px);
+    }
+    17%{
+        opacity:1;
+        transform:translateY(0);
+    }
+    70%{
+        opacity:1;
+        transform:translateY(0);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-72px);
+    }
+}
+
+/* TEXT STYLES */
+
+.billing-introducing{
+    font-size:20px;
+    font-weight:500;
+    letter-spacing:5px;
     text-transform:uppercase;
-    color:#818181;
+    color:#777;
 }
 
-.software-kicker::before{
-    content:"";
-    width:24px;
-    height:1px;
-    background:#bcbcbc;
-}
-
-.software-status{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    font-size:9px;
-    font-weight:600;
-    letter-spacing:.4px;
-    color:#737373;
-}
-
-.software-status::before{
-    content:"";
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#9c9c9c;
-}
-
-/* SPLIT */
-.software-layout{
-    display:grid;
-    grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
-    gap:58px;
-    align-items:center;
-}
-
-/* LEFT */
-.software-copy{
-    max-width:520px;
-}
-
-.software-copy h2{
-    font-size:48px;
-    font-weight:600;
-    line-height:1.06;
-    letter-spacing:-2px;
+.billing-keyword{
+    position:relative;
+    display:inline-block;
+    font-size:68px;
+    font-weight:650;
+    line-height:1;
+    letter-spacing:-3px;
     color:#171717;
 }
 
-.software-copy h2 span{
-    color:#757575;
-    font-weight:500;
+.billing-keyword .shade{
+    position:absolute;
+    inset:0;
+    color:transparent;
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 20%,
+            #ff5c4d 32%,
+            #ff9a36 40%,
+            #f4d84a 48%,
+            #35c98c 56%,
+            #418dff 64%,
+            #8c5cff 72%,
+            transparent 84%,
+            transparent 100%
+        );
+    background-size:240% 100%;
+    background-position:125% 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    animation:
+        billingShadeMove 1.55s
+        cubic-bezier(.45,0,.2,1)
+        .15s
+        forwards;
+    pointer-events:none;
 }
 
-.software-copy p{
-    max-width:470px;
-    margin-top:16px;
-    font-size:13.5px;
-    line-height:1.72;
-    color:#6a6a6a;
+@keyframes billingShadeMove{
+    0%{
+        background-position:125% 0;
+    }
+    100%{
+        background-position:-25% 0;
+    }
 }
 
-/* KEYWORD MATRIX */
-.software-keywords{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    margin-top:28px;
-    border-top:1px solid #dedfe2;
-    border-left:1px solid #dedfe2;
+.billing-product-name{
+    position:relative;
+    display:inline-block;
+    font-size:66px;
+    font-weight:650;
+    line-height:1;
+    letter-spacing:-3px;
+    color:#151515;
 }
 
-.software-keyword{
-    min-height:74px;
-    padding:15px 16px;
+.billing-product-name .soft{
+    color:#727272;
+}
+
+.billing-product-name .shade{
+    position:absolute;
+    inset:0;
+    color:transparent;
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 22%,
+            #ff5c4d 33%,
+            #ff9b38 41%,
+            #f0d94a 49%,
+            #36c98c 57%,
+            #438cff 65%,
+            #8d5cff 73%,
+            transparent 84%,
+            transparent 100%
+        );
+    background-size:240% 100%;
+    background-position:125% 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    animation:
+        billingShadeMove 1.8s
+        cubic-bezier(.45,0,.2,1)
+        .2s
+        forwards;
+    pointer-events:none;
+}
+
+.billing-built{
     display:flex;
     flex-direction:column;
-    justify-content:center;
-    border-right:1px solid #dedfe2;
-    border-bottom:1px solid #dedfe2;
-    background:rgba(255,255,255,.52);
-    transition:
-        background .25s ease,
-        transform .25s ease;
+    align-items:center;
+    gap:8px;
 }
 
-.software-keyword:hover{
-    background:#fff;
-    transform:translateY(-1px);
-}
-
-.software-keyword small{
-    margin-bottom:5px;
-    font-size:8px;
+.billing-built small{
+    font-size:9px;
     font-weight:600;
-    letter-spacing:1.5px;
+    letter-spacing:2.2px;
     text-transform:uppercase;
-    color:#9b9b9b;
+    color:#9a9a9a;
 }
 
-.software-keyword strong{
-    font-size:12px;
+.billing-built strong{
+    font-size:36px;
     font-weight:600;
-    color:#333;
+    line-height:1.1;
+    letter-spacing:-1.35px;
+    color:#1a1a1a;
 }
 
-/* RIGHT VIDEO */
-.software-demo{
-    position:relative;
-    width:100%;
-}
-
-.software-video-shell{
-    position:relative;
-    width:100%;
-    aspect-ratio:16 / 10;
-    overflow:hidden;
-    border-radius:24px;
-    background:#fff;
-    border:1px solid #e1e3e6;
-    box-shadow:0 24px 70px rgba(31,41,55,.10);
-}
-
-.software-video-shell::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:42px;
-    z-index:4;
-    background:rgba(255,255,255,.94);
-    border-bottom:1px solid #ececec;
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-}
-
-.software-window-dots{
-    position:absolute;
-    z-index:6;
-    top:17px;
-    left:17px;
+.billing-company-made{
     display:flex;
-    gap:6px;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
 }
 
-.software-window-dots span{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#c5c5c5;
+.billing-company-made small{
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:2.4px;
+    text-transform:uppercase;
+    color:#9a9a9a;
 }
 
-.software-demo video{
+.billing-company-made strong{
+    font-size:35px;
+    font-weight:600;
+    line-height:1.12;
+    letter-spacing:-1.3px;
+    color:#191919;
+}
+
+/* FINAL LOCAL MP4 VIDEO */
+
+.billing-final-video{
     position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    top:42px;
+    inset:0;
+    z-index:2;
+    background:#000;
+}
+
+.billing-final-video video{
     width:100%;
-    height:calc(100% - 42px);
-    object-fit:cover;
+    height:100%;
     display:block;
-    background:#f3f4f6;
+    object-fit:cover;
+    background:#000;
 }
 
-/* loader prevents black frame */
-.software-video-loader{
+.billing-mp4-loader{
     position:absolute;
-    z-index:5;
-    left:0;
-    right:0;
-    bottom:0;
-    top:42px;
+    inset:0;
+    z-index:4;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#f5f6f8;
+    background:#f4f5f7;
     opacity:1;
     visibility:visible;
     transition:
@@ -3945,157 +4020,106 @@ a{
         visibility .25s ease;
 }
 
-.software-video-loader.ready{
+.billing-mp4-loader.loaded{
     opacity:0;
     visibility:hidden;
 }
 
-.software-spinner{
-    width:24px;
-    height:24px;
-    border:2px solid #d7d9dd;
+.billing-mp4-spinner{
+    width:25px;
+    height:25px;
+    border:2px solid #d6d8dc;
     border-top-color:#777;
     border-radius:50%;
-    animation:softwareSpin .75s linear infinite;
+    animation:billingMp4Spin .7s linear infinite;
 }
 
-@keyframes softwareSpin{
+@keyframes billingMp4Spin{
     to{
         transform:rotate(360deg);
     }
 }
 
-.software-demo-note{
-    position:absolute;
-    z-index:7;
-    right:14px;
-    bottom:14px;
-    padding:8px 10px;
-    border-radius:9px;
-    background:rgba(255,255,255,.88);
-    border:1px solid rgba(255,255,255,.8);
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    font-size:8px;
-    font-weight:600;
-    letter-spacing:.3px;
-    color:#5f5f5f;
-}
+/* MOBILE */
 
-/* TABLET */
 @media(max-width:900px){
 
-    .business-software{
-        padding:72px 20px 84px;
+    .billing-teaser{
+        padding:62px 20px 78px;
     }
 
-    .software-layout{
-        grid-template-columns:1fr;
-        gap:34px;
+    .billing-teaser-frame{
+        height:500px;
+        border-radius:24px;
     }
 
-    .software-copy{
-        max-width:700px;
+    .billing-keyword,
+    .billing-product-name{
+        font-size:54px;
+        letter-spacing:-2.2px;
     }
 
-    .software-copy h2{
-        max-width:650px;
-        font-size:40px;
-        letter-spacing:-1.6px;
-    }
-
-    .software-demo{
-        max-width:760px;
+    .billing-built strong,
+    .billing-company-made strong{
+        font-size:31px;
     }
 }
 
-/* MOBILE */
 @media(max-width:600px){
 
-    .business-software{
-        padding:54px 14px 64px;
+    .billing-teaser{
+        padding:48px 14px 62px;
     }
 
-    .software-topline{
-        margin-bottom:22px;
+    .billing-teaser-frame{
+        height:430px;
+        border-radius:20px;
     }
 
-    .software-status{
-        display:none;
+    .billing-sequence-line{
+        padding:22px;
     }
 
-    .software-kicker{
-        font-size:8px;
-        letter-spacing:1.8px;
+    .billing-introducing{
+        font-size:13px;
+        letter-spacing:3.5px;
     }
 
-    .software-layout{
-        gap:25px;
+    .billing-keyword,
+    .billing-product-name{
+        font-size:40px;
+        line-height:1.04;
+        letter-spacing:-1.5px;
     }
 
-    .software-copy h2{
-        font-size:30px;
-        line-height:1.09;
-        letter-spacing:-1.1px;
+    .billing-built,
+    .billing-company-made{
+        gap:8px;
     }
 
-    .software-copy p{
-        margin-top:12px;
-        font-size:12.5px;
-        line-height:1.6;
-    }
-
-    .software-keywords{
-        margin-top:20px;
-    }
-
-    .software-keyword{
-        min-height:64px;
-        padding:12px;
-    }
-
-    .software-keyword small{
+    .billing-built small,
+    .billing-company-made small{
         font-size:7px;
-        letter-spacing:1.2px;
+        letter-spacing:1.7px;
     }
 
-    .software-keyword strong{
-        font-size:10.5px;
-    }
-
-    .software-video-shell{
-        aspect-ratio:16 / 11;
-        border-radius:18px;
-    }
-
-    .software-video-shell::before{
-        height:34px;
-    }
-
-    .software-window-dots{
-        top:13px;
-        left:13px;
-    }
-
-    .software-window-dots span{
-        width:6px;
-        height:6px;
-    }
-
-    .software-demo video,
-    .software-video-loader{
-        top:34px;
-        height:calc(100% - 34px);
-    }
-
-    .software-demo-note{
-        right:10px;
-        bottom:10px;
-        padding:7px 9px;
-        font-size:7.5px;
+    .billing-built strong,
+    .billing-company-made strong{
+        max-width:315px;
+        font-size:25px;
+        line-height:1.15;
+        letter-spacing:-.8px;
     }
 }
 
+@media(prefers-reduced-motion:reduce){
+
+    .billing-sequence-line,
+    .billing-keyword .shade,
+    .billing-product-name .shade{
+        animation-timing-function:linear;
+    }
+}
 </style>
 
 </head>
@@ -5234,120 +5258,144 @@ a{
 
 
 
+
+
+
+
 <!-- =========================================================
-     BUSINESS SOFTWARE PRODUCT
+     BILLING SOFTWARE TEASER
 ========================================================= -->
 
-<section class="business-software" id="business-software">
+<section class="billing-teaser" id="billing-software">
 
-    <div class="business-software-inner">
+    <div class="billing-teaser-inner">
 
-        <div class="software-topline">
-
-            <span class="software-kicker">
-                Business Software
-            </span>
-
-            <span class="software-status">
-                Built for real operations
-            </span>
-
-        </div>
+        <div class="billing-teaser-frame" id="billingTeaserFrame">
 
 
-        <div class="software-layout">
+            <!-- FINAL LOCAL MP4 VIDEO -->
 
+            <div class="billing-final-video">
 
-            <!-- LEFT CONTENT -->
+                <video
+                    id="billingProductVideo"
+                    src="app/bill.mp4"
+                    muted
+                    playsinline
+                    preload="auto"
+                ></video>
 
-            <div class="software-copy">
-
-                <h2>
-                    Software that adapts to
-                    <span>the way your business works.</span>
-                </h2>
-
-                <p>
-                    A flexible billing and business application
-                    designed around practical workflows, faster
-                    operations and day-to-day control.
-                </p>
-
-
-                <div class="software-keywords">
-
-                    <div class="software-keyword">
-                        <small>01</small>
-                        <strong>Custom Billing</strong>
-                    </div>
-
-                    <div class="software-keyword">
-                        <small>02</small>
-                        <strong>Instant Receipts</strong>
-                    </div>
-
-                    <div class="software-keyword">
-                        <small>03</small>
-                        <strong>Product Management</strong>
-                    </div>
-
-                    <div class="software-keyword">
-                        <small>04</small>
-                        <strong>Sales Tracking</strong>
-                    </div>
-
-                    <div class="software-keyword">
-                        <small>05</small>
-                        <strong>Inventory Control</strong>
-                    </div>
-
-                    <div class="software-keyword">
-                        <small>06</small>
-                        <strong>Business Customization</strong>
-                    </div>
-
+                <div
+                    class="billing-mp4-loader"
+                    id="billingMp4Loader"
+                >
+                    <span class="billing-mp4-spinner"></span>
                 </div>
 
             </div>
 
 
-            <!-- RIGHT VIDEO -->
+            <!-- TEXT TEASER -->
 
-            <div class="software-demo">
+            <div class="billing-sequence" id="billingSequence">
 
-                <div class="software-video-shell">
 
-                    <div class="software-window-dots" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <!-- 1 -->
+
+                <div class="billing-sequence-line step-one">
+
+                    <div class="billing-introducing">
+                        Introducing
                     </div>
-
-
-                    <video
-                        id="businessSoftwareVideo"
-                        src="software/billing.mp4"
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                        preload="auto"
-                    ></video>
-
-
-                    <div
-                        class="software-video-loader"
-                        id="businessSoftwareLoader"
-                    >
-                        <span class="software-spinner"></span>
-                    </div>
-
-
-                    <span class="software-demo-note">
-                        Live Product Demo
-                    </span>
 
                 </div>
+
+
+                <!-- 2 -->
+
+                <div class="billing-sequence-line step-two">
+
+                    <div class="billing-keyword">
+                        <span>Fast</span>
+                        <span class="shade" aria-hidden="true">Fast</span>
+                    </div>
+
+                </div>
+
+
+                <!-- 3 -->
+
+                <div class="billing-sequence-line step-three">
+
+                    <div class="billing-keyword">
+                        <span>Secure</span>
+                        <span class="shade" aria-hidden="true">Secure</span>
+                    </div>
+
+                </div>
+
+
+                <!-- 4 -->
+
+                <div class="billing-sequence-line step-four">
+
+                    <div class="billing-keyword">
+                        <span>Smart</span>
+                        <span class="shade" aria-hidden="true">Smart</span>
+                    </div>
+
+                </div>
+
+
+                <!-- 5 -->
+
+                <div class="billing-sequence-line step-five">
+
+                    <div class="billing-product-name">
+                        <span>Billing <span class="soft">Software</span></span>
+                        <span class="shade" aria-hidden="true">Billing Software</span>
+                    </div>
+
+                </div>
+
+
+                <!-- 6 -->
+
+                <div class="billing-sequence-line step-six">
+
+                    <div class="billing-built">
+
+                        <small>
+                            Built for
+                        </small>
+
+                        <strong>
+                            Faster Business Operations
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 7 -->
+
+                <div class="billing-sequence-line step-seven">
+
+                    <div class="billing-company-made">
+
+                        <small>
+                            Designed & Developed by
+                        </small>
+
+                        <strong>
+                            Cezonal Solutions Private Limited
+                        </strong>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
@@ -5357,7 +5405,6 @@ a{
     </div>
 
 </section>
-
 
 <script>
 
@@ -7340,104 +7387,194 @@ syncVideoButtons();
 })();
 
 
+
+
 /* =========================================================
-   BUSINESS SOFTWARE VIDEO
-   Auto-play + clean loader
+   BILLING SOFTWARE TEASER
 ========================================================= */
 
 (function(){
 
+    const section =
+        document.getElementById(
+            "billing-software"
+        );
+
+    const frame =
+        document.getElementById(
+            "billingTeaserFrame"
+        );
+
     const video =
         document.getElementById(
-            "businessSoftwareVideo"
+            "billingProductVideo"
         );
 
     const loader =
         document.getElementById(
-            "businessSoftwareLoader"
+            "billingMp4Loader"
         );
 
-    if(!video){
+    if(
+        !section ||
+        !frame ||
+        !video
+    ){
         return;
     }
 
-    function hideLoader(){
+
+    const TEASER_TIME =
+        12900;
+
+    let started =
+        false;
+
+
+    function videoLoaded(){
 
         if(loader){
-            loader.classList.add("ready");
+
+            loader.classList.add(
+                "loaded"
+            );
         }
     }
 
-    function showLoader(){
+
+    function videoLoading(){
 
         if(loader){
-            loader.classList.remove("ready");
+
+            loader.classList.remove(
+                "loaded"
+            );
         }
     }
 
-    function tryPlay(){
 
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-
-        video.setAttribute("muted","");
-        video.setAttribute("playsinline","");
-        video.setAttribute("autoplay","");
-
-        const promise =
-            video.play();
-
-        if(
-            promise &&
-            typeof promise.catch === "function"
-        ){
-
-            promise.catch(function(){
-
-                video.addEventListener(
-                    "canplay",
-                    function(){
-
-                        video.play()
-                            .catch(function(){});
-
-                    },
-                    {
-                        once:true
-                    }
-                );
-            });
-        }
-    }
-
-    [
+    video.addEventListener(
         "loadeddata",
-        "canplay",
-        "playing"
-    ].forEach(function(eventName){
+        videoLoaded
+    );
 
-        video.addEventListener(
-            eventName,
-            hideLoader
-        );
-    });
+    video.addEventListener(
+        "canplay",
+        videoLoaded
+    );
+
+    video.addEventListener(
+        "playing",
+        videoLoaded
+    );
 
     video.addEventListener(
         "waiting",
-        showLoader
+        videoLoading
     );
 
-    video.addEventListener(
-        "stalled",
-        showLoader
-    );
 
-    if(video.readyState >= 2){
-        hideLoader();
+    function revealVideo(){
+
+        frame.classList.add(
+            "video-ready"
+        );
+
+        video.muted =
+            true;
+
+        video.defaultMuted =
+            true;
+
+        video.playsInline =
+            true;
+
+        video.setAttribute(
+            "muted",
+            ""
+        );
+
+        video.setAttribute(
+            "playsinline",
+            ""
+        );
+
+        video.currentTime =
+            0;
+
+        const playPromise =
+            video.play();
+
+        if(
+            playPromise &&
+            typeof playPromise.catch ===
+            "function"
+        ){
+
+            playPromise.catch(
+                function(){}
+            );
+        }
     }
 
-    tryPlay();
+
+    function startTeaser(){
+
+        if(started){
+            return;
+        }
+
+        started =
+            true;
+
+        /*
+          Preload the MP4 while the text teaser
+          is running, but do not show/play it yet.
+        */
+
+        video.load();
+
+        setTimeout(
+            revealVideo,
+            TEASER_TIME
+        );
+    }
+
+
+    const observer =
+        new IntersectionObserver(
+            function(entries){
+
+                entries.forEach(
+                    function(entry){
+
+                        if(
+                            entry.isIntersecting &&
+                            entry.intersectionRatio >= .3
+                        ){
+
+                            startTeaser();
+
+                            observer.unobserve(
+                                section
+                            );
+                        }
+                    }
+                );
+            },
+            {
+                threshold:[
+                    0,
+                    .3,
+                    .6
+                ]
+            }
+        );
+
+
+    observer.observe(
+        section
+    );
 
 })();
 
