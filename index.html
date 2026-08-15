@@ -2783,6 +2783,112 @@ a{
     }
 }
 
+
+/* =========================================================
+   VIDEO LOADING COVER
+   Prevents black flash while one.mp4 is loading.
+========================================================= */
+
+.video-loading-cover{
+    position:absolute;
+    inset:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at 50% 45%,
+            #ffffff 0%,
+            #f7f8fa 48%,
+            #eef1f4 100%);
+    opacity:1;
+    visibility:visible;
+    pointer-events:none;
+    transition:opacity .28s ease, visibility .28s ease;
+}
+
+.video-loading-cover.is-ready{
+    opacity:0;
+    visibility:hidden;
+}
+
+.video-loader-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.ios-spinner{
+    position:relative;
+    width:28px;
+    height:28px;
+}
+
+.ios-spinner span{
+    position:absolute;
+    left:13px;
+    top:2px;
+    width:2px;
+    height:7px;
+    border-radius:20px;
+    background:#7a7f87;
+    transform-origin:1px 12px;
+    animation:iosSpinnerFade 1s linear infinite;
+}
+
+.ios-spinner span:nth-child(1){transform:rotate(0deg);animation-delay:-.916s;}
+.ios-spinner span:nth-child(2){transform:rotate(30deg);animation-delay:-.833s;}
+.ios-spinner span:nth-child(3){transform:rotate(60deg);animation-delay:-.75s;}
+.ios-spinner span:nth-child(4){transform:rotate(90deg);animation-delay:-.666s;}
+.ios-spinner span:nth-child(5){transform:rotate(120deg);animation-delay:-.583s;}
+.ios-spinner span:nth-child(6){transform:rotate(150deg);animation-delay:-.5s;}
+.ios-spinner span:nth-child(7){transform:rotate(180deg);animation-delay:-.416s;}
+.ios-spinner span:nth-child(8){transform:rotate(210deg);animation-delay:-.333s;}
+.ios-spinner span:nth-child(9){transform:rotate(240deg);animation-delay:-.25s;}
+.ios-spinner span:nth-child(10){transform:rotate(270deg);animation-delay:-.166s;}
+.ios-spinner span:nth-child(11){transform:rotate(300deg);animation-delay:-.083s;}
+.ios-spinner span:nth-child(12){transform:rotate(330deg);animation-delay:0s;}
+
+@keyframes iosSpinnerFade{
+    0%{opacity:1;}
+    100%{opacity:.12;}
+}
+
+.video-loading-text{
+    font-size:10px;
+    font-weight:500;
+    letter-spacing:.2px;
+    color:#8b9097;
+}
+
+.showcase-main-video{
+    background:#f5f6f8;
+}
+
+@media(max-width:520px){
+    .ios-spinner{
+        width:25px;
+        height:25px;
+    }
+
+    .ios-spinner span{
+        left:11.5px;
+        top:2px;
+        height:6px;
+        transform-origin:1px 10.5px;
+    }
+
+    .video-loader-inner{
+        gap:10px;
+    }
+
+    .video-loading-text{
+        font-size:9px;
+    }
+}
+
 </style>
 
 </head>
@@ -3403,6 +3509,17 @@ a{
                     preload="metadata"
                 ></video>
 
+                <div class="video-loading-cover" data-video-loader="desktop">
+                    <div class="video-loader-inner">
+                        <div class="ios-spinner" aria-hidden="true">
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        
+                    </div>
+                </div>
+
                 <button
                     class="video-control"
                     type="button"
@@ -3467,6 +3584,17 @@ a{
                 playsinline
                 preload="metadata"
             ></video>
+
+            <div class="video-loading-cover" data-video-loader="mobile">
+                <div class="video-loader-inner">
+                    <div class="ios-spinner" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    
+                </div>
+            </div>
 
             <button
                 class="video-control"
@@ -3960,6 +4088,83 @@ document.addEventListener(
     );
 
     probe.load();
+
+})();
+
+
+
+/* =========================================================
+   VIDEO LOADING STATE
+   Keeps a clean light cover visible instead of black.
+========================================================= */
+
+(function(){
+
+    const videos =
+        document.querySelectorAll(".showcase-main-video");
+
+    function getLoader(video){
+        const container =
+            video.closest(".main-media, .mobile-product-card");
+
+        return container
+            ? container.querySelector(".video-loading-cover")
+            : null;
+    }
+
+    function showLoader(video){
+        const loader = getLoader(video);
+
+        if(loader){
+            loader.classList.remove("is-ready");
+        }
+    }
+
+    function hideLoader(video){
+        const loader = getLoader(video);
+
+        if(loader){
+            loader.classList.add("is-ready");
+        }
+    }
+
+    videos.forEach(function(video){
+
+        showLoader(video);
+
+        if(video.readyState >= 3){
+            hideLoader(video);
+        }
+
+        video.addEventListener("canplay", function(){
+            hideLoader(video);
+        });
+
+        video.addEventListener("playing", function(){
+            hideLoader(video);
+        });
+
+        video.addEventListener("loadeddata", function(){
+            if(video.readyState >= 2){
+                hideLoader(video);
+            }
+        });
+
+        video.addEventListener("waiting", function(){
+            showLoader(video);
+        });
+
+        video.addEventListener("stalled", function(){
+            showLoader(video);
+        });
+
+        video.addEventListener("error", function(){
+
+            showLoader(video);
+
+
+        });
+    });
 
 })();
 
