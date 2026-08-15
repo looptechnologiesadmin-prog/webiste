@@ -4095,7 +4095,10 @@ document.addEventListener(
 
 /* =========================================================
    VIDEO LOADING STATE
-   Keeps a clean light cover visible instead of black.
+   FIX:
+   - Spinner hides as soon as first frame is ready
+   - Spinner also hides on canplay / playing
+   - Spinner never stays forever after successful load
 ========================================================= */
 
 (function(){
@@ -4104,16 +4107,23 @@ document.addEventListener(
         document.querySelectorAll(".showcase-main-video");
 
     function getLoader(video){
+
         const container =
-            video.closest(".main-media, .mobile-product-card");
+            video.closest(
+                ".main-media, .mobile-product-card"
+            );
 
         return container
-            ? container.querySelector(".video-loading-cover")
+            ? container.querySelector(
+                ".video-loading-cover"
+            )
             : null;
     }
 
     function showLoader(video){
-        const loader = getLoader(video);
+
+        const loader =
+            getLoader(video);
 
         if(loader){
             loader.classList.remove("is-ready");
@@ -4121,7 +4131,9 @@ document.addEventListener(
     }
 
     function hideLoader(video){
-        const loader = getLoader(video);
+
+        const loader =
+            getLoader(video);
 
         if(loader){
             loader.classList.add("is-ready");
@@ -4132,38 +4144,73 @@ document.addEventListener(
 
         showLoader(video);
 
-        if(video.readyState >= 3){
+        /*
+           If browser already has a frame, hide immediately.
+        */
+        if(video.readyState >= 2){
             hideLoader(video);
         }
 
-        video.addEventListener("canplay", function(){
-            hideLoader(video);
+        [
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "playing"
+        ].forEach(function(eventName){
+
+            video.addEventListener(
+                eventName,
+                function(){
+
+                    if(video.readyState >= 2 || eventName === "playing"){
+                        hideLoader(video);
+                    }
+                }
+            );
         });
 
-        video.addEventListener("playing", function(){
-            hideLoader(video);
-        });
+        /*
+           Only show loader again for actual buffering
+           while the video is meant to be playing.
+        */
+        video.addEventListener(
+            "waiting",
+            function(){
 
-        video.addEventListener("loadeddata", function(){
-            if(video.readyState >= 2){
-                hideLoader(video);
+                if(!video.paused && !video.ended){
+                    showLoader(video);
+                }
             }
-        });
+        );
 
-        video.addEventListener("waiting", function(){
-            showLoader(video);
-        });
+        video.addEventListener(
+            "stalled",
+            function(){
 
-        video.addEventListener("stalled", function(){
-            showLoader(video);
-        });
+                if(!video.paused && !video.ended){
+                    showLoader(video);
+                }
+            }
+        );
 
-        video.addEventListener("error", function(){
+        /*
+           Safety fallback:
+           if metadata loaded and a frame becomes available
+           shortly after, don't leave spinner stuck.
+        */
+        video.addEventListener(
+            "loadedmetadata",
+            function(){
 
-            showLoader(video);
+                setTimeout(function(){
 
+                    if(video.readyState >= 2){
+                        hideLoader(video);
+                    }
 
-        });
+                },250);
+            }
+        );
     });
 
 })();
@@ -4171,16 +4218,14 @@ document.addEventListener(
 
 /* =========================================================
    PRODUCT SHOWCASE
-   FINAL AUTOPLAY + SWIPE + RETURN FIX
+   FINAL AUTOPLAY FIX
    ---------------------------------------------------------
-   • Video autoplays when its slide is active.
-   • Video stays on screen until it finishes.
-   • Images change automatically every 4.5 seconds.
-   • Swiping away from video stops it immediately.
-   • Returning to video restarts it automatically.
-   • Scrolling away from the section stops video/timers.
-   • Returning to the section restarts the active slide.
-   • Small corner Play/Pause button still works.
+   • Video starts automatically once ready.
+   • Spinner disappears when frame is ready.
+   • Video slide stays until video ends.
+   • Images change every 4.5 seconds.
+   • Swipe away stops video.
+   • Return to video restarts automatically.
 ========================================================= */
 
 const productShowcase =
@@ -4227,9 +4272,9 @@ let showcaseVisible = false;
 let userIsSwiping = false;
 
 
-/* =========================================================
-   BASIC HELPERS
-========================================================= */
+/* -------------------------
+   HELPERS
+------------------------- */
 
 function isMobileShowcase(){
 
@@ -4237,7 +4282,6 @@ function isMobileShowcase(){
         .matchMedia("(max-width:520px)")
         .matches;
 }
-
 
 function clearProductTimer(){
 
@@ -4249,51 +4293,39 @@ function clearProductTimer(){
     }
 }
 
-
 function updateCopy(index){
 
-    productCopies.forEach(
-        function(copy,i){
+    productCopies.forEach(function(copy,i){
 
-            copy.classList.toggle(
-                "active",
-                i === index
-            );
-        }
-    );
+        copy.classList.toggle(
+            "active",
+            i === index
+        );
+    });
 }
 
 
-/* =========================================================
-   MAIN VIDEO REFERENCES
-========================================================= */
+/* -------------------------
+   VIDEO REFERENCES
+------------------------- */
 
 function getDesktopMainVideo(){
 
-    const firstMedia =
-        productMedia[0];
-
-    return firstMedia
-        ? firstMedia.querySelector("video")
+    return productMedia[0]
+        ? productMedia[0].querySelector("video")
         : null;
 }
-
 
 function getMobileMainVideo(){
 
-    const firstCard =
-        mobileCards[0];
-
-    return firstCard
-        ? firstCard.querySelector("video")
+    return mobileCards[0]
+        ? mobileCards[0].querySelector("video")
         : null;
 }
-
 
 function getActiveVideo(){
 
     if(currentProduct !== 0){
-
         return null;
     }
 
@@ -4303,9 +4335,9 @@ function getActiveVideo(){
 }
 
 
-/* =========================================================
-   PLAY BUTTON STATE
-========================================================= */
+/* -------------------------
+   BUTTON STATE
+------------------------- */
 
 function setVideoButtonState(
     button,
@@ -4313,7 +4345,6 @@ function setVideoButtonState(
 ){
 
     if(!button){
-
         return;
     }
 
@@ -4330,7 +4361,6 @@ function setVideoButtonState(
     );
 }
 
-
 function syncVideoButtons(){
 
     const desktopVideo =
@@ -4339,14 +4369,12 @@ function syncVideoButtons(){
     const mobileVideo =
         getMobileMainVideo();
 
-
     setVideoButtonState(
         desktopVideoControl,
         !!desktopVideo &&
         !desktopVideo.paused &&
         !desktopVideo.ended
     );
-
 
     setVideoButtonState(
         mobileVideoControl,
@@ -4357,45 +4385,81 @@ function syncVideoButtons(){
 }
 
 
-/* =========================================================
+/* -------------------------
+   LOADER CONTROL
+------------------------- */
+
+function getVideoLoader(video){
+
+    const container =
+        video
+            ? video.closest(
+                ".main-media, .mobile-product-card"
+            )
+            : null;
+
+    return container
+        ? container.querySelector(
+            ".video-loading-cover"
+        )
+        : null;
+}
+
+function hideVideoLoader(video){
+
+    const loader =
+        getVideoLoader(video);
+
+    if(loader){
+        loader.classList.add("is-ready");
+    }
+}
+
+function showVideoLoader(video){
+
+    const loader =
+        getVideoLoader(video);
+
+    if(loader){
+        loader.classList.remove("is-ready");
+    }
+}
+
+
+/* -------------------------
    STOP VIDEO
-========================================================= */
+------------------------- */
 
 function stopAllMainVideos(reset){
 
     [
         getDesktopMainVideo(),
         getMobileMainVideo()
-    ].forEach(
-        function(video){
+    ].forEach(function(video){
 
-            if(!video){
-
-                return;
-            }
-
-            video.onended = null;
-
-            video.pause();
-
-            if(reset){
-
-                try{
-
-                    video.currentTime = 0;
-
-                }catch(error){}
-            }
+        if(!video){
+            return;
         }
-    );
+
+        video.onended = null;
+
+        video.pause();
+
+        if(reset){
+
+            try{
+                video.currentTime = 0;
+            }catch(error){}
+        }
+    });
 
     syncVideoButtons();
 }
 
 
-/* =========================================================
+/* -------------------------
    AUTOPLAY ACTIVE VIDEO
-========================================================= */
+------------------------- */
 
 function autoplayActiveVideo(restart){
 
@@ -4404,7 +4468,6 @@ function autoplayActiveVideo(restart){
         currentProduct !== 0 ||
         userIsSwiping
     ){
-
         return;
     }
 
@@ -4412,45 +4475,33 @@ function autoplayActiveVideo(restart){
         getActiveVideo();
 
     if(!video){
-
         return;
     }
-
-    /*
-       Muted + playsinline is required for reliable
-       autoplay on iPhone/Android/Desktop browsers.
-    */
 
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
     video.loop = false;
 
-    video.setAttribute(
-        "muted",
-        ""
-    );
-
-    video.setAttribute(
-        "playsinline",
-        ""
-    );
-
-    video.setAttribute(
-        "autoplay",
-        ""
-    );
-
+    video.setAttribute("muted","");
+    video.setAttribute("playsinline","");
+    video.setAttribute("autoplay","");
 
     if(restart){
 
         try{
-
             video.currentTime = 0;
-
         }catch(error){}
     }
 
+    /*
+       If a frame is already ready, remove spinner now.
+    */
+    if(video.readyState >= 2){
+        hideVideoLoader(video);
+    }else{
+        showVideoLoader(video);
+    }
 
     video.onended = function(){
 
@@ -4460,74 +4511,128 @@ function autoplayActiveVideo(restart){
             showcaseVisible &&
             currentProduct === 0
         ){
-
             goToNextProduct();
         }
     };
 
 
-    const playPromise =
-        video.play();
+    function attemptPlay(){
 
+        if(
+            !showcaseVisible ||
+            currentProduct !== 0 ||
+            userIsSwiping
+        ){
+            return;
+        }
 
-    if(
-        playPromise &&
-        typeof playPromise.then === "function"
-    ){
+        const promise =
+            video.play();
 
-        playPromise
-            .then(function(){
+        if(
+            promise &&
+            typeof promise.then === "function"
+        ){
 
-                syncVideoButtons();
+            promise
+                .then(function(){
 
-            })
-            .catch(function(){
+                    hideVideoLoader(video);
+                    syncVideoButtons();
 
-                /*
-                   If the browser is still buffering,
-                   retry automatically when enough
-                   video data is available.
-                */
+                })
+                .catch(function(){
 
-                video.addEventListener(
-                    "canplay",
-                    function(){
+                    /*
+                       Retry when enough data arrives.
+                    */
+                    video.addEventListener(
+                        "canplay",
+                        function(){
 
-                        if(
-                            showcaseVisible &&
-                            currentProduct === 0 &&
-                            !userIsSwiping
-                        ){
+                            if(
+                                showcaseVisible &&
+                                currentProduct === 0 &&
+                                !userIsSwiping
+                            ){
 
-                            video.play()
-                                .then(syncVideoButtons)
-                                .catch(syncVideoButtons);
+                                video.play()
+                                    .then(function(){
+
+                                        hideVideoLoader(video);
+                                        syncVideoButtons();
+
+                                    })
+                                    .catch(function(){
+
+                                        syncVideoButtons();
+
+                                    });
+                            }
+                        },
+                        {
+                            once:true
                         }
-                    },
-                    {
-                        once:true
-                    }
-                );
+                    );
+                });
+        }
+    }
 
-                syncVideoButtons();
-            });
+
+    /*
+       If already playable, start immediately.
+       Otherwise wait for first playable event.
+    */
+    if(video.readyState >= 2){
+
+        attemptPlay();
+
+    }else{
+
+        const startWhenReady = function(){
+
+            hideVideoLoader(video);
+
+            attemptPlay();
+        };
+
+        video.addEventListener(
+            "loadeddata",
+            startWhenReady,
+            {
+                once:true
+            }
+        );
+
+        video.addEventListener(
+            "canplay",
+            startWhenReady,
+            {
+                once:true
+            }
+        );
+
+        /*
+           Ensure browser actively loads the video.
+        */
+        try{
+            video.load();
+        }catch(error){}
     }
 }
 
 
-/* =========================================================
-   MANUAL PLAY / PAUSE BUTTON
-========================================================= */
+/* -------------------------
+   MANUAL PLAY / PAUSE
+------------------------- */
 
 function toggleVideo(video){
 
     if(!video){
-
         return;
     }
 
     clearProductTimer();
-
 
     if(
         video.paused ||
@@ -4537,9 +4642,7 @@ function toggleVideo(video){
         if(video.ended){
 
             try{
-
                 video.currentTime = 0;
-
             }catch(error){}
         }
 
@@ -4556,14 +4659,17 @@ function toggleVideo(video){
                 showcaseVisible &&
                 currentProduct === 0
             ){
-
                 goToNextProduct();
             }
         };
 
-
         video.play()
-            .then(syncVideoButtons)
+            .then(function(){
+
+                hideVideoLoader(video);
+                syncVideoButtons();
+
+            })
             .catch(syncVideoButtons);
 
     }else{
@@ -4609,42 +4715,9 @@ if(mobileVideoControl){
 }
 
 
-/* =========================================================
-   KEEP BUTTON ICON CORRECT
-========================================================= */
-
-[
-    getDesktopMainVideo(),
-    getMobileMainVideo()
-].forEach(
-    function(video){
-
-        if(!video){
-
-            return;
-        }
-
-        [
-            "play",
-            "playing",
-            "pause",
-            "ended"
-        ].forEach(
-            function(eventName){
-
-                video.addEventListener(
-                    eventName,
-                    syncVideoButtons
-                );
-            }
-        );
-    }
-);
-
-
-/* =========================================================
-   SIDE PREVIEW MEDIA
-========================================================= */
+/* -------------------------
+   SIDE PREVIEW
+------------------------- */
 
 function updatePreview(
     element,
@@ -4652,7 +4725,6 @@ function updatePreview(
 ){
 
     if(!element){
-
         return;
     }
 
@@ -4661,59 +4733,29 @@ function updatePreview(
 
     element.innerHTML = "";
 
-
     if(item.type === "video"){
 
         const video =
             document.createElement("video");
 
-        video.src =
-            item.src;
+        video.src = item.src;
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = "metadata";
 
-        video.muted =
-            true;
+        video.setAttribute("muted","");
+        video.setAttribute("autoplay","");
+        video.setAttribute("playsinline","");
 
-        video.defaultMuted =
-            true;
-
-        video.loop =
-            true;
-
-        video.autoplay =
-            true;
-
-        video.playsInline =
-            true;
-
-        video.preload =
-            "metadata";
-
-        video.setAttribute(
-            "muted",
-            ""
-        );
-
-        video.setAttribute(
-            "autoplay",
-            ""
-        );
-
-        video.setAttribute(
-            "playsinline",
-            ""
-        );
-
-        element.appendChild(
-            video
-        );
-
+        element.appendChild(video);
 
         if(showcaseVisible){
 
             video.play()
-                .catch(
-                    function(){}
-                );
+                .catch(function(){});
         }
 
     }else{
@@ -4721,27 +4763,21 @@ function updatePreview(
         const img =
             document.createElement("img");
 
-        img.src =
-            item.src;
+        img.src = item.src;
+        img.alt = "";
 
-        img.alt =
-            "";
-
-        element.appendChild(
-            img
-        );
+        element.appendChild(img);
     }
 }
 
 
-/* =========================================================
-   NEXT SLIDE
-========================================================= */
+/* -------------------------
+   NEXT
+------------------------- */
 
 function goToNextProduct(){
 
     if(!showcaseVisible){
-
         return;
     }
 
@@ -4751,7 +4787,6 @@ function goToNextProduct(){
             1
         ) %
         mediaFiles.length;
-
 
     setProduct(
         nextIndex,
@@ -4763,33 +4798,25 @@ function goToNextProduct(){
 }
 
 
-/* =========================================================
-   AUTO SLIDE
-========================================================= */
+/* -------------------------
+   SCHEDULER
+------------------------- */
 
 function scheduleCurrentProduct(){
 
     clearProductTimer();
 
-
     if(
         !showcaseVisible ||
         userIsSwiping
     ){
-
         return;
     }
-
 
     if(
         mediaFiles[currentProduct]
             .type === "video"
     ){
-
-        /*
-           Video controls its own duration.
-           Do NOT use a timeout on video.
-        */
 
         autoplayActiveVideo(true);
 
@@ -4806,9 +4833,9 @@ function scheduleCurrentProduct(){
 }
 
 
-/* =========================================================
-   MOBILE SCROLL TO CARD
-========================================================= */
+/* -------------------------
+   MOBILE SCROLL
+------------------------- */
 
 function scrollMobileTo(
     index,
@@ -4819,7 +4846,6 @@ function scrollMobileTo(
         !mobileStrip ||
         !isMobileShowcase()
     ){
-
         return;
     }
 
@@ -4827,13 +4853,11 @@ function scrollMobileTo(
         mobileCards[index];
 
     if(!card){
-
         return;
     }
 
     internalMobileScroll =
         true;
-
 
     const left =
         card.offsetLeft -
@@ -4841,7 +4865,6 @@ function scrollMobileTo(
             mobileStrip.clientWidth -
             card.clientWidth
         ) / 2;
-
 
     mobileStrip.scrollTo({
 
@@ -4852,11 +4875,9 @@ function scrollMobileTo(
             "smooth"
     });
 
-
     clearTimeout(
         mobileScrollTimer
     );
-
 
     mobileScrollTimer =
         setTimeout(
@@ -4864,15 +4885,16 @@ function scrollMobileTo(
 
                 internalMobileScroll =
                     false;
+
             },
             550
         );
 }
 
 
-/* =========================================================
-   SET ACTIVE PRODUCT
-========================================================= */
+/* -------------------------
+   SET PRODUCT
+------------------------- */
 
 function setProduct(
     index,
@@ -4885,28 +4907,15 @@ function setProduct(
 
     clearProductTimer();
 
-
-    /*
-       Leaving video:
-       stop immediately and reset.
-    */
-
     if(index !== 0){
 
         stopAllMainVideos(true);
     }
 
-
     currentProduct =
         index;
 
-
-    updateCopy(
-        index
-    );
-
-
-    /* DESKTOP MEDIA */
+    updateCopy(index);
 
     productMedia.forEach(
         function(media,i){
@@ -4929,16 +4938,11 @@ function setProduct(
                 video.pause();
 
                 try{
-
                     video.currentTime = 0;
-
                 }catch(error){}
             }
         }
     );
-
-
-    /* MOBILE VIDEO */
 
     mobileCards.forEach(
         function(card,i){
@@ -4956,16 +4960,11 @@ function setProduct(
                 video.pause();
 
                 try{
-
                     video.currentTime = 0;
-
                 }catch(error){}
             }
         }
     );
-
-
-    /* SIDE PREVIEWS */
 
     const previousIndex =
         (
@@ -4975,7 +4974,6 @@ function setProduct(
         ) %
         mediaFiles.length;
 
-
     const nextIndex =
         (
             index +
@@ -4983,18 +4981,15 @@ function setProduct(
         ) %
         mediaFiles.length;
 
-
     updatePreview(
         leftPreview,
         previousIndex
     );
 
-
     updatePreview(
         rightPreview,
         nextIndex
     );
-
 
     if(leftPreview){
 
@@ -5002,15 +4997,11 @@ function setProduct(
             previousIndex;
     }
 
-
     if(rightPreview){
 
         rightPreview.dataset.preview =
             nextIndex;
     }
-
-
-    /* MOBILE AUTO MOVE */
 
     if(
         options.scrollMobile &&
@@ -5023,15 +5014,9 @@ function setProduct(
         );
     }
 
-
     if(showcaseVisible){
 
         if(index === 0){
-
-            /*
-               Every time video becomes active
-               again, restart automatically.
-            */
 
             autoplayActiveVideo(
                 options.restartVideo !== false
@@ -5043,14 +5028,13 @@ function setProduct(
         }
     }
 
-
     syncVideoButtons();
 }
 
 
-/* =========================================================
+/* -------------------------
    SIDE PREVIEW CLICKS
-========================================================= */
+------------------------- */
 
 if(leftPreview){
 
@@ -5094,16 +5078,15 @@ if(rightPreview){
 }
 
 
-/* =========================================================
-   MOBILE MANUAL SWIPE
-========================================================= */
+/* -------------------------
+   MOBILE SWIPE
+------------------------- */
 
 function stopForManualSwipe(){
 
     if(
         !isMobileShowcase()
     ){
-
         return;
     }
 
@@ -5111,11 +5094,6 @@ function stopForManualSwipe(){
         true;
 
     clearProductTimer();
-
-    /*
-       Stop video as soon as finger begins
-       sliding away from it.
-    */
 
     stopAllMainVideos(false);
 }
@@ -5127,27 +5105,22 @@ function finishManualSwipe(){
         !mobileStrip ||
         !isMobileShowcase()
     ){
-
         return;
     }
-
 
     const stripRect =
         mobileStrip
             .getBoundingClientRect();
 
-
     const stripCenter =
         stripRect.left +
         stripRect.width / 2;
-
 
     let closestIndex =
         currentProduct;
 
     let closestDistance =
         Infinity;
-
 
     mobileCards.forEach(
         function(card,i){
@@ -5166,7 +5139,6 @@ function finishManualSwipe(){
                     stripCenter
                 );
 
-
             if(
                 distance <
                 closestDistance
@@ -5181,10 +5153,8 @@ function finishManualSwipe(){
         }
     );
 
-
     userIsSwiping =
         false;
-
 
     setProduct(
         closestIndex,
@@ -5206,7 +5176,6 @@ if(mobileStrip){
         }
     );
 
-
     mobileStrip.addEventListener(
         "pointerdown",
         stopForManualSwipe,
@@ -5215,31 +5184,24 @@ if(mobileStrip){
         }
     );
 
-
     let mobileRAF =
         false;
-
 
     mobileStrip.addEventListener(
         "scroll",
         function(){
 
             if(internalMobileScroll){
-
                 return;
             }
 
-
             if(!userIsSwiping){
-
                 stopForManualSwipe();
             }
-
 
             clearTimeout(
                 mobileScrollTimer
             );
-
 
             mobileScrollTimer =
                 setTimeout(
@@ -5247,20 +5209,12 @@ if(mobileStrip){
                     180
                 );
 
-
-            /*
-               Update text while user slides.
-            */
-
             if(mobileRAF){
-
                 return;
             }
 
-
             mobileRAF =
                 true;
-
 
             requestAnimationFrame(
                 function(){
@@ -5268,31 +5222,25 @@ if(mobileStrip){
                     mobileRAF =
                         false;
 
-
                     if(
                         !isMobileShowcase()
                     ){
-
                         return;
                     }
-
 
                     const stripRect =
                         mobileStrip
                             .getBoundingClientRect();
 
-
                     const stripCenter =
                         stripRect.left +
                         stripRect.width / 2;
-
 
                     let closestIndex =
                         currentProduct;
 
                     let closestDistance =
                         Infinity;
-
 
                     mobileCards.forEach(
                         function(card,i){
@@ -5311,7 +5259,6 @@ if(mobileStrip){
                                     stripCenter
                                 );
 
-
                             if(
                                 distance <
                                 closestDistance
@@ -5326,7 +5273,6 @@ if(mobileStrip){
                         }
                     );
 
-
                     updateCopy(
                         closestIndex
                     );
@@ -5340,9 +5286,9 @@ if(mobileStrip){
 }
 
 
-/* =========================================================
-   SHOWCASE VISIBILITY
-========================================================= */
+/* -------------------------
+   VIEWPORT OBSERVER
+------------------------- */
 
 if(productShowcase){
 
@@ -5357,20 +5303,13 @@ if(productShowcase){
                             entry.target !==
                             productShowcase
                         ){
-
                             return;
                         }
-
 
                         const nowVisible =
                             entry.isIntersecting &&
                             entry.intersectionRatio >
                             0.18;
-
-
-                        /*
-                           User has returned to section.
-                        */
 
                         if(
                             nowVisible &&
@@ -5379,7 +5318,6 @@ if(productShowcase){
 
                             showcaseVisible =
                                 true;
-
 
                             if(
                                 currentProduct === 0
@@ -5394,27 +5332,17 @@ if(productShowcase){
                                 scheduleCurrentProduct();
                             }
 
-
                             return;
                         }
 
-
                         showcaseVisible =
                             nowVisible;
-
-
-                        /*
-                           User left section.
-                        */
 
                         if(!showcaseVisible){
 
                             clearProductTimer();
 
-                            stopAllMainVideos(
-                                false
-                            );
-
+                            stopAllMainVideos(false);
 
                             document
                                 .querySelectorAll(
@@ -5439,16 +5367,15 @@ if(productShowcase){
             }
         );
 
-
     showcaseObserver.observe(
         productShowcase
     );
 }
 
 
-/* =========================================================
-   APP / TAB VISIBILITY
-========================================================= */
+/* -------------------------
+   TAB / APP VISIBILITY
+------------------------- */
 
 document.addEventListener(
     "visibilitychange",
@@ -5458,21 +5385,13 @@ document.addEventListener(
 
             clearProductTimer();
 
-            stopAllMainVideos(
-                false
-            );
+            stopAllMainVideos(false);
 
         }else if(showcaseVisible){
 
-            /*
-               User returned to the app/tab.
-            */
-
             if(currentProduct === 0){
 
-                autoplayActiveVideo(
-                    true
-                );
+                autoplayActiveVideo(true);
 
             }else{
 
@@ -5483,13 +5402,12 @@ document.addEventListener(
 );
 
 
-/* =========================================================
+/* -------------------------
    RESIZE
-========================================================= */
+------------------------- */
 
 let showcaseWasMobile =
     isMobileShowcase();
-
 
 window.addEventListener(
     "resize",
@@ -5498,11 +5416,7 @@ window.addEventListener(
         const nowMobile =
             isMobileShowcase();
 
-
-        stopAllMainVideos(
-            false
-        );
-
+        stopAllMainVideos(false);
 
         if(
             nowMobile &&
@@ -5515,18 +5429,14 @@ window.addEventListener(
             );
         }
 
-
         showcaseWasMobile =
             nowMobile;
-
 
         if(showcaseVisible){
 
             if(currentProduct === 0){
 
-                autoplayActiveVideo(
-                    true
-                );
+                autoplayActiveVideo(true);
 
             }else{
 
@@ -5537,10 +5447,9 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   INITIAL STATE
-   Don't play before user reaches this section.
-========================================================= */
+/* -------------------------
+   INITIAL
+------------------------- */
 
 setProduct(
     0,
@@ -5550,11 +5459,7 @@ setProduct(
     }
 );
 
-
-stopAllMainVideos(
-    true
-);
-
+stopAllMainVideos(true);
 
 if(isMobileShowcase()){
 
@@ -5568,7 +5473,6 @@ if(isMobileShowcase()){
         }
     );
 }
-
 
 syncVideoButtons();
 
