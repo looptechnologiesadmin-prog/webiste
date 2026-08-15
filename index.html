@@ -4171,13 +4171,16 @@ document.addEventListener(
 
 /* =========================================================
    PRODUCT SHOWCASE
-   FIXED BEHAVIOR
-   - Slider starts only when this section is visible
-   - Video slide stays until video ends
-   - Images auto-slide every 4.5 seconds
-   - Mobile swipe stops video immediately
-   - After swipe settles, active card/text are updated
-   - Small video play/pause button included
+   FINAL AUTOPLAY + SWIPE + RETURN FIX
+   ---------------------------------------------------------
+   • Video autoplays when its slide is active.
+   • Video stays on screen until it finishes.
+   • Images change automatically every 4.5 seconds.
+   • Swiping away from video stops it immediately.
+   • Returning to video restarts it automatically.
+   • Scrolling away from the section stops video/timers.
+   • Returning to the section restarts the active slide.
+   • Small corner Play/Pause button still works.
 ========================================================= */
 
 const productShowcase =
@@ -4229,32 +4232,40 @@ let userIsSwiping = false;
 ========================================================= */
 
 function isMobileShowcase(){
-    return window.matchMedia("(max-width:520px)").matches;
+
+    return window
+        .matchMedia("(max-width:520px)")
+        .matches;
 }
+
 
 function clearProductTimer(){
 
     if(productTimer){
+
         clearTimeout(productTimer);
+
         productTimer = null;
     }
 }
 
+
 function updateCopy(index){
 
-    productCopies.forEach(function(copy,i){
+    productCopies.forEach(
+        function(copy,i){
 
-        copy.classList.toggle(
-            "active",
-            i === index
-        );
-
-    });
+            copy.classList.toggle(
+                "active",
+                i === index
+            );
+        }
+    );
 }
 
 
 /* =========================================================
-   VIDEO HELPERS
+   MAIN VIDEO REFERENCES
 ========================================================= */
 
 function getDesktopMainVideo(){
@@ -4267,6 +4278,7 @@ function getDesktopMainVideo(){
         : null;
 }
 
+
 function getMobileMainVideo(){
 
     const firstCard =
@@ -4277,9 +4289,11 @@ function getMobileMainVideo(){
         : null;
 }
 
+
 function getActiveVideo(){
 
     if(currentProduct !== 0){
+
         return null;
     }
 
@@ -4288,9 +4302,18 @@ function getActiveVideo(){
         : getDesktopMainVideo();
 }
 
-function setVideoButtonState(button,playing){
+
+/* =========================================================
+   PLAY BUTTON STATE
+========================================================= */
+
+function setVideoButtonState(
+    button,
+    playing
+){
 
     if(!button){
+
         return;
     }
 
@@ -4307,6 +4330,7 @@ function setVideoButtonState(button,playing){
     );
 }
 
+
 function syncVideoButtons(){
 
     const desktopVideo =
@@ -4315,12 +4339,14 @@ function syncVideoButtons(){
     const mobileVideo =
         getMobileMainVideo();
 
+
     setVideoButtonState(
         desktopVideoControl,
         !!desktopVideo &&
         !desktopVideo.paused &&
         !desktopVideo.ended
     );
+
 
     setVideoButtonState(
         mobileVideoControl,
@@ -4330,38 +4356,55 @@ function syncVideoButtons(){
     );
 }
 
+
+/* =========================================================
+   STOP VIDEO
+========================================================= */
+
 function stopAllMainVideos(reset){
 
     [
         getDesktopMainVideo(),
         getMobileMainVideo()
-    ].forEach(function(video){
+    ].forEach(
+        function(video){
 
-        if(!video){
-            return;
+            if(!video){
+
+                return;
+            }
+
+            video.onended = null;
+
+            video.pause();
+
+            if(reset){
+
+                try{
+
+                    video.currentTime = 0;
+
+                }catch(error){}
+            }
         }
-
-        video.onended = null;
-
-        video.pause();
-
-        if(reset){
-            try{
-                video.currentTime = 0;
-            }catch(error){}
-        }
-    });
+    );
 
     syncVideoButtons();
 }
 
-function playActiveVideo(fromStart){
+
+/* =========================================================
+   AUTOPLAY ACTIVE VIDEO
+========================================================= */
+
+function autoplayActiveVideo(restart){
 
     if(
         !showcaseVisible ||
         currentProduct !== 0 ||
         userIsSwiping
     ){
+
         return;
     }
 
@@ -4369,17 +4412,45 @@ function playActiveVideo(fromStart){
         getActiveVideo();
 
     if(!video){
+
         return;
     }
 
+    /*
+       Muted + playsinline is required for reliable
+       autoplay on iPhone/Android/Desktop browsers.
+    */
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
     video.loop = false;
 
-    if(fromStart){
+    video.setAttribute(
+        "muted",
+        ""
+    );
+
+    video.setAttribute(
+        "playsinline",
+        ""
+    );
+
+    video.setAttribute(
+        "autoplay",
+        ""
+    );
+
+
+    if(restart){
 
         try{
+
             video.currentTime = 0;
+
         }catch(error){}
     }
+
 
     video.onended = function(){
 
@@ -4389,40 +4460,92 @@ function playActiveVideo(fromStart){
             showcaseVisible &&
             currentProduct === 0
         ){
+
             goToNextProduct();
         }
     };
 
-    video.play()
-        .then(syncVideoButtons)
-        .catch(function(){
 
-            /* Browser may require user tap.
-               Play button remains visible. */
+    const playPromise =
+        video.play();
 
-            syncVideoButtons();
-        });
+
+    if(
+        playPromise &&
+        typeof playPromise.then === "function"
+    ){
+
+        playPromise
+            .then(function(){
+
+                syncVideoButtons();
+
+            })
+            .catch(function(){
+
+                /*
+                   If the browser is still buffering,
+                   retry automatically when enough
+                   video data is available.
+                */
+
+                video.addEventListener(
+                    "canplay",
+                    function(){
+
+                        if(
+                            showcaseVisible &&
+                            currentProduct === 0 &&
+                            !userIsSwiping
+                        ){
+
+                            video.play()
+                                .then(syncVideoButtons)
+                                .catch(syncVideoButtons);
+                        }
+                    },
+                    {
+                        once:true
+                    }
+                );
+
+                syncVideoButtons();
+            });
+    }
 }
 
 
 /* =========================================================
-   SMALL PLAY / PAUSE BUTTON
+   MANUAL PLAY / PAUSE BUTTON
 ========================================================= */
 
 function toggleVideo(video){
 
     if(!video){
+
         return;
     }
 
     clearProductTimer();
 
-    if(video.paused || video.ended){
+
+    if(
+        video.paused ||
+        video.ended
+    ){
 
         if(video.ended){
-            video.currentTime = 0;
+
+            try{
+
+                video.currentTime = 0;
+
+            }catch(error){}
         }
 
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
         video.loop = false;
 
         video.onended = function(){
@@ -4433,9 +4556,11 @@ function toggleVideo(video){
                 showcaseVisible &&
                 currentProduct === 0
             ){
+
                 goToNextProduct();
             }
         };
+
 
         video.play()
             .then(syncVideoButtons)
@@ -4449,12 +4574,14 @@ function toggleVideo(video){
     }
 }
 
+
 if(desktopVideoControl){
 
     desktopVideoControl.addEventListener(
         "click",
         function(event){
 
+            event.preventDefault();
             event.stopPropagation();
 
             toggleVideo(
@@ -4464,12 +4591,14 @@ if(desktopVideoControl){
     );
 }
 
+
 if(mobileVideoControl){
 
     mobileVideoControl.addEventListener(
         "click",
         function(event){
 
+            event.preventDefault();
             event.stopPropagation();
 
             toggleVideo(
@@ -4481,12 +4610,49 @@ if(mobileVideoControl){
 
 
 /* =========================================================
+   KEEP BUTTON ICON CORRECT
+========================================================= */
+
+[
+    getDesktopMainVideo(),
+    getMobileMainVideo()
+].forEach(
+    function(video){
+
+        if(!video){
+
+            return;
+        }
+
+        [
+            "play",
+            "playing",
+            "pause",
+            "ended"
+        ].forEach(
+            function(eventName){
+
+                video.addEventListener(
+                    eventName,
+                    syncVideoButtons
+                );
+            }
+        );
+    }
+);
+
+
+/* =========================================================
    SIDE PREVIEW MEDIA
 ========================================================= */
 
-function updatePreview(element,index){
+function updatePreview(
+    element,
+    index
+){
 
     if(!element){
+
         return;
     }
 
@@ -4495,19 +4661,40 @@ function updatePreview(element,index){
 
     element.innerHTML = "";
 
+
     if(item.type === "video"){
 
         const video =
             document.createElement("video");
 
-        video.src = item.src;
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.preload = "metadata";
+        video.src =
+            item.src;
+
+        video.muted =
+            true;
+
+        video.defaultMuted =
+            true;
+
+        video.loop =
+            true;
+
+        video.autoplay =
+            true;
+
+        video.playsInline =
+            true;
+
+        video.preload =
+            "metadata";
 
         video.setAttribute(
             "muted",
+            ""
+        );
+
+        video.setAttribute(
+            "autoplay",
             ""
         );
 
@@ -4516,18 +4703,17 @@ function updatePreview(element,index){
             ""
         );
 
-        element.appendChild(video);
+        element.appendChild(
+            video
+        );
 
-        /*
-           Side-preview video is decorative only.
-           It does not need to play when the section
-           is outside the viewport.
-        */
 
         if(showcaseVisible){
 
             video.play()
-                .catch(function(){});
+                .catch(
+                    function(){}
+                );
         }
 
     }else{
@@ -4535,10 +4721,15 @@ function updatePreview(element,index){
         const img =
             document.createElement("img");
 
-        img.src = item.src;
-        img.alt = "";
+        img.src =
+            item.src;
 
-        element.appendChild(img);
+        img.alt =
+            "";
+
+        element.appendChild(
+            img
+        );
     }
 }
 
@@ -4550,12 +4741,17 @@ function updatePreview(element,index){
 function goToNextProduct(){
 
     if(!showcaseVisible){
+
         return;
     }
 
     const nextIndex =
-        (currentProduct + 1)
-        % mediaFiles.length;
+        (
+            currentProduct +
+            1
+        ) %
+        mediaFiles.length;
+
 
     setProduct(
         nextIndex,
@@ -4575,19 +4771,27 @@ function scheduleCurrentProduct(){
 
     clearProductTimer();
 
+
     if(
         !showcaseVisible ||
         userIsSwiping
     ){
+
         return;
     }
 
-    const currentItem =
-        mediaFiles[currentProduct];
 
-    if(currentItem.type === "video"){
+    if(
+        mediaFiles[currentProduct]
+            .type === "video"
+    ){
 
-        playActiveVideo(true);
+        /*
+           Video controls its own duration.
+           Do NOT use a timeout on video.
+        */
+
+        autoplayActiveVideo(true);
 
     }else{
 
@@ -4606,12 +4810,16 @@ function scheduleCurrentProduct(){
    MOBILE SCROLL TO CARD
 ========================================================= */
 
-function scrollMobileTo(index,behavior){
+function scrollMobileTo(
+    index,
+    behavior
+){
 
     if(
         !mobileStrip ||
         !isMobileShowcase()
     ){
+
         return;
     }
 
@@ -4619,10 +4827,13 @@ function scrollMobileTo(index,behavior){
         mobileCards[index];
 
     if(!card){
+
         return;
     }
 
-    internalMobileScroll = true;
+    internalMobileScroll =
+        true;
+
 
     const left =
         card.offsetLeft -
@@ -4631,19 +4842,28 @@ function scrollMobileTo(index,behavior){
             card.clientWidth
         ) / 2;
 
+
     mobileStrip.scrollTo({
+
         left:left,
-        behavior:behavior || "smooth"
+
+        behavior:
+            behavior ||
+            "smooth"
     });
 
-    clearTimeout(mobileScrollTimer);
+
+    clearTimeout(
+        mobileScrollTimer
+    );
+
 
     mobileScrollTimer =
         setTimeout(
             function(){
 
-                internalMobileScroll = false;
-
+                internalMobileScroll =
+                    false;
             },
             550
         );
@@ -4654,22 +4874,36 @@ function scrollMobileTo(index,behavior){
    SET ACTIVE PRODUCT
 ========================================================= */
 
-function setProduct(index,options){
+function setProduct(
+    index,
+    options
+){
 
     options =
-        options || {};
+        options ||
+        {};
 
     clearProductTimer();
+
+
+    /*
+       Leaving video:
+       stop immediately and reset.
+    */
 
     if(index !== 0){
 
         stopAllMainVideos(true);
     }
 
+
     currentProduct =
         index;
 
-    updateCopy(index);
+
+    updateCopy(
+        index
+    );
 
 
     /* DESKTOP MEDIA */
@@ -4681,6 +4915,52 @@ function setProduct(index,options){
                 "active",
                 i === index
             );
+
+            const video =
+                media.querySelector(
+                    "video"
+                );
+
+            if(
+                video &&
+                i !== index
+            ){
+
+                video.pause();
+
+                try{
+
+                    video.currentTime = 0;
+
+                }catch(error){}
+            }
+        }
+    );
+
+
+    /* MOBILE VIDEO */
+
+    mobileCards.forEach(
+        function(card,i){
+
+            const video =
+                card.querySelector(
+                    "video"
+                );
+
+            if(
+                video &&
+                i !== index
+            ){
+
+                video.pause();
+
+                try{
+
+                    video.currentTime = 0;
+
+                }catch(error){}
+            }
         }
     );
 
@@ -4695,6 +4975,7 @@ function setProduct(index,options){
         ) %
         mediaFiles.length;
 
+
     const nextIndex =
         (
             index +
@@ -4702,21 +4983,25 @@ function setProduct(index,options){
         ) %
         mediaFiles.length;
 
+
     updatePreview(
         leftPreview,
         previousIndex
     );
+
 
     updatePreview(
         rightPreview,
         nextIndex
     );
 
+
     if(leftPreview){
 
         leftPreview.dataset.preview =
             previousIndex;
     }
+
 
     if(rightPreview){
 
@@ -4725,7 +5010,7 @@ function setProduct(index,options){
     }
 
 
-    /* AUTO SLIDE CAN MOVE MOBILE STRIP */
+    /* MOBILE AUTO MOVE */
 
     if(
         options.scrollMobile &&
@@ -4741,16 +5026,16 @@ function setProduct(index,options){
 
     if(showcaseVisible){
 
-        if(
-            mediaFiles[index].type === "video"
-        ){
+        if(index === 0){
 
-            if(!userIsSwiping){
+            /*
+               Every time video becomes active
+               again, restart automatically.
+            */
 
-                playActiveVideo(
-                    options.restartVideo !== false
-                );
-            }
+            autoplayActiveVideo(
+                options.restartVideo !== false
+            );
 
         }else{
 
@@ -4758,12 +5043,13 @@ function setProduct(index,options){
         }
     }
 
+
     syncVideoButtons();
 }
 
 
 /* =========================================================
-   SIDE CARD CLICKS
+   SIDE PREVIEW CLICKS
 ========================================================= */
 
 if(leftPreview){
@@ -4774,7 +5060,9 @@ if(leftPreview){
 
             setProduct(
                 Number(
-                    leftPreview.dataset.preview
+                    leftPreview
+                        .dataset
+                        .preview
                 ),
                 {
                     restartVideo:true
@@ -4784,6 +5072,7 @@ if(leftPreview){
     );
 }
 
+
 if(rightPreview){
 
     rightPreview.addEventListener(
@@ -4792,7 +5081,9 @@ if(rightPreview){
 
             setProduct(
                 Number(
-                    rightPreview.dataset.preview
+                    rightPreview
+                        .dataset
+                        .preview
                 ),
                 {
                     restartVideo:true
@@ -4804,24 +5095,31 @@ if(rightPreview){
 
 
 /* =========================================================
-   MOBILE SWIPE
-   IMPORTANT:
-   AS SOON AS USER STARTS SWIPING,
-   VIDEO STOPS.
+   MOBILE MANUAL SWIPE
 ========================================================= */
 
 function stopForManualSwipe(){
 
-    if(!isMobileShowcase()){
+    if(
+        !isMobileShowcase()
+    ){
+
         return;
     }
 
-    userIsSwiping = true;
+    userIsSwiping =
+        true;
 
     clearProductTimer();
 
+    /*
+       Stop video as soon as finger begins
+       sliding away from it.
+    */
+
     stopAllMainVideos(false);
 }
+
 
 function finishManualSwipe(){
 
@@ -4829,15 +5127,20 @@ function finishManualSwipe(){
         !mobileStrip ||
         !isMobileShowcase()
     ){
+
         return;
     }
 
+
     const stripRect =
-        mobileStrip.getBoundingClientRect();
+        mobileStrip
+            .getBoundingClientRect();
+
 
     const stripCenter =
         stripRect.left +
         stripRect.width / 2;
+
 
     let closestIndex =
         currentProduct;
@@ -4845,11 +5148,13 @@ function finishManualSwipe(){
     let closestDistance =
         Infinity;
 
+
     mobileCards.forEach(
         function(card,i){
 
             const rect =
-                card.getBoundingClientRect();
+                card
+                    .getBoundingClientRect();
 
             const center =
                 rect.left +
@@ -4860,6 +5165,7 @@ function finishManualSwipe(){
                     center -
                     stripCenter
                 );
+
 
             if(
                 distance <
@@ -4875,7 +5181,10 @@ function finishManualSwipe(){
         }
     );
 
-    userIsSwiping = false;
+
+    userIsSwiping =
+        false;
+
 
     setProduct(
         closestIndex,
@@ -4897,6 +5206,7 @@ if(mobileStrip){
         }
     );
 
+
     mobileStrip.addEventListener(
         "pointerdown",
         stopForManualSwipe,
@@ -4905,29 +5215,31 @@ if(mobileStrip){
         }
     );
 
-    let mobileRAF = false;
+
+    let mobileRAF =
+        false;
+
 
     mobileStrip.addEventListener(
         "scroll",
         function(){
 
             if(internalMobileScroll){
+
                 return;
             }
 
-            /*
-               Stop video even if browser did not fire
-               touchstart/pointerdown first.
-            */
 
             if(!userIsSwiping){
 
                 stopForManualSwipe();
             }
 
+
             clearTimeout(
                 mobileScrollTimer
             );
+
 
             mobileScrollTimer =
                 setTimeout(
@@ -4937,40 +5249,50 @@ if(mobileStrip){
 
 
             /*
-               Update copy while swiping so text feels
-               responsive to the card in the center.
+               Update text while user slides.
             */
 
             if(mobileRAF){
+
                 return;
             }
 
-            mobileRAF = true;
+
+            mobileRAF =
+                true;
+
 
             requestAnimationFrame(
                 function(){
 
-                    mobileRAF = false;
+                    mobileRAF =
+                        false;
+
 
                     if(
                         !isMobileShowcase()
                     ){
+
                         return;
                     }
+
 
                     const stripRect =
                         mobileStrip
                             .getBoundingClientRect();
 
+
                     const stripCenter =
                         stripRect.left +
                         stripRect.width / 2;
+
 
                     let closestIndex =
                         currentProduct;
 
                     let closestDistance =
                         Infinity;
+
 
                     mobileCards.forEach(
                         function(card,i){
@@ -4989,6 +5311,7 @@ if(mobileStrip){
                                     stripCenter
                                 );
 
+
                             if(
                                 distance <
                                 closestDistance
@@ -5002,6 +5325,7 @@ if(mobileStrip){
                             }
                         }
                     );
+
 
                     updateCopy(
                         closestIndex
@@ -5017,7 +5341,7 @@ if(mobileStrip){
 
 
 /* =========================================================
-   ONLY RUN SLIDER WHEN USER REACHES THIS SECTION
+   SHOWCASE VISIBILITY
 ========================================================= */
 
 if(productShowcase){
@@ -5029,33 +5353,68 @@ if(productShowcase){
                 entries.forEach(
                     function(entry){
 
-                        if(entry.target !== productShowcase){
+                        if(
+                            entry.target !==
+                            productShowcase
+                        ){
+
                             return;
                         }
 
-                        showcaseVisible =
+
+                        const nowVisible =
                             entry.isIntersecting &&
-                            entry.intersectionRatio > 0.18;
+                            entry.intersectionRatio >
+                            0.18;
 
-                        if(showcaseVisible){
 
-                            /*
-                               User reached this section:
-                               begin/resume automatic slider.
-                            */
+                        /*
+                           User has returned to section.
+                        */
 
-                            scheduleCurrentProduct();
+                        if(
+                            nowVisible &&
+                            !showcaseVisible
+                        ){
 
-                        }else{
+                            showcaseVisible =
+                                true;
 
-                            /*
-                               User left the section:
-                               stop timers and all videos.
-                            */
+
+                            if(
+                                currentProduct === 0
+                            ){
+
+                                autoplayActiveVideo(
+                                    true
+                                );
+
+                            }else{
+
+                                scheduleCurrentProduct();
+                            }
+
+
+                            return;
+                        }
+
+
+                        showcaseVisible =
+                            nowVisible;
+
+
+                        /*
+                           User left section.
+                        */
+
+                        if(!showcaseVisible){
 
                             clearProductTimer();
 
-                            stopAllMainVideos(false);
+                            stopAllMainVideos(
+                                false
+                            );
+
 
                             document
                                 .querySelectorAll(
@@ -5080,6 +5439,7 @@ if(productShowcase){
             }
         );
 
+
     showcaseObserver.observe(
         productShowcase
     );
@@ -5087,7 +5447,7 @@ if(productShowcase){
 
 
 /* =========================================================
-   PAGE VISIBILITY
+   APP / TAB VISIBILITY
 ========================================================= */
 
 document.addEventListener(
@@ -5098,22 +5458,26 @@ document.addEventListener(
 
             clearProductTimer();
 
-            stopAllMainVideos(false);
-
-            document
-                .querySelectorAll(
-                    ".preview-card video"
-                )
-                .forEach(
-                    function(video){
-
-                        video.pause();
-                    }
-                );
+            stopAllMainVideos(
+                false
+            );
 
         }else if(showcaseVisible){
 
-            scheduleCurrentProduct();
+            /*
+               User returned to the app/tab.
+            */
+
+            if(currentProduct === 0){
+
+                autoplayActiveVideo(
+                    true
+                );
+
+            }else{
+
+                scheduleCurrentProduct();
+            }
         }
     }
 );
@@ -5126,6 +5490,7 @@ document.addEventListener(
 let showcaseWasMobile =
     isMobileShowcase();
 
+
 window.addEventListener(
     "resize",
     function(){
@@ -5133,7 +5498,11 @@ window.addEventListener(
         const nowMobile =
             isMobileShowcase();
 
-        stopAllMainVideos(false);
+
+        stopAllMainVideos(
+            false
+        );
+
 
         if(
             nowMobile &&
@@ -5146,62 +5515,31 @@ window.addEventListener(
             );
         }
 
+
         showcaseWasMobile =
             nowMobile;
 
+
         if(showcaseVisible){
 
-            scheduleCurrentProduct();
+            if(currentProduct === 0){
+
+                autoplayActiveVideo(
+                    true
+                );
+
+            }else{
+
+                scheduleCurrentProduct();
+            }
         }
     }
 );
 
 
-
-/* =========================================================
-   WHAT WE BUILD NAV LINKS
-   Open the matching showcase item.
-========================================================= */
-
-document
-    .querySelectorAll("[data-product-jump]")
-    .forEach(function(link){
-
-        link.addEventListener(
-            "click",
-            function(){
-
-                const index =
-                    Number(
-                        link.dataset.productJump
-                    );
-
-                /*
-                   Wait for the anchor scroll to begin,
-                   then activate the requested product.
-                */
-                setTimeout(
-                    function(){
-
-                        setProduct(
-                            index,
-                            {
-                                scrollMobile:true,
-                                restartVideo:true
-                            }
-                        );
-
-                    },
-                    180
-                );
-            }
-        );
-    });
-
-
 /* =========================================================
    INITIAL STATE
-   DO NOT START PLAYING BEFORE USER REACHES SECTION.
+   Don't play before user reaches this section.
 ========================================================= */
 
 setProduct(
@@ -5212,7 +5550,11 @@ setProduct(
     }
 );
 
-stopAllMainVideos(true);
+
+stopAllMainVideos(
+    true
+);
+
 
 if(isMobileShowcase()){
 
@@ -5226,6 +5568,7 @@ if(isMobileShowcase()){
         }
     );
 }
+
 
 syncVideoButtons();
 
