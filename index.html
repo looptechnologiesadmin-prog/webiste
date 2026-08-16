@@ -8092,6 +8092,42 @@ a{
     }
 }
 
+
+/* =========================================================
+   MADE WITH CEZONAL — LIMITED ROTATION
+   No full 360-degree flip.
+========================================================= */
+
+.cezonal-made-line{
+    animation:cezonalMadeHalfTurn 5.2s ease-in-out infinite !important;
+}
+
+@keyframes cezonalMadeHalfTurn{
+    0%,100%{
+        transform:perspective(700px) rotateY(-18deg) rotateX(1deg);
+        opacity:.84;
+    }
+
+    50%{
+        transform:perspective(700px) rotateY(18deg) rotateX(-1deg);
+        opacity:1;
+    }
+}
+
+.cezonal-center-word{
+    animation:cezonalWordHalfTurn 5.2s ease-in-out .12s infinite !important;
+}
+
+@keyframes cezonalWordHalfTurn{
+    0%,100%{
+        transform:translateZ(12px) rotateY(-12deg);
+    }
+
+    50%{
+        transform:translateZ(18px) rotateY(12deg);
+    }
+}
+
 </style>
 
 </head>
@@ -12967,8 +13003,13 @@ syncVideoButtons();
         if(center){
 
             const centerTiltY =
-                currentRotY *
-                .12;
+                Math.max(
+                    -90,
+                    Math.min(
+                        90,
+                        currentRotY * .12
+                    )
+                );
 
             const centerTiltX =
                 currentRotX *
