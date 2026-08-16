@@ -8128,6 +8128,1019 @@ a{
     }
 }
 
+
+/* =========================================================
+   CEZONAL FINAL FOOTER
+========================================================= */
+
+.cezonal-final-footer{
+    position:relative;
+    width:100%;
+    min-height:500px;
+    margin:0;
+    padding:70px 20px 34px;
+    overflow:hidden;
+    background:#000;
+    color:#fff;
+}
+
+.cezonal-footer-stage{
+    position:relative;
+    width:100%;
+    height:300px;
+    overflow:hidden;
+}
+
+.cezonal-footer-image{
+    position:absolute;
+    left:0;
+    top:50%;
+    width:min(420px,42vw);
+    max-height:260px;
+    object-fit:contain;
+    display:block;
+
+    opacity:0;
+    transform:
+        translate(-115%,-50%)
+        scale(.96);
+
+    will-change:transform,opacity;
+}
+
+.cezonal-final-footer.is-visible .cezonal-footer-image{
+    animation:
+        cezonalFooterTravel
+        2.3s
+        cubic-bezier(.22,.72,.18,1)
+        forwards;
+}
+
+@keyframes cezonalFooterTravel{
+
+    0%{
+        left:0%;
+        opacity:0;
+        transform:
+            translate(-115%,-50%)
+            scale(.96);
+    }
+
+    16%{
+        opacity:1;
+    }
+
+    50%{
+        left:50%;
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    100%{
+        left:100%;
+        opacity:1;
+        transform:
+            translate(8%,-50%)
+            scale(.96);
+    }
+}
+
+.cezonal-footer-brand{
+    position:relative;
+    z-index:2;
+    width:100%;
+    margin-top:12px;
+    text-align:center;
+
+    opacity:0;
+    transform:translateY(12px);
+
+    transition:
+        opacity .7s ease 1.35s,
+        transform .7s ease 1.35s;
+}
+
+.cezonal-final-footer.is-visible .cezonal-footer-brand{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.cezonal-footer-brand strong{
+    display:block;
+    margin:0;
+
+    font-size:clamp(18px,2vw,28px);
+    font-weight:600;
+    line-height:1.2;
+    letter-spacing:-.6px;
+
+    color:#fff;
+}
+
+.cezonal-footer-line{
+    width:42px;
+    height:1px;
+    margin:22px auto 0;
+    background:rgba(255,255,255,.26);
+}
+
+.cezonal-footer-copy{
+    margin:14px 0 0;
+    font-size:9px;
+    font-weight:500;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.42);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .cezonal-final-footer{
+        min-height:390px;
+        padding:46px 14px 26px;
+    }
+
+    .cezonal-footer-stage{
+        height:235px;
+    }
+
+    .cezonal-footer-image{
+        width:min(250px,64vw);
+        max-height:205px;
+    }
+
+    .cezonal-footer-brand{
+        margin-top:4px;
+    }
+
+    .cezonal-footer-brand strong{
+        font-size:18px;
+        letter-spacing:-.35px;
+    }
+
+    .cezonal-footer-line{
+        margin-top:16px;
+    }
+
+    .cezonal-footer-copy{
+        margin-top:11px;
+        font-size:7px;
+        letter-spacing:1.2px;
+    }
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    .cezonal-footer-image{
+        left:50%;
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+
+    .cezonal-final-footer.is-visible .cezonal-footer-image{
+        animation:none;
+    }
+
+    .cezonal-footer-brand{
+        opacity:1;
+        transform:none;
+        transition:none;
+    }
+}
+
+
+/* =========================================================
+   FINAL FOOTER FIX — WHITE IMAGE AREA, BLACK ONLY AFTER IMAGE
+========================================================= */
+.cezonal-final-footer{
+    position:relative !important;
+    width:100% !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+    color:#fff !important;
+}
+
+.cezonal-footer-stage{
+    position:relative !important;
+    width:100% !important;
+    height:330px !important;
+    overflow:hidden !important;
+    background:#fff !important;
+}
+
+.cezonal-footer-image{
+    position:absolute !important;
+    top:50% !important;
+    width:min(420px,42vw) !important;
+    max-height:270px !important;
+    object-fit:contain !important;
+    display:block !important;
+}
+
+.cezonal-footer-brand{
+    position:relative !important;
+    z-index:2 !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:48px 20px 34px !important;
+    text-align:center !important;
+    background:#000 !important;
+    color:#fff !important;
+}
+
+.cezonal-footer-brand strong{
+    color:#fff !important;
+}
+
+@media(max-width:600px){
+    .cezonal-footer-stage{
+        height:245px !important;
+    }
+
+    .cezonal-footer-image{
+        width:min(250px,64vw) !important;
+        max-height:205px !important;
+    }
+
+    .cezonal-footer-brand{
+        padding:36px 14px 27px !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL IMAGE ONLY — NO FOOTER
+========================================================= */
+.cezonal-footer-brand,
+.cezonal-footer-line,
+.cezonal-footer-copy{
+    display:none !important;
+}
+
+.cezonal-final-image-section{
+    position:relative;
+    width:100%;
+    height:360px;
+    margin:0;
+    overflow:hidden;
+    background:#fff;
+}
+
+.cezonal-final-image{
+    position:absolute;
+    top:50%;
+    left:0;
+    width:min(430px,42vw);
+    max-width:430px;
+    max-height:300px;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    opacity:0;
+    transform:translate(-110%,-50%);
+    will-change:transform,left,opacity;
+}
+
+.cezonal-final-image-section.is-visible .cezonal-final-image{
+    animation:cezonalFinalImageMove 2.4s cubic-bezier(.22,.72,.18,1) forwards;
+}
+
+@keyframes cezonalFinalImageMove{
+    0%{
+        left:0;
+        opacity:0;
+        transform:translate(-110%,-50%);
+    }
+    12%{
+        opacity:1;
+    }
+    50%{
+        left:50%;
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+    100%{
+        left:100%;
+        opacity:1;
+        transform:translate(8%,-50%);
+    }
+}
+
+@media(max-width:600px){
+    .cezonal-final-image-section{
+        height:270px;
+    }
+
+    .cezonal-final-image{
+        width:min(270px,68vw);
+        max-width:270px;
+        max-height:225px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    .cezonal-final-image{
+        left:50%;
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+
+    .cezonal-final-image-section.is-visible .cezonal-final-image{
+        animation:none;
+    }
+}
+
+
+/* =========================================================
+   FINAL PNG VISIBILITY FIX
+   footer.png enters from left and STAYS visible in center.
+========================================================= */
+.cezonal-final-image-section{
+    position:relative !important;
+    width:100% !important;
+    height:360px !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+}
+
+.cezonal-final-image{
+    position:absolute !important;
+    top:50% !important;
+    left:50% !important;
+    width:min(520px,72vw) !important;
+    max-width:520px !important;
+    max-height:310px !important;
+    height:auto !important;
+    display:block !important;
+    object-fit:contain !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    z-index:5 !important;
+    transform:translate(-50%,-50%) !important;
+}
+
+.cezonal-final-image-section:not(.is-visible) .cezonal-final-image{
+    opacity:0 !important;
+    transform:translate(-130%,-50%) !important;
+}
+
+.cezonal-final-image-section.is-visible .cezonal-final-image{
+    animation:cezonalFooterPngVisible 1.25s cubic-bezier(.22,.72,.18,1) forwards !important;
+}
+
+@keyframes cezonalFooterPngVisible{
+    0%{
+        opacity:0;
+        transform:translate(-130%,-50%);
+    }
+    100%{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+}
+
+@media(max-width:600px){
+    .cezonal-final-image-section{
+        height:270px !important;
+    }
+
+    .cezonal-final-image{
+        width:min(330px,86vw) !important;
+        max-width:330px !important;
+        max-height:225px !important;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    .cezonal-final-image-section:not(.is-visible) .cezonal-final-image,
+    .cezonal-final-image-section.is-visible .cezonal-final-image{
+        opacity:1 !important;
+        transform:translate(-50%,-50%) !important;
+        animation:none !important;
+    }
+}
+
+
+/* =========================================================
+   FOOTER.PNG POSITION + VISIBILITY FINAL OVERRIDE
+========================================================= */
+.cezonal-final-image-section{
+    position:relative !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    height:360px !important;
+    min-height:360px !important;
+    margin:0 !important;
+    padding:20px !important;
+    overflow:hidden !important;
+    background:#fff !important;
+    visibility:visible !important;
+    opacity:1 !important;
+}
+
+.cezonal-final-image{
+    position:relative !important;
+    left:auto !important;
+    top:auto !important;
+    display:block !important;
+    width:min(520px,76vw) !important;
+    max-width:520px !important;
+    max-height:310px !important;
+    height:auto !important;
+    object-fit:contain !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    z-index:5 !important;
+    transform:none !important;
+    animation:cezonalFooterEnterFromLeft 1.15s cubic-bezier(.22,.72,.18,1) both !important;
+}
+
+@keyframes cezonalFooterEnterFromLeft{
+    from{
+        opacity:0;
+        transform:translateX(-70vw);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.cezonal-final-image-section:not(.is-visible) .cezonal-final-image,
+.cezonal-final-image-section.is-visible .cezonal-final-image{
+    visibility:visible !important;
+    opacity:1 !important;
+    animation:cezonalFooterEnterFromLeft 1.15s cubic-bezier(.22,.72,.18,1) both !important;
+}
+
+@media(max-width:600px){
+    .cezonal-final-image-section{
+        height:270px !important;
+        min-height:270px !important;
+        padding:14px !important;
+    }
+
+    .cezonal-final-image{
+        width:min(330px,86vw) !important;
+        max-width:330px !important;
+        max-height:225px !important;
+    }
+}
+
+
+/* =========================================================
+   FOOTER.PNG — EDGE TO EDGE + ZERO GAP
+========================================================= */
+
+#cezonal-particle-cta{
+    margin-bottom:0 !important;
+}
+
+.cezonal-final-image-section{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:320px !important;
+    min-height:320px !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+}
+
+.cezonal-final-image{
+    position:absolute !important;
+    top:50% !important;
+    left:0 !important;
+
+    display:block !important;
+    width:min(500px,42vw) !important;
+    max-width:500px !important;
+    max-height:280px !important;
+    height:auto !important;
+
+    object-fit:contain !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    z-index:5 !important;
+
+    transform:translate(-100%,-50%) !important;
+    animation:cezonalFooterEdgeTravel 3.2s cubic-bezier(.45,.05,.55,.95) forwards !important;
+    will-change:left,transform;
+}
+
+@keyframes cezonalFooterEdgeTravel{
+    0%{
+        left:0;
+        transform:translate(-100%,-50%);
+    }
+
+    8%{
+        left:0;
+        transform:translate(0,-50%);
+    }
+
+    50%{
+        left:50%;
+        transform:translate(-50%,-50%);
+    }
+
+    92%{
+        left:100%;
+        transform:translate(-100%,-50%);
+    }
+
+    100%{
+        left:100%;
+        transform:translate(0,-50%);
+    }
+}
+
+/* Kill older visibility rules */
+.cezonal-final-image-section:not(.is-visible) .cezonal-final-image,
+.cezonal-final-image-section.is-visible .cezonal-final-image{
+    opacity:1 !important;
+    visibility:visible !important;
+    animation:cezonalFooterEdgeTravel 3.2s cubic-bezier(.45,.05,.55,.95) forwards !important;
+}
+
+@media(max-width:600px){
+    .cezonal-final-image-section{
+        height:235px !important;
+        min-height:235px !important;
+    }
+
+    .cezonal-final-image{
+        width:min(280px,64vw) !important;
+        max-width:280px !important;
+        max-height:205px !important;
+    }
+}
+
+
+/* =========================================================
+   FOOTER.PNG — DIRECTLY BELOW COMPLETE START A PROJECT SECTION
+========================================================= */
+
+#cezonal-particle-cta{
+    margin:0 !important;
+    margin-bottom:0 !important;
+}
+
+.cezonal-final-image-section{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    line-height:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+}
+
+.cezonal-final-image{
+    position:relative !important;
+    inset:auto !important;
+    left:auto !important;
+    top:auto !important;
+
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    height:auto !important;
+    max-height:none !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    object-fit:cover !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+    animation:cezonalFooterSlideAcross 1.25s cubic-bezier(.22,.72,.18,1) both !important;
+}
+
+@keyframes cezonalFooterSlideAcross{
+    from{
+        opacity:0;
+        transform:translateX(-100%);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.cezonal-final-image-section:not(.is-visible) .cezonal-final-image,
+.cezonal-final-image-section.is-visible .cezonal-final-image{
+    opacity:1 !important;
+    visibility:visible !important;
+    animation:cezonalFooterSlideAcross 1.25s cubic-bezier(.22,.72,.18,1) both !important;
+}
+
+@media(max-width:600px){
+    .cezonal-final-image-section{
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+    }
+
+    .cezonal-final-image{
+        width:100% !important;
+        max-width:none !important;
+        height:auto !important;
+        max-height:none !important;
+    }
+}
+
+
+/* =========================================================
+   CEZONAL BLACK FOOTER — DIRECTLY AFTER FOOTER.PNG
+========================================================= */
+.cezonal-black-footer{
+    width:100%;
+    margin:0;
+    padding:0;
+    background:#000;
+    color:#fff;
+}
+
+.cezonal-black-footer-inner{
+    width:100%;
+    min-height:360px;
+    padding:64px 20px 58px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+}
+
+.cezonal-black-footer-logo{
+    width:88px;
+    height:88px;
+    display:block;
+    object-fit:contain;
+    margin:0 0 24px;
+}
+
+.cezonal-black-footer-name{
+    margin:0;
+    font-size:clamp(28px,3vw,46px);
+    font-weight:600;
+    line-height:1.05;
+    letter-spacing:-1.8px;
+    color:#fff;
+}
+
+.cezonal-black-footer-private{
+    margin-top:10px;
+    font-size:11px;
+    font-weight:500;
+    line-height:1;
+    letter-spacing:4.5px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+}
+
+@media(max-width:600px){
+    .cezonal-black-footer-inner{
+        min-height:300px;
+        padding:48px 16px 44px;
+    }
+
+    .cezonal-black-footer-logo{
+        width:72px;
+        height:72px;
+        margin-bottom:20px;
+    }
+
+    .cezonal-black-footer-name{
+        font-size:27px;
+        letter-spacing:-1.1px;
+    }
+
+    .cezonal-black-footer-private{
+        margin-top:9px;
+        font-size:8px;
+        letter-spacing:3.2px;
+    }
+}
+
+
+/* =========================================================
+   BLACK FOOTER — COMPACT FINAL
+========================================================= */
+
+.cezonal-black-footer-inner{
+    min-height:250px !important;
+    padding:34px 20px 32px !important;
+}
+
+.cezonal-black-footer-logo{
+    width:58px !important;
+    height:58px !important;
+    margin:0 0 10px !important;
+}
+
+.cezonal-black-footer-name{
+    margin:0 !important;
+    font-size:clamp(24px,2.4vw,36px) !important;
+    line-height:1.05 !important;
+    letter-spacing:-1.2px !important;
+}
+
+.cezonal-black-footer-private{
+    margin-top:6px !important;
+    font-size:9px !important;
+    letter-spacing:3.4px !important;
+}
+
+/* No separator line anywhere in the final footer */
+.cezonal-black-footer .cezonal-footer-line,
+.cezonal-black-footer hr{
+    display:none !important;
+}
+
+@media(max-width:600px){
+
+    .cezonal-black-footer-inner{
+        min-height:215px !important;
+        padding:28px 14px 26px !important;
+    }
+
+    .cezonal-black-footer-logo{
+        width:50px !important;
+        height:50px !important;
+        margin-bottom:8px !important;
+    }
+
+    .cezonal-black-footer-name{
+        font-size:23px !important;
+        letter-spacing:-.8px !important;
+    }
+
+    .cezonal-black-footer-private{
+        margin-top:5px !important;
+        font-size:7.5px !important;
+        letter-spacing:2.7px !important;
+    }
+}
+
+
+/* =========================================================
+   CEZONAL FOOTER — FINAL CLEAN VERSION
+========================================================= */
+
+/* No line / border / gap between footer.png and black footer */
+.cezonal-final-image-section{
+    margin-bottom:0 !important;
+    border-bottom:0 !important;
+    box-shadow:none !important;
+}
+
+.cezonal-final-image-section::before,
+.cezonal-final-image-section::after{
+    display:none !important;
+    content:none !important;
+}
+
+.cezonal-black-footer{
+    position:relative !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    border-top:0 !important;
+    outline:0 !important;
+    box-shadow:none !important;
+    background:#000 !important;
+    color:#fff !important;
+}
+
+.cezonal-black-footer::before,
+.cezonal-black-footer::after{
+    display:none !important;
+    content:none !important;
+}
+
+.cezonal-black-footer-inner{
+    width:min(1180px,100%) !important;
+    min-height:0 !important;
+
+    margin:0 auto !important;
+    padding:26px 28px 20px !important;
+
+    display:block !important;
+    text-align:center !important;
+}
+
+
+/* BRAND — PUSHED UP / COMPACT */
+
+.cezonal-footer-brand-block{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.cezonal-black-footer-logo{
+    width:44px !important;
+    height:44px !important;
+
+    display:block !important;
+    object-fit:contain !important;
+
+    margin:0 0 5px !important;
+}
+
+.cezonal-black-footer-name{
+    margin:0 !important;
+
+    font-size:25px !important;
+    font-weight:600 !important;
+
+    line-height:1.02 !important;
+    letter-spacing:-.9px !important;
+
+    color:#fff !important;
+}
+
+.cezonal-black-footer-private{
+    margin-top:4px !important;
+
+    font-size:7.5px !important;
+    font-weight:500 !important;
+
+    line-height:1 !important;
+    letter-spacing:2.7px !important;
+
+    text-transform:uppercase !important;
+
+    color:rgba(255,255,255,.48) !important;
+}
+
+
+/* FOOTER LINKS */
+
+.cezonal-footer-links{
+    width:min(620px,100%);
+
+    margin:26px auto 0;
+
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px 60px;
+
+    text-align:left;
+}
+
+.cezonal-footer-column{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:9px;
+}
+
+.cezonal-footer-column-title{
+    margin-bottom:3px;
+
+    font-size:8px;
+    font-weight:600;
+
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+
+    color:rgba(255,255,255,.38);
+}
+
+.cezonal-footer-column a{
+    color:rgba(255,255,255,.72);
+
+    text-decoration:none;
+
+    font-size:11px;
+    font-weight:500;
+    line-height:1.25;
+
+    transition:color .2s ease;
+}
+
+.cezonal-footer-column a:hover{
+    color:#fff;
+}
+
+
+/* COPYRIGHT — NO SEPARATOR LINE */
+
+.cezonal-footer-bottom{
+    margin-top:28px;
+    padding:0 0 2px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:5px 8px;
+
+    border:0 !important;
+    border-top:0 !important;
+
+    font-size:8px;
+    font-weight:500;
+    line-height:1.4;
+
+    letter-spacing:.15px;
+
+    color:rgba(255,255,255,.34);
+}
+
+/* Explicitly kill any old footer line/hr */
+.cezonal-black-footer .cezonal-footer-line,
+.cezonal-black-footer hr{
+    display:none !important;
+    border:0 !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .cezonal-black-footer-inner{
+        padding:21px 18px 17px !important;
+    }
+
+    .cezonal-black-footer-logo{
+        width:40px !important;
+        height:40px !important;
+        margin-bottom:4px !important;
+    }
+
+    .cezonal-black-footer-name{
+        font-size:22px !important;
+        letter-spacing:-.7px !important;
+    }
+
+    .cezonal-black-footer-private{
+        margin-top:4px !important;
+        font-size:7px !important;
+        letter-spacing:2.35px !important;
+    }
+
+    .cezonal-footer-links{
+        width:100%;
+        max-width:360px;
+
+        margin-top:22px;
+
+        gap:20px 30px;
+    }
+
+    .cezonal-footer-column{
+        gap:8px;
+    }
+
+    .cezonal-footer-column-title{
+        font-size:7px;
+        letter-spacing:1.45px;
+    }
+
+    .cezonal-footer-column a{
+        font-size:10px;
+    }
+
+    .cezonal-footer-bottom{
+        margin-top:22px;
+
+        flex-direction:column;
+        gap:2px;
+
+        font-size:7px;
+    }
+}
+
 </style>
 
 </head>
@@ -10108,6 +11121,116 @@ a{
     </div>
 
 </section>
+<section class="cezonal-final-image-section" id="cezonalFinalImageSection">
+    <img
+        src="footer.jpeg"
+        class="cezonal-final-image"
+        alt="Cezonal"
+        decoding="async"
+    >
+</section>
+
+
+<!-- =========================================================
+     CEZONAL BLACK FOOTER
+========================================================= -->
+<footer class="cezonal-black-footer">
+
+    <div class="cezonal-black-footer-inner">
+
+        <div class="cezonal-footer-brand-block">
+
+            <img
+                src="logo.png"
+                class="cezonal-black-footer-logo"
+                alt="Cezonal Solutions"
+                loading="lazy"
+                decoding="async"
+            >
+
+            <div class="cezonal-black-footer-name">
+                Cezonal Solutions
+            </div>
+
+            <div class="cezonal-black-footer-private">
+                Private Limited
+            </div>
+
+        </div>
+
+
+        <div class="cezonal-footer-links">
+
+            <div class="cezonal-footer-column">
+
+                <span class="cezonal-footer-column-title">
+                    Explore
+                </span>
+
+                <a href="#what-we-build">
+                    What We Build
+                </a>
+
+                <a href="#about">
+                    About Cezonal
+                </a>
+
+                <a href="#jobs">
+                    Careers
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <div class="cezonal-footer-column">
+
+                <span class="cezonal-footer-column-title">
+                    Services
+                </span>
+
+                <a href="#software-development">
+                    Software Development
+                </a>
+
+                <a href="#mobile-app-development">
+                    Mobile Applications
+                </a>
+
+                <a href="#web-development">
+                    Web Development
+                </a>
+
+                <a href="#ui-ux">
+                    UI &amp; UX Design
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="cezonal-footer-bottom">
+
+            <span>
+                © 2026 Cezonal Solutions Private Limited.
+            </span>
+
+            <span>
+                All rights reserved.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
 
 
 
@@ -13677,7 +14800,85 @@ syncVideoButtons();
 
 })();
 
+
+
+
+/* =========================================================
+   CEZONAL FINAL FOOTER — ENTER ANIMATION
+========================================================= */
+
+(function(){
+
+    const footer =
+        document.getElementById(
+            "cezonalFinalFooter"
+        );
+
+    if(!footer){
+        return;
+    }
+
+    const observer =
+        new IntersectionObserver(
+            function(entries){
+
+                entries.forEach(
+                    function(entry){
+
+                        if(entry.isIntersecting){
+
+                            footer.classList.add(
+                                "is-visible"
+                            );
+
+                            observer.unobserve(
+                                footer
+                            );
+                        }
+                    }
+                );
+            },
+            {
+                threshold:.24
+            }
+        );
+
+    observer.observe(
+        footer
+    );
+
+})();
+
+
+
+/* FINAL IMAGE ONLY — START WHEN VISIBLE */
+(function(){
+    const section = document.getElementById("cezonalFinalImageSection");
+    if(!section) return;
+
+    const observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                section.classList.add("is-visible");
+                observer.unobserve(section);
+            }
+        });
+    }, {threshold:.12});
+
+    observer.observe(section);
+})();
+
 </script>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
