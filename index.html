@@ -5506,7 +5506,7 @@ a{
 
 .product-signals{
     width:100%;
-    padding:44px 24px 78px;
+    padding:30px 24px 78px;
     background:#fff;
     overflow:hidden;
 }
@@ -5631,7 +5631,7 @@ a{
 @media(max-width:600px){
 
     .product-signals{
-        padding:30px 14px 54px;
+        padding:22px 14px 54px;
     }
 
     .product-signals-head{
@@ -5762,7 +5762,7 @@ a{
        but removes the excessive gap before the next section. */
     .scroll-cards-section{
         position:relative !important;
-        height:calc(var(--stable-vh, 100vh) * 4.75) !important;
+        height:calc(var(--stable-vh, 100vh) * 3.65) !important;
         min-height:0 !important;
         margin:0 !important;
         padding:0 !important;
@@ -5943,7 +5943,7 @@ a{
     /* next section begins immediately after sticky story releases */
     .product-signals{
         margin:0 !important;
-        padding-top:22px !important;
+        padding-top:12px !important;
     }
 }
 
@@ -5975,6 +5975,2120 @@ a{
     .scroll-story-content p{
         -webkit-line-clamp:5 !important;
         font-size:8.9px !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL MOBILE NEWSPAPER END-GAP FIX
+========================================================= */
+
+@media(max-width:600px){
+
+    .scroll-cards-section,
+    .scroll-cards-sticky,
+    .scroll-cards-inner,
+    .scroll-card-stage{
+        margin-bottom:0 !important;
+    }
+
+    .product-signals{
+        position:relative;
+        z-index:3;
+        margin-top:0 !important;
+    }
+}
+
+
+/* =========================================================
+   NEWSPAPER STORY — NO ARTIFICIAL SCROLL GAP
+========================================================= */
+
+.scroll-cards-section{
+    position:relative !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-sticky{
+    position:relative !important;
+    top:auto !important;
+
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:0 !important;
+    padding:30px 24px 24px !important;
+
+    overflow:hidden !important;
+    background:#f7f8fa !important;
+
+    transform:none !important;
+    will-change:auto !important;
+}
+
+.scroll-cards-inner{
+    width:100% !important;
+    max-width:1180px !important;
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:0 auto !important;
+    padding:0 !important;
+}
+
+.scroll-cards-head{
+    margin:0 0 8px !important;
+    padding:0 !important;
+}
+
+.scroll-card-stage{
+    position:relative !important;
+
+    width:100% !important;
+    height:430px !important;
+    min-height:430px !important;
+    max-height:430px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    overflow:hidden !important;
+}
+
+.scroll-story-progress{
+    display:none !important;
+}
+
+.product-signals{
+    margin-top:0 !important;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .scroll-cards-section{
+        height:auto !important;
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .scroll-cards-sticky{
+        position:relative !important;
+        top:auto !important;
+
+        height:auto !important;
+        min-height:0 !important;
+
+        margin:0 !important;
+        padding:18px 12px 12px !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-cards-head{
+        margin:0 0 4px !important;
+    }
+
+    .scroll-cards-head h2{
+        margin:0 !important;
+    }
+
+    .scroll-card-stage{
+        height:252px !important;
+        min-height:252px !important;
+        max-height:252px !important;
+
+        margin:4px 0 0 !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-story-card{
+        top:0 !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:auto !important;
+
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        max-height:246px !important;
+
+        margin:0 !important;
+    }
+
+    .product-signals{
+        margin:0 !important;
+        padding-top:18px !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-cards-sticky{
+        padding:16px 10px 10px !important;
+    }
+
+    .scroll-card-stage{
+        height:236px !important;
+        min-height:236px !important;
+        max-height:236px !important;
+    }
+
+    .scroll-story-card{
+        max-height:230px !important;
+    }
+}
+
+
+/* =========================================================
+   NEWSPAPER STORY — STICKY, NO EMPTY GAP
+   The user stays in this section while scrolling through
+   all 7 papers. No blank spacer is shown.
+========================================================= */
+
+.scroll-cards-section{
+    --paper-scroll-step:180px;
+
+    position:relative !important;
+    width:100% !important;
+
+    /*
+       100vh keeps the sticky viewport visible.
+       6 extra steps = transitions from paper 1 to paper 7.
+       This creates only the scroll distance needed for switching,
+       not several empty screens.
+    */
+    height:calc(100vh + (6 * var(--paper-scroll-step))) !important;
+
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-sticky{
+    position:sticky !important;
+    top:0 !important;
+
+    width:100% !important;
+    height:100vh !important;
+    min-height:100vh !important;
+
+    margin:0 !important;
+    padding:30px 24px 20px !important;
+
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+
+    overflow:hidden !important;
+
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-inner{
+    width:100% !important;
+    max-width:1180px !important;
+
+    margin:0 auto !important;
+    padding:0 !important;
+}
+
+.scroll-cards-head{
+    margin:0 0 8px !important;
+}
+
+.scroll-card-stage{
+    position:relative !important;
+
+    width:100% !important;
+    height:430px !important;
+    min-height:430px !important;
+    max-height:430px !important;
+
+    margin:0 !important;
+
+    overflow:hidden !important;
+}
+
+.scroll-story-progress{
+    display:none !important;
+}
+
+.product-signals{
+    margin-top:0 !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .scroll-cards-section{
+        --paper-scroll-step:110px;
+
+        height:
+            calc(
+                var(--stable-vh, 100vh) +
+                (6 * var(--paper-scroll-step))
+            ) !important;
+    }
+
+    .scroll-cards-sticky{
+        position:sticky !important;
+        top:0 !important;
+
+        height:var(--stable-vh, 100vh) !important;
+        min-height:var(--stable-vh, 100vh) !important;
+
+        padding:18px 12px 10px !important;
+
+        display:block !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-cards-head{
+        margin:0 0 4px !important;
+    }
+
+    .scroll-card-stage{
+        height:252px !important;
+        min-height:252px !important;
+        max-height:252px !important;
+
+        margin:4px 0 0 !important;
+    }
+
+    .scroll-story-card{
+        top:0 !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:auto !important;
+
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        max-height:246px !important;
+
+        margin:0 !important;
+    }
+
+    .product-signals{
+        margin:0 !important;
+        padding-top:18px !important;
+    }
+}
+
+
+@media(max-width:380px){
+
+    .scroll-cards-section{
+        --paper-scroll-step:95px;
+    }
+
+    .scroll-cards-sticky{
+        padding:16px 10px 9px !important;
+    }
+
+    .scroll-card-stage{
+        height:236px !important;
+        min-height:236px !important;
+        max-height:236px !important;
+    }
+
+    .scroll-story-card{
+        max-height:230px !important;
+    }
+}
+
+
+/* =========================================================
+   NEWSPAPER STORY — COMPACT LOCKED SCROLL
+   Next section stays close/visible. No artificial spacer.
+========================================================= */
+
+.scroll-cards-section{
+    position:relative !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    background:#f7f8fa !important;
+    overflow:visible !important;
+}
+
+.scroll-cards-sticky{
+    position:relative !important;
+    top:auto !important;
+
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:0 !important;
+    padding:24px 24px 18px !important;
+
+    overflow:hidden !important;
+
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-inner{
+    width:100% !important;
+    max-width:1180px !important;
+
+    margin:0 auto !important;
+    padding:0 !important;
+}
+
+.scroll-cards-head{
+    margin:0 0 7px !important;
+    padding:0 !important;
+}
+
+.scroll-card-stage{
+    position:relative !important;
+
+    width:100% !important;
+    height:390px !important;
+    min-height:390px !important;
+    max-height:390px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    overflow:hidden !important;
+}
+
+.scroll-story-progress{
+    display:none !important;
+}
+
+/* The next section begins directly after the paper block. */
+.product-signals{
+    margin:0 !important;
+    padding-top:24px !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .scroll-cards-section{
+        height:auto !important;
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .scroll-cards-sticky{
+        position:relative !important;
+        top:auto !important;
+
+        height:auto !important;
+        min-height:0 !important;
+
+        margin:0 !important;
+        padding:14px 12px 10px !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-cards-head{
+        margin:0 0 3px !important;
+    }
+
+    .scroll-cards-kicker{
+        margin-bottom:1px !important;
+    }
+
+    .scroll-cards-head h2{
+        margin:0 !important;
+        font-size:20px !important;
+        line-height:1.03 !important;
+    }
+
+    .scroll-card-stage{
+        width:100% !important;
+
+        height:245px !important;
+        min-height:245px !important;
+        max-height:245px !important;
+
+        margin:4px 0 0 !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-story-card{
+        top:0 !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:auto !important;
+
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        max-height:239px !important;
+
+        margin:0 !important;
+    }
+
+    .product-signals{
+        margin:0 !important;
+        padding-top:14px !important;
+    }
+}
+
+
+@media(max-width:380px){
+
+    .scroll-cards-sticky{
+        padding:12px 10px 9px !important;
+    }
+
+    .scroll-card-stage{
+        height:230px !important;
+        min-height:230px !important;
+        max-height:230px !important;
+    }
+
+    .scroll-story-card{
+        max-height:224px !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL NEWSPAPER STICKY SCROLL
+   Sticky screen + paper changes + no visible gap.
+========================================================= */
+
+.scroll-cards-section{
+    --paper-step:150px;
+
+    position:relative !important;
+    width:100% !important;
+
+    /* Only enough extra distance to move through 7 papers. */
+    height:calc(100vh + (6 * var(--paper-step))) !important;
+
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-sticky{
+    position:sticky !important;
+    top:0 !important;
+
+    width:100% !important;
+    height:100vh !important;
+    min-height:100vh !important;
+
+    margin:0 !important;
+    padding:26px 24px 18px !important;
+
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+
+    overflow:hidden !important;
+
+    background:#f7f8fa !important;
+}
+
+.scroll-cards-inner{
+    width:100% !important;
+    max-width:1180px !important;
+
+    margin:0 auto !important;
+    padding:0 !important;
+}
+
+.scroll-cards-head{
+    margin:0 0 7px !important;
+    padding:0 !important;
+}
+
+.scroll-card-stage{
+    position:relative !important;
+
+    width:100% !important;
+    height:430px !important;
+    min-height:430px !important;
+    max-height:430px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    overflow:hidden !important;
+}
+
+.scroll-story-progress{
+    display:none !important;
+}
+
+/* Next section starts immediately after sticky release. */
+.product-signals{
+    margin:0 !important;
+    padding-top:20px !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .scroll-cards-section{
+        --paper-step:95px;
+
+        height:
+            calc(
+                var(--stable-vh, 100vh) +
+                (6 * var(--paper-step))
+            ) !important;
+
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .scroll-cards-sticky{
+        position:sticky !important;
+        top:0 !important;
+
+        width:100% !important;
+
+        height:var(--stable-vh, 100vh) !important;
+        min-height:var(--stable-vh, 100vh) !important;
+
+        margin:0 !important;
+        padding:14px 12px 8px !important;
+
+        display:block !important;
+
+        overflow:hidden !important;
+
+        background:#f7f8fa !important;
+    }
+
+    .scroll-cards-head{
+        margin:0 0 3px !important;
+        padding:0 !important;
+    }
+
+    .scroll-cards-kicker{
+        margin:0 0 1px !important;
+    }
+
+    .scroll-cards-head h2{
+        margin:0 !important;
+
+        font-size:20px !important;
+        line-height:1.03 !important;
+        letter-spacing:-.6px !important;
+    }
+
+    .scroll-card-stage{
+        width:100% !important;
+
+        height:248px !important;
+        min-height:248px !important;
+        max-height:248px !important;
+
+        margin:4px 0 0 !important;
+        padding:0 !important;
+
+        overflow:hidden !important;
+    }
+
+    .scroll-story-card{
+        position:absolute !important;
+
+        top:0 !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:auto !important;
+
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        max-height:242px !important;
+
+        margin:0 !important;
+    }
+
+    /*
+       Fill the remaining sticky viewport with the same section
+       background so there is never a white/blank "gap" region.
+    */
+    .scroll-cards-sticky::after{
+        content:"";
+        position:absolute;
+        left:0;
+        right:0;
+        top:315px;
+        bottom:0;
+        z-index:-1;
+        background:#f7f8fa;
+        pointer-events:none;
+    }
+
+    .product-signals{
+        margin:0 !important;
+        padding-top:14px !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-cards-section{
+        --paper-step:86px;
+    }
+
+    .scroll-cards-sticky{
+        padding:12px 10px 7px !important;
+    }
+
+    .scroll-card-stage{
+        height:232px !important;
+        min-height:232px !important;
+        max-height:232px !important;
+    }
+
+    .scroll-story-card{
+        max-height:226px !important;
+    }
+}
+
+
+
+/* =========================================================
+   CEZONAL 3D PROJECT GALLERY — WORLD / SPHERE MODE
+========================================================= */
+
+.cezonal-3d-gallery{
+    position:relative;
+    width:100%;
+    height:780px;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 50% 48%, #171a21 0%, #0d1015 34%, #07090d 68%, #030405 100%);
+
+    perspective:1250px;
+    perspective-origin:50% 50%;
+
+    isolation:isolate;
+}
+
+.cezonal-3d-gallery::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.035), transparent 36%),
+        radial-gradient(circle at 50% 50%, transparent 0 31%, rgba(255,255,255,.025) 31.2% 31.5%, transparent 31.8%),
+        radial-gradient(circle at 50% 50%, transparent 0 42%, rgba(255,255,255,.018) 42.2% 42.5%, transparent 42.8%);
+}
+
+.cezonal-3d-gallery::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:520px;
+    height:520px;
+    z-index:1;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.045);
+
+    box-shadow:
+        inset 0 0 80px rgba(255,255,255,.015),
+        0 0 90px rgba(0,0,0,.35);
+
+    pointer-events:none;
+}
+
+.cezonal-3d-stage{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:1px;
+    height:1px;
+
+    transform-style:preserve-3d;
+    will-change:transform;
+
+    z-index:2;
+}
+
+.cezonal-3d-card{
+    position:absolute;
+    left:0;
+    top:0;
+
+    width:190px;
+    height:116px;
+
+    margin-left:-95px;
+    margin-top:-58px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:4px;
+
+    background:#111;
+
+    box-shadow:
+        0 18px 36px rgba(0,0,0,.48);
+
+    transform-style:preserve-3d;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+
+    will-change:transform,opacity,filter;
+
+    transition:
+        opacity .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease;
+}
+
+.cezonal-3d-card img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+
+    transform:scale(1.01);
+}
+
+.cezonal-3d-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.09),
+            transparent 30%,
+            transparent 72%,
+            rgba(255,255,255,.05)
+        );
+}
+
+.cezonal-3d-card.is-front{
+    box-shadow:
+        0 24px 52px rgba(0,0,0,.58);
+}
+
+
+/* CENTER WORDMARK */
+
+.cezonal-3d-center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    z-index:8;
+
+    width:min(80vw,720px);
+
+    transform:
+        translate(-50%,-50%)
+        translateZ(180px);
+
+    text-align:center;
+    color:#fff;
+
+    pointer-events:none;
+}
+
+.cezonal-3d-center h2{
+    margin:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+    flex-wrap:wrap;
+
+    font-family:"Inter",sans-serif;
+    font-size:54px;
+    font-weight:500;
+    line-height:1;
+
+    letter-spacing:-2.2px;
+
+    color:#fff;
+}
+
+.cezonal-3d-center h2 > span:first-child{
+    opacity:.92;
+    animation:
+        madeWithFloat
+        4.6s
+        ease-in-out
+        infinite;
+}
+
+.cezonal-3d-center h2 .cezonal-center-word{
+    position:relative;
+    display:inline-block;
+
+    font-weight:650;
+    letter-spacing:-2.6px;
+
+    color:#fff;
+
+    animation:
+        cezonalCenterFloat
+        4.6s
+        ease-in-out
+        .18s
+        infinite;
+}
+
+.cezonal-3d-center h2 .cezonal-center-word::after{
+    content:"Cezonal";
+
+    position:absolute;
+    inset:0;
+
+    color:transparent;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9933 0%,
+            #ff9933 24%,
+            #ffffff 43%,
+            #ffffff 55%,
+            #138808 74%,
+            #138808 100%
+        );
+
+    background-size:220% 100%;
+    background-position:120% 0;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    opacity:.88;
+
+    animation:
+        cezonalColorSweep
+        3.8s
+        cubic-bezier(.45,0,.2,1)
+        infinite;
+}
+
+@keyframes madeWithFloat{
+    0%,100%{
+        transform:translateY(0);
+        opacity:.82;
+    }
+
+    50%{
+        transform:translateY(-4px);
+        opacity:1;
+    }
+}
+
+@keyframes cezonalCenterFloat{
+    0%,100%{
+        transform:translateY(0) scale(1);
+    }
+
+    50%{
+        transform:translateY(4px) scale(1.018);
+    }
+}
+
+@keyframes cezonalColorSweep{
+    0%{
+        background-position:120% 0;
+        opacity:.3;
+    }
+
+    45%{
+        background-position:50% 0;
+        opacity:1;
+    }
+
+    100%{
+        background-position:-20% 0;
+        opacity:.45;
+    }
+}
+
+
+/* subtle center halo */
+.cezonal-center-halo{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:300px;
+    height:300px;
+
+    transform:
+        translate(-50%,-50%)
+        translateZ(70px);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 34%, transparent 70%);
+
+    filter:blur(2px);
+
+    pointer-events:none;
+
+    z-index:4;
+}
+
+
+/* DOUBLE CLICK SPIN FEEDBACK */
+
+.cezonal-3d-gallery.spin-burst .cezonal-3d-center{
+    animation:
+        centerPulse
+        .72s
+        cubic-bezier(.2,.75,.2,1);
+}
+
+@keyframes centerPulse{
+    0%{
+        transform:
+            translate(-50%,-50%)
+            translateZ(180px)
+            scale(1);
+    }
+
+    45%{
+        transform:
+            translate(-50%,-50%)
+            translateZ(220px)
+            scale(1.07);
+    }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            translateZ(180px)
+            scale(1);
+    }
+}
+
+
+/* TABLET */
+
+@media(max-width:900px){
+
+    .cezonal-3d-gallery{
+        height:700px;
+        perspective:1050px;
+    }
+
+    .cezonal-3d-gallery::after{
+        width:440px;
+        height:440px;
+    }
+
+    .cezonal-3d-card{
+        width:164px;
+        height:100px;
+
+        margin-left:-82px;
+        margin-top:-50px;
+    }
+
+    .cezonal-3d-center h2{
+        font-size:43px;
+        gap:10px;
+    }
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .cezonal-3d-gallery{
+        height:680px;
+        perspective:850px;
+    }
+
+    .cezonal-3d-gallery::after{
+        width:330px;
+        height:330px;
+    }
+
+    .cezonal-3d-card{
+        width:118px;
+        height:74px;
+
+        margin-left:-59px;
+        margin-top:-37px;
+
+        border-radius:3px;
+
+        box-shadow:
+            0 10px 22px rgba(0,0,0,.42);
+    }
+
+    .cezonal-3d-center{
+        width:86vw;
+
+        transform:
+            translate(-50%,-50%)
+            translateZ(120px);
+    }
+
+    .cezonal-3d-center h2{
+        gap:8px;
+
+        font-size:33px;
+        line-height:1;
+
+        letter-spacing:-1.2px;
+    }
+
+    .cezonal-3d-center h2 .cezonal-center-word{
+        letter-spacing:-1.5px;
+    }
+
+    .cezonal-center-halo{
+        width:220px;
+        height:220px;
+    }
+}
+
+
+@media(max-width:380px){
+
+    .cezonal-3d-gallery{
+        height:630px;
+    }
+
+    .cezonal-3d-card{
+        width:108px;
+        height:68px;
+
+        margin-left:-54px;
+        margin-top:-34px;
+    }
+
+    .cezonal-3d-center h2{
+        font-size:30px;
+    }
+}
+
+/* =========================================================
+   3D WORLD — REMOVE VISIBLE INNER CIRCLE ONLY
+========================================================= */
+.cezonal-3d-gallery::after{
+    display:none !important;
+    content:none !important;
+}
+
+.cezonal-3d-gallery::before{
+    background:
+        radial-gradient(circle at 50% 48%,
+            rgba(255,255,255,.028) 0%,
+            rgba(255,255,255,.012) 24%,
+            transparent 58%
+        ) !important;
+}
+
+.cezonal-center-halo{
+    display:none !important;
+}
+
+
+/* =========================================================
+   CENTER WORDMARK — TWO LINES + 3D BEND
+========================================================= */
+
+.cezonal-3d-center{
+    transform-style:preserve-3d !important;
+    will-change:transform !important;
+}
+
+.cezonal-3d-center h2{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    gap:5px !important;
+
+    transform-style:preserve-3d !important;
+
+    perspective:800px;
+}
+
+.cezonal-made-line{
+    display:block !important;
+
+    font-family:"Inter",sans-serif !important;
+    font-size:.52em !important;
+    font-weight:500 !important;
+
+    line-height:1 !important;
+
+    letter-spacing:-.7px !important;
+
+    color:rgba(255,255,255,.88) !important;
+
+    transform:
+        translateZ(7px)
+        rotateX(-2deg);
+
+    transform-origin:50% 100%;
+
+    animation:
+        madeWithFloat
+        4.6s
+        ease-in-out
+        infinite;
+}
+
+.cezonal-center-word{
+    display:block !important;
+
+    transform:
+        translateZ(16px)
+        rotateX(2deg);
+
+    transform-origin:50% 0%;
+
+    animation:
+        cezonalCenterFloat
+        4.6s
+        ease-in-out
+        .18s
+        infinite;
+}
+
+/* Slight curved/bent feeling without showing a circle */
+.cezonal-center-word::before{
+    content:"";
+    position:absolute;
+
+    left:7%;
+    right:7%;
+    bottom:-10px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,.08) 0%,
+            rgba(255,255,255,.025) 38%,
+            transparent 72%
+        );
+
+    filter:blur(5px);
+
+    transform:
+        translateZ(-6px)
+        scaleX(.86);
+
+    pointer-events:none;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .cezonal-3d-center h2{
+        gap:4px !important;
+    }
+
+    .cezonal-made-line{
+        font-size:.5em !important;
+    }
+}
+
+
+/* =========================================================
+   3D GALLERY — TWISTED RIBBON / HELIX MODE
+   No visible circle or globe shape.
+========================================================= */
+
+.cezonal-3d-gallery{
+    height:780px !important;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 48%,
+            #171a21 0%,
+            #0d1015 38%,
+            #07090d 72%,
+            #030405 100%
+        ) !important;
+}
+
+/* absolutely no decorative circle */
+.cezonal-3d-gallery::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:0 !important;
+    pointer-events:none !important;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 0%,
+            rgba(255,255,255,.018) 34%,
+            transparent 58%,
+            rgba(255,255,255,.012) 76%,
+            transparent 100%
+        ) !important;
+}
+
+.cezonal-3d-gallery::after{
+    display:none !important;
+    content:none !important;
+}
+
+.cezonal-center-halo{
+    display:none !important;
+}
+
+
+/* CENTER TEXT */
+
+.cezonal-3d-center h2{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    gap:7px !important;
+}
+
+/* Made with = simple rotating animation only */
+.cezonal-made-line{
+    display:block !important;
+
+    font-size:.48em !important;
+    font-weight:500 !important;
+
+    letter-spacing:-.6px !important;
+
+    color:rgba(255,255,255,.88) !important;
+
+    transform-origin:50% 50% !important;
+
+    animation:
+        madeWithRotate
+        5.2s
+        ease-in-out
+        infinite !important;
+}
+
+@keyframes madeWithRotate{
+
+    0%,
+    100%{
+        transform:
+            perspective(700px)
+            rotateY(-8deg)
+            rotateX(1deg);
+
+        opacity:.82;
+    }
+
+    25%{
+        transform:
+            perspective(700px)
+            rotateY(0deg)
+            rotateX(-2deg);
+
+        opacity:1;
+    }
+
+    50%{
+        transform:
+            perspective(700px)
+            rotateY(8deg)
+            rotateX(1deg);
+
+        opacity:.9;
+    }
+
+    75%{
+        transform:
+            perspective(700px)
+            rotateY(0deg)
+            rotateX(2deg);
+
+        opacity:1;
+    }
+}
+
+
+/* Cezonal second line remains clean */
+.cezonal-center-word{
+    display:block !important;
+
+    font-size:1.08em !important;
+    font-weight:650 !important;
+
+    transform-origin:50% 50% !important;
+
+    animation:
+        cezonalSoftDepth
+        5.2s
+        ease-in-out
+        infinite !important;
+}
+
+@keyframes cezonalSoftDepth{
+
+    0%,
+    100%{
+        transform:
+            translateZ(12px)
+            rotateY(3deg);
+    }
+
+    50%{
+        transform:
+            translateZ(18px)
+            rotateY(-3deg);
+    }
+}
+
+
+/* remove old fake curved shadow/bend */
+.cezonal-center-word::before{
+    display:none !important;
+    content:none !important;
+}
+
+
+/* image styling for ribbon */
+.cezonal-3d-card{
+    border-radius:4px !important;
+
+    transition:
+        opacity .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease !important;
+}
+
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .cezonal-3d-gallery{
+        height:680px !important;
+    }
+
+    .cezonal-3d-center h2{
+        gap:5px !important;
+    }
+
+    .cezonal-made-line{
+        font-size:.46em !important;
+    }
+
+    .cezonal-center-word{
+        font-size:1.04em !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .cezonal-3d-gallery{
+        height:630px !important;
+    }
+}
+
+
+/* =========================================================
+   CEZONAL 3D GALLERY — FLOATING SPATIAL WALL
+   Scattered panels like the reference image.
+========================================================= */
+
+.cezonal-3d-gallery{
+    height:780px !important;
+    background:#111216 !important;
+    perspective:1250px !important;
+    perspective-origin:50% 50% !important;
+}
+
+.cezonal-3d-gallery::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:0 !important;
+    z-index:1 !important;
+    pointer-events:none !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.012),
+            transparent 18%,
+            transparent 82%,
+            rgba(255,255,255,.012)
+        ),
+        radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,.018),
+            transparent 58%
+        ) !important;
+}
+
+.cezonal-3d-gallery::after,
+.cezonal-center-halo{
+    display:none !important;
+    content:none !important;
+}
+
+.cezonal-3d-stage{
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
+
+    width:1px !important;
+    height:1px !important;
+
+    transform-style:preserve-3d !important;
+    z-index:2 !important;
+}
+
+.cezonal-3d-card{
+    position:absolute !important;
+    left:0 !important;
+    top:0 !important;
+
+    width:196px !important;
+    height:120px !important;
+
+    margin-left:-98px !important;
+    margin-top:-60px !important;
+
+    overflow:hidden !important;
+
+    border:1px solid rgba(255,255,255,.12) !important;
+    border-radius:2px !important;
+
+    background:#17191e !important;
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.46) !important;
+
+    transform-style:preserve-3d !important;
+    backface-visibility:hidden !important;
+    -webkit-backface-visibility:hidden !important;
+
+    transition:
+        opacity .22s ease,
+        filter .22s ease,
+        box-shadow .22s ease !important;
+}
+
+.cezonal-3d-card img{
+    width:100% !important;
+    height:100% !important;
+    display:block !important;
+    object-fit:cover !important;
+}
+
+.cezonal-3d-card.is-front{
+    box-shadow:
+        0 24px 54px rgba(0,0,0,.58) !important;
+}
+
+/* CENTER TEXT */
+.cezonal-3d-center{
+    z-index:10 !important;
+    width:min(72vw,620px) !important;
+
+    transform:
+        translate(-50%,-50%)
+        translateZ(220px) !important;
+
+    pointer-events:none !important;
+}
+
+.cezonal-3d-center h2{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    gap:4px !important;
+
+    color:#fff !important;
+}
+
+.cezonal-made-line{
+    font-size:.45em !important;
+    font-weight:500 !important;
+    letter-spacing:-.5px !important;
+    color:rgba(255,255,255,.88) !important;
+
+    animation:
+        madeWithReferenceFloat
+        4.8s
+        ease-in-out
+        infinite !important;
+}
+
+.cezonal-center-word{
+    font-size:1.12em !important;
+    font-weight:650 !important;
+
+    animation:
+        cezonalReferenceFloat
+        4.8s
+        ease-in-out
+        .18s
+        infinite !important;
+}
+
+@keyframes madeWithReferenceFloat{
+    0%,100%{
+        transform:translateY(0) rotateY(-5deg);
+        opacity:.82;
+    }
+
+    50%{
+        transform:translateY(-3px) rotateY(5deg);
+        opacity:1;
+    }
+}
+
+@keyframes cezonalReferenceFloat{
+    0%,100%{
+        transform:translateY(0) translateZ(12px);
+    }
+
+    50%{
+        transform:translateY(3px) translateZ(20px);
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .cezonal-3d-gallery{
+        height:690px !important;
+        perspective:850px !important;
+    }
+
+    .cezonal-3d-card{
+        width:122px !important;
+        height:76px !important;
+
+        margin-left:-61px !important;
+        margin-top:-38px !important;
+
+        box-shadow:
+            0 10px 22px rgba(0,0,0,.42) !important;
+    }
+
+    .cezonal-3d-center{
+        width:78vw !important;
+
+        transform:
+            translate(-50%,-50%)
+            translateZ(145px) !important;
+    }
+
+    .cezonal-3d-center h2{
+        gap:3px !important;
+        font-size:33px !important;
+    }
+
+    .cezonal-made-line{
+        font-size:.47em !important;
+    }
+
+    .cezonal-center-word{
+        font-size:1.08em !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .cezonal-3d-gallery{
+        height:640px !important;
+    }
+
+    .cezonal-3d-card{
+        width:110px !important;
+        height:69px !important;
+
+        margin-left:-55px !important;
+        margin-top:-34.5px !important;
+    }
+
+    .cezonal-3d-center h2{
+        font-size:30px !important;
+    }
+}
+
+
+/* =========================================================
+   PRODUCT SIGNALS — DROPDOWN / ACCORDION
+========================================================= */
+
+.product-signal{
+    display:block !important;
+    min-height:0 !important;
+    padding:0 !important;
+}
+
+.product-signal:hover{
+    padding:0 !important;
+}
+
+.product-signal-trigger{
+    width:100%;
+    min-height:112px;
+
+    display:grid;
+    grid-template-columns:120px minmax(0,1fr) 34px;
+    gap:28px;
+    align-items:center;
+
+    border:none;
+    background:transparent;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:
+        padding .25s ease,
+        background .25s ease;
+}
+
+.product-signal-trigger:hover{
+    padding:0 14px;
+    background:#fafafa;
+}
+
+.product-signal-copy{
+    display:block;
+}
+
+.product-signal-copy strong{
+    display:block;
+}
+
+.product-signal-copy > span{
+    display:block;
+}
+
+.product-signal-mark{
+    flex-shrink:0;
+}
+
+.product-signal.open .product-signal-mark{
+    transform:rotate(45deg);
+    background:#111;
+    color:#fff;
+}
+
+.product-signal-dropdown{
+    display:grid;
+    grid-template-rows:0fr;
+
+    overflow:hidden;
+
+    transition:
+        grid-template-rows .38s cubic-bezier(.2,.7,.2,1),
+        opacity .28s ease;
+
+    opacity:0;
+}
+
+.product-signal.open .product-signal-dropdown{
+    grid-template-rows:1fr;
+    opacity:1;
+}
+
+.product-signal-dropdown-inner{
+    min-height:0;
+
+    display:grid;
+    grid-template-columns:120px minmax(0,1fr) 34px;
+    gap:28px;
+
+    padding:0 0 0;
+
+    overflow:hidden;
+}
+
+.product-signal-dropdown-inner > p{
+    grid-column:2;
+
+    max-width:700px;
+
+    padding:0 0 18px;
+
+    font-size:12px;
+    line-height:1.68;
+
+    color:#686868;
+}
+
+.product-signal-tags{
+    grid-column:2;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 12px;
+
+    padding:0 0 22px;
+}
+
+.product-signal-tags span{
+    display:inline-flex;
+    align-items:center;
+
+    min-height:28px;
+    padding:0 10px;
+
+    border:1px solid #e2e2e2;
+    border-radius:100px;
+
+    background:#fafafa;
+
+    font-size:8px;
+    font-weight:600;
+    letter-spacing:.7px;
+    text-transform:uppercase;
+
+    color:#777;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .product-signal-trigger{
+        min-height:86px;
+
+        grid-template-columns:46px minmax(0,1fr) 28px;
+        gap:10px;
+    }
+
+    .product-signal-trigger:hover{
+        padding:0;
+        background:transparent;
+    }
+
+    .product-signal-dropdown-inner{
+        grid-template-columns:46px minmax(0,1fr) 28px;
+        gap:10px;
+    }
+
+    .product-signal-dropdown-inner > p{
+        grid-column:2;
+
+        padding-bottom:12px;
+
+        font-size:10px;
+        line-height:1.5;
+    }
+
+    .product-signal-tags{
+        grid-column:2;
+
+        gap:6px 7px;
+
+        padding-bottom:16px;
+    }
+
+    .product-signal-tags span{
+        min-height:24px;
+        padding:0 8px;
+
+        font-size:6.8px;
+    }
+}
+
+
+/* =========================================================
+   CEZONAL PARTICLE CTA — AFTER PRODUCT SIGNALS
+========================================================= */
+
+.cezonal-particle-cta{
+    position:relative;
+    width:100%;
+    height:clamp(560px,78vh,820px);
+    min-height:560px;
+    margin:0;
+    overflow:hidden;
+    isolation:isolate;
+    background:
+        radial-gradient(circle at 50% 46%, rgba(65,82,98,.28), transparent 34%),
+        linear-gradient(180deg,#202a33 0%,#172029 55%,#111820 100%);
+}
+
+.cezonal-particle-canvas{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    width:100%;
+    height:100%;
+    display:block;
+    pointer-events:none;
+}
+
+.cezonal-particle-shade{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 50% 50%, transparent 0 31%, rgba(8,13,18,.06) 58%, rgba(4,8,12,.28) 100%),
+        linear-gradient(180deg,rgba(255,255,255,.025),transparent 24%,transparent 76%,rgba(0,0,0,.18));
+}
+
+.cezonal-particle-content{
+    position:relative;
+    z-index:3;
+    width:min(920px,calc(100% - 40px));
+    height:100%;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    pointer-events:none;
+}
+
+.cezonal-particle-kicker{
+    margin-bottom:16px;
+    font-size:10px;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:3.2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.64);
+}
+
+.cezonal-particle-title{
+    max-width:900px;
+    margin:0;
+    font-size:clamp(48px,6vw,86px);
+    font-weight:500;
+    line-height:.98;
+    letter-spacing:-4.4px;
+    color:#fff;
+    text-wrap:balance;
+    text-shadow:0 5px 28px rgba(0,0,0,.24);
+}
+
+.cezonal-particle-copy{
+    max-width:560px;
+    margin:22px auto 0;
+    font-size:14px;
+    font-weight:500;
+    line-height:1.6;
+    color:rgba(255,255,255,.72);
+}
+
+.cezonal-particle-button{
+    min-width:190px;
+    min-height:54px;
+    margin-top:30px;
+    padding:0 26px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.78);
+    border-radius:3px;
+    background:#fff;
+    color:#111;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.9px;
+    text-transform:uppercase;
+    pointer-events:auto;
+    transition:transform .22s ease,background .22s ease,color .22s ease;
+}
+
+.cezonal-particle-button:hover{
+    transform:translateY(-2px);
+    background:transparent;
+    color:#fff;
+}
+
+@media(max-width:600px){
+    .cezonal-particle-cta{
+        height:620px;
+        min-height:620px;
+    }
+
+    .cezonal-particle-content{
+        width:calc(100% - 30px);
+    }
+
+    .cezonal-particle-kicker{
+        margin-bottom:12px;
+        font-size:8px;
+        letter-spacing:2.4px;
+    }
+
+    .cezonal-particle-title{
+        max-width:390px;
+        font-size:44px;
+        line-height:1;
+        letter-spacing:-2.5px;
+    }
+
+    .cezonal-particle-copy{
+        max-width:330px;
+        margin-top:17px;
+        font-size:12px;
+        line-height:1.55;
+    }
+
+    .cezonal-particle-button{
+        min-width:164px;
+        min-height:48px;
+        margin-top:24px;
+        font-size:10px;
+    }
+}
+
+@media(max-width:380px){
+    .cezonal-particle-cta{
+        height:580px;
+        min-height:580px;
+    }
+
+    .cezonal-particle-title{
+        font-size:38px;
+        letter-spacing:-2px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    .cezonal-particle-button{
+        transition:none;
+    }
+}
+
+
+/* =========================================================
+   PARTICLE CTA — SMALLER CENTER CONTENT
+========================================================= */
+
+.cezonal-particle-content{
+    width:min(520px,48vw) !important;
+    max-width:520px !important;
+}
+
+.cezonal-particle-kicker{
+    margin-bottom:12px !important;
+    font-size:8px !important;
+    letter-spacing:2.6px !important;
+}
+
+.cezonal-particle-title{
+    max-width:500px !important;
+    font-size:clamp(38px,4.2vw,60px) !important;
+    line-height:1 !important;
+    letter-spacing:-3px !important;
+}
+
+.cezonal-particle-copy{
+    max-width:390px !important;
+    margin-top:16px !important;
+    font-size:12px !important;
+    line-height:1.5 !important;
+}
+
+.cezonal-particle-button{
+    min-width:164px !important;
+    min-height:48px !important;
+    margin-top:22px !important;
+    padding:0 20px !important;
+    font-size:10px !important;
+}
+
+@media(max-width:600px){
+
+    .cezonal-particle-content{
+        width:min(72vw,300px) !important;
+        max-width:300px !important;
+    }
+
+    .cezonal-particle-kicker{
+        margin-bottom:9px !important;
+        font-size:7px !important;
+        letter-spacing:2px !important;
+    }
+
+    .cezonal-particle-title{
+        max-width:290px !important;
+        font-size:31px !important;
+        line-height:1.02 !important;
+        letter-spacing:-1.7px !important;
+    }
+
+    .cezonal-particle-copy{
+        max-width:255px !important;
+        margin-top:12px !important;
+        font-size:10px !important;
+        line-height:1.45 !important;
+    }
+
+    .cezonal-particle-button{
+        min-width:138px !important;
+        min-height:42px !important;
+        margin-top:17px !important;
+        padding:0 16px !important;
+        font-size:9px !important;
     }
 }
 
@@ -7372,565 +9486,310 @@ a{
      CAPABILITIES — VERTICAL SCROLL STORY
 ========================================================= -->
 
-<section class="scroll-cards-section" id="scroll-capabilities">
 
-    <div class="scroll-cards-sticky">
-
-        <div class="scroll-cards-inner">
-
-            <div class="scroll-cards-head">
-
-                <span class="scroll-cards-kicker">
-                    What we can create
-                </span>
-
-                <h2>
-                    Scroll through the ways we turn ideas into products.
-                </h2>
-
-            </div>
-
-
-            <div class="scroll-card-stage">
-
-
-                <!-- 1 -->
-
-                <article class="scroll-story-card active" data-scroll-card="0">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            1 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Business Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            Custom Business Software
-                        </h3>
-
-                        <p>
-                            Purpose-built applications shaped around business
-                            operations, teams and everyday workflows. From internal
-                            approvals and stock movement to staff activity, billing
-                            and reporting, the system can be structured around how
-                            the business already works instead of forcing teams into
-                            a fixed process. The result is software that feels more
-                            natural to use, easier to manage and simpler to expand.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>Custom workflows</span>
-                            <span>Operations</span>
-                            <span>Automation</span>
-                            <span>Role-based access</span>
-                            <span>Reports</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Built around the business
-                                </small>
-
-                                <strong>
-                                    Workflows can follow the way teams already operate instead of forcing a fixed process.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    More control
-                                </small>
-
-                                <strong>
-                                    Permissions, reports and daily actions stay connected inside one practical system.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 2 -->
-
-                <article class="scroll-story-card" data-scroll-card="1">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            2 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Mobile Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            Mobile Applications
-                        </h3>
-
-                        <p>
-                            Modern mobile experiences designed around speed,
-                            clarity and everyday customer use. We focus on smooth
-                            navigation, fast interactions and interfaces that remain
-                            easy to understand even as the product grows. Mobile apps
-                            can connect with live data, payments, notifications,
-                            location services and business systems in the background.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>iOS</span>
-                            <span>Android</span>
-                            <span>Connected experiences</span>
-                            <span>Notifications</span>
-                            <span>Live data</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Made for everyday use
-                                </small>
-
-                                <strong>
-                                    Fast navigation and clear actions keep the mobile experience simple for customers and teams.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Connected in real time
-                                </small>
-
-                                <strong>
-                                    Notifications, live data and backend services work together behind the interface.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 3 -->
-
-                <article class="scroll-story-card" data-scroll-card="2">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            3 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Commerce Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            E-Commerce Platforms
-                        </h3>
-
-                        <p>
-                            Product discovery, checkout, orders and operations
-                            connected into one smooth shopping experience. Customers
-                            can move from browsing to purchase with fewer steps while
-                            business teams manage products, availability, pricing,
-                            orders and fulfilment from a connected operational layer.
-                            The platform can scale across web and mobile experiences.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>Shopping</span>
-                            <span>Checkout</span>
-                            <span>Orders</span>
-                            <span>Inventory</span>
-                            <span>Fulfilment</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    From browse to delivery
-                                </small>
-
-                                <strong>
-                                    Discovery, checkout and order handling remain connected throughout the shopping journey.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Built for operations
-                                </small>
-
-                                <strong>
-                                    Inventory, fulfilment and customer activity can stay synchronized across web and mobile.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 4 -->
-
-                <article class="scroll-story-card" data-scroll-card="3">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            4 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Retail Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            Billing & Retail Systems
-                        </h3>
-
-                        <p>
-                            Faster billing, receipts, inventory and sales
-                            visibility built into a practical business system.
-                            Products can be added quickly, totals calculated instantly
-                            and receipts prepared without slowing down the counter.
-                            Sales history, stock movement and day-to-day billing data
-                            stay connected so owners can understand operations better.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>Billing</span>
-                            <span>Receipts</span>
-                            <span>Inventory</span>
-                            <span>Sales history</span>
-                            <span>Quick checkout</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Designed for the counter
-                                </small>
-
-                                <strong>
-                                    Billing stays quick while product, stock and receipt information updates in the background.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Useful after the sale
-                                </small>
-
-                                <strong>
-                                    Sales history and inventory movement give owners a clearer view of daily business activity.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 5 -->
-
-                <article class="scroll-story-card" data-scroll-card="4">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            5 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            AI Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            AI Assistants
-                        </h3>
-
-                        <p>
-                            Smart automated conversations that answer questions,
-                            support customers and stay available around the clock.
-                            AI assistants can handle common enquiries, guide users
-                            through services, collect useful details and reduce the
-                            amount of repetitive support work handled manually. The
-                            experience can be connected to business information and
-                            existing customer workflows.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>AI replies</span>
-                            <span>Support</span>
-                            <span>Automation</span>
-                            <span>Lead capture</span>
-                            <span>24/7 assistance</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Always available
-                                </small>
-
-                                <strong>
-                                    Common questions can be handled instantly without waiting for a team member to respond.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Beyond simple replies
-                                </small>
-
-                                <strong>
-                                    The assistant can guide users, collect details and connect conversations to business workflows.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 6 -->
-
-                <article class="scroll-story-card" data-scroll-card="5">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            6 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Operations Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            Internal Dashboards
-                        </h3>
-
-                        <p>
-                            Clear operational views for teams, orders,
-                            performance and faster everyday decisions. Dashboards
-                            bring important activity into one place so teams can
-                            monitor status, compare performance and act without
-                            jumping between multiple systems. Views can be tailored
-                            for managers, staff and different operational roles.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>Dashboards</span>
-                            <span>Insights</span>
-                            <span>Team tools</span>
-                            <span>Live status</span>
-                            <span>Performance</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    One operational view
-                                </small>
-
-                                <strong>
-                                    Important activity can be brought together so teams spend less time switching between systems.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Made for decisions
-                                </small>
-
-                                <strong>
-                                    Live status and performance views help managers understand what needs attention faster.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- 7 -->
-
-                <article class="scroll-story-card" data-scroll-card="6">
-
-                    <div class="scroll-story-meta">
-<span class="scroll-story-number">
-                            7 / 7
-                        </span>
-
-<span class="scroll-story-tag">
-                            Platform Desk
-                        </span>
-
-                    </div>
-
-                    <div class="scroll-story-content">
-
-                        <h3>
-                            Connected Digital Products
-                        </h3>
-
-                        <p>
-                            Web, mobile and backend systems working together
-                            as one connected product experience. Customer-facing
-                            interfaces, admin tools, databases and operational systems
-                            can share the same underlying information so updates move
-                            across the product without repeated work. This creates a
-                            stronger foundation for future features, integrations and
-                            larger-scale growth.
-                        </p>
-
-                        <div class="scroll-story-keywords">
-                            <span>Web</span>
-                            <span>Mobile</span>
-                            <span>Backend</span>
-                            <span>Integrations</span>
-                            <span>Scalable systems</span>
-                        </div>
-
-
-                        <div class="scroll-story-extra">
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    One connected foundation
-                                </small>
-
-                                <strong>
-                                    Products work better when every layer speaks the same language.
-                                </strong>
-
-                            </div>
-
-
-                            <div class="scroll-story-extra-item">
-
-                                <small>
-                                    Built beyond launch
-                                </small>
-
-                                <strong>
-                                    New features, integrations and business growth can be added without rebuilding everything.
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-            </div>
-
-
-            <div class="scroll-story-progress">
-
-                <div class="scroll-story-progress-track">
-                    <span
-                        class="scroll-story-progress-fill"
-                        id="scrollStoryProgressFill"
-                    ></span>
-                </div>
-</div>
-
-        </div>
-
-    </div>
-
-</section>
 
 
 <!-- =========================================================
      PRODUCT SIGNALS
 ========================================================= -->
+
+
+<!-- =========================================================
+     CEZONAL 3D PROJECT GALLERY
+========================================================= -->
+
+<section class="cezonal-3d-gallery" id="cezonal-3d-gallery">
+
+    <div class="cezonal-3d-stage" id="cezonal3dStage">
+
+        <div class="cezonal-3d-card" data-gallery-card="0">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/Im7lZjxeLhg/download?force=true&w=900"
+                alt="Cezonal project 1"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="1">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/HOrhCnQsxnQ/download?force=true&w=900"
+                alt="Cezonal project 2"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="2">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/XJXWbfSo2f0/download?force=true&w=900"
+                alt="Cezonal project 3"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="3">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/SYTO3xs06fU/download?force=true&w=900"
+                alt="Cezonal project 4"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="4">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/oyXis2kALVg/download?force=true&w=900"
+                alt="Cezonal project 5"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="5">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/EUsVwEOsblE/download?force=true&w=900"
+                alt="Cezonal project 6"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="6">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/FO7JIlwjOtU/download?force=true&w=900"
+                alt="Cezonal project 7"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="7">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/8bghKxNU1j0/download?force=true&w=900"
+                alt="Cezonal project 8"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="8">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/2EJCSULRwC8/download?force=true&w=900"
+                alt="Cezonal project 9"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="9">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/sbVu5zitZt0/download?force=true&w=900"
+                alt="Cezonal project 10"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="10">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/OqtafYT5kTw/download?force=true&w=900"
+                alt="Cezonal project 11"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="11">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/ieic5Tq8YMk/download?force=true&w=900"
+                alt="Cezonal project 12"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="12">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/4hbJ-eymZ1o/download?force=true&w=900"
+                alt="Cezonal project 13"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="13">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/m_HRfLhgABo/download?force=true&w=900"
+                alt="Cezonal project 14"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="14">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/oXlXu2qukGE/download?force=true&w=900"
+                alt="Cezonal project 15"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="15">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/koOdUvfGr4c/download?force=true&w=900"
+                alt="Cezonal project 16"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="16">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/iar-afB0QQw/download?force=true&w=900"
+                alt="Cezonal project 17"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="17">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/8qEB0fTe9Vw/download?force=true&w=900"
+                alt="Cezonal project 18"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="18">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/PNbDkQ2DDgM/download?force=true&w=900"
+                alt="Cezonal project 19"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="19">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/f77Bh3inUpE/download?force=true&w=900"
+                alt="Cezonal project 20"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="20">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/SyYmXSDnJ54/download?force=true&w=900"
+                alt="Cezonal project 21"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="21">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/w7ZyuGYNpRQ/download?force=true&w=900"
+                alt="Cezonal project 22"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="22">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/eHD8Y1Znfpk/download?force=true&w=900"
+                alt="Cezonal project 23"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="23">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/VWcPlbHglYc/download?force=true&w=900"
+                alt="Cezonal project 24"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="24">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/yWwob8kwOCk/download?force=true&w=900"
+                alt="Cezonal project 25"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="25">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/YI_9SivVt_s/download?force=true&w=900"
+                alt="Cezonal project 26"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="26">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/DyFjxmHt3Es/download?force=true&w=900"
+                alt="Cezonal project 27"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="27">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/9l_326FISzk/download?force=true&w=900"
+                alt="Cezonal project 28"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="28">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/qC2n6RQU4Vw/download?force=true&w=900"
+                alt="Cezonal project 29"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+        <div class="cezonal-3d-card" data-gallery-card="29">
+            <img
+                referrerpolicy="no-referrer" src="https://unsplash.com/photos/LPWl2pEVGKc/download?force=true&w=900"
+                alt="Cezonal project 30"
+                loading="lazy"
+                decoding="async"
+                onerror="this.parentElement.style.display='none';"
+            >
+        </div>
+    </div>
+
+    
+    <div class="cezonal-center-halo"></div>
+
+    <div class="cezonal-3d-center" id="cezonal3dCenter">
+
+        <h2>
+            <span class="cezonal-made-line">Made with</span>
+            <span class="cezonal-center-word">Cezonal</span>
+        </h2>
+
+    </div>
+
+
+</section>
+
+
 
 <section class="product-signals" id="product-signals">
 
@@ -7954,100 +9813,216 @@ a{
 
             <div class="product-signal">
 
-                <span class="product-signal-index">
-                    01
-                </span>
+                <button
+                    type="button"
+                    class="product-signal-trigger"
+                    aria-expanded="false"
+                >
 
-                <div class="product-signal-copy">
-
-                    <strong>
-                        Faster interactions
-                    </strong>
-
-                    <span>
-                        Less waiting, fewer unnecessary steps and smoother everyday actions.
+                    <span class="product-signal-index">
+                        01
                     </span>
 
-                </div>
+                    <span class="product-signal-copy">
 
-                <span class="product-signal-mark">
-                    +
-                </span>
+                        <strong>
+                            Faster interactions
+                        </strong>
+
+                        <span>
+                            Less waiting, fewer unnecessary steps and smoother everyday actions.
+                        </span>
+
+                    </span>
+
+                    <span class="product-signal-mark" aria-hidden="true">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="product-signal-dropdown">
+
+                    <div class="product-signal-dropdown-inner">
+
+                        <p>
+                            We reduce friction across important user actions so pages,
+                            forms, checkout flows and operational tools feel faster and
+                            easier to complete.
+                        </p>
+
+                        <div class="product-signal-tags">
+                            <span>Quick actions</span>
+                            <span>Less waiting</span>
+                            <span>Smoother flows</span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
             <div class="product-signal">
 
-                <span class="product-signal-index">
-                    02
-                </span>
+                <button
+                    type="button"
+                    class="product-signal-trigger"
+                    aria-expanded="false"
+                >
 
-                <div class="product-signal-copy">
-
-                    <strong>
-                        Clearer interfaces
-                    </strong>
-
-                    <span>
-                        Information stays easy to understand even when the system becomes powerful.
+                    <span class="product-signal-index">
+                        02
                     </span>
 
-                </div>
+                    <span class="product-signal-copy">
 
-                <span class="product-signal-mark">
-                    +
-                </span>
+                        <strong>
+                            Clearer interfaces
+                        </strong>
+
+                        <span>
+                            Information stays easy to understand even when the system becomes powerful.
+                        </span>
+
+                    </span>
+
+                    <span class="product-signal-mark" aria-hidden="true">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="product-signal-dropdown">
+
+                    <div class="product-signal-dropdown-inner">
+
+                        <p>
+                            Clean hierarchy, clear labels and focused layouts help users
+                            understand what matters without feeling overloaded by the
+                            amount of information on screen.
+                        </p>
+
+                        <div class="product-signal-tags">
+                            <span>Clear hierarchy</span>
+                            <span>Focused layouts</span>
+                            <span>Easy navigation</span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
             <div class="product-signal">
 
-                <span class="product-signal-index">
-                    03
-                </span>
+                <button
+                    type="button"
+                    class="product-signal-trigger"
+                    aria-expanded="false"
+                >
 
-                <div class="product-signal-copy">
-
-                    <strong>
-                        Connected operations
-                    </strong>
-
-                    <span>
-                        Customer experiences and internal business workflows stay in sync.
+                    <span class="product-signal-index">
+                        03
                     </span>
 
-                </div>
+                    <span class="product-signal-copy">
 
-                <span class="product-signal-mark">
-                    +
-                </span>
+                        <strong>
+                            Connected operations
+                        </strong>
+
+                        <span>
+                            Customer experiences and internal business workflows stay in sync.
+                        </span>
+
+                    </span>
+
+                    <span class="product-signal-mark" aria-hidden="true">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="product-signal-dropdown">
+
+                    <div class="product-signal-dropdown-inner">
+
+                        <p>
+                            Customer actions, orders, inventory, staff workflows and
+                            backend systems can share the same live information so teams
+                            work from one connected operational layer.
+                        </p>
+
+                        <div class="product-signal-tags">
+                            <span>Live data</span>
+                            <span>Connected systems</span>
+                            <span>Operations</span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
             <div class="product-signal">
 
-                <span class="product-signal-index">
-                    04
-                </span>
+                <button
+                    type="button"
+                    class="product-signal-trigger"
+                    aria-expanded="false"
+                >
 
-                <div class="product-signal-copy">
-
-                    <strong>
-                        Built to evolve
-                    </strong>
-
-                    <span>
-                        Strong foundations make future features and growth easier to support.
+                    <span class="product-signal-index">
+                        04
                     </span>
 
-                </div>
+                    <span class="product-signal-copy">
 
-                <span class="product-signal-mark">
-                    +
-                </span>
+                        <strong>
+                            Built to evolve
+                        </strong>
+
+                        <span>
+                            Strong foundations make future features and growth easier to support.
+                        </span>
+
+                    </span>
+
+                    <span class="product-signal-mark" aria-hidden="true">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="product-signal-dropdown">
+
+                    <div class="product-signal-dropdown-inner">
+
+                        <p>
+                            Products are structured so new modules, integrations and
+                            features can be added later without forcing the entire system
+                            to be redesigned from the beginning.
+                        </p>
+
+                        <div class="product-signal-tags">
+                            <span>Scalable</span>
+                            <span>Flexible</span>
+                            <span>Future ready</span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -8057,6 +10032,48 @@ a{
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     CEZONAL PARTICLE CTA
+========================================================= -->
+
+<section class="cezonal-particle-cta" id="cezonal-particle-cta">
+
+    <canvas
+        class="cezonal-particle-canvas"
+        id="cezonalParticleCanvas"
+        aria-hidden="true"
+    ></canvas>
+
+    <div class="cezonal-particle-shade" aria-hidden="true"></div>
+
+    <div class="cezonal-particle-content">
+
+        <span class="cezonal-particle-kicker">
+            From idea to impact
+        </span>
+
+        <h2 class="cezonal-particle-title">
+            Build what’s next.
+        </h2>
+
+        <p class="cezonal-particle-copy">
+            Ideas shaped into digital products built for real everyday use.
+        </p>
+
+        <a
+            href="#contact"
+            class="cezonal-particle-button"
+        >
+            Start a Project
+        </a>
+
+    </div>
+
+</section>
+
+
 
 
 
@@ -10611,231 +12628,658 @@ syncVideoButtons();
 
 
 
+
+
+
+
+
+
+
 /* =========================================================
-   7-CARD VERTICAL SCROLL STORY
-   Normal page scroll moves through one sticky newspaper at a time.
-   After paper 7, normal page scrolling continues.
+   CEZONAL 3D PROJECT GALLERY — SPHERICAL WORLD
 ========================================================= */
 
 (function(){
 
     const section =
         document.getElementById(
-            "scroll-capabilities"
+            "cezonal-3d-gallery"
+        );
+
+    const stage =
+        document.getElementById(
+            "cezonal3dStage"
+        );
+
+    const center =
+        document.getElementById(
+            "cezonal3dCenter"
         );
 
     const cards =
         Array.from(
             document.querySelectorAll(
-                "[data-scroll-card]"
+                ".cezonal-3d-card"
             )
         );
 
     if(
         !section ||
+        !stage ||
         !cards.length
     ){
         return;
     }
 
-    let currentIndex =
+
+    let targetRotY =
         0;
 
-    let ticking =
-        false;
+    let targetRotX =
+        -4;
 
-    let exitTimer =
+    let currentRotY =
+        0;
+
+    let currentRotX =
+        -4;
+
+    let spinVelocity =
+        0;
+
+    let touchX =
+        null;
+
+    let touchY =
+        null;
+
+    let lastTapTime =
+        0;
+
+    let rafId =
         null;
 
 
-    function setCard(index){
+    function mobile(){
 
-        index =
-            Math.max(
-                0,
-                Math.min(
-                    cards.length - 1,
-                    index
-                )
-            );
+        return window.innerWidth <= 600;
+    }
 
 
-        if(index === currentIndex){
+    /*
+       Fibonacci-sphere placement:
+       spreads all 30 images around a true sphere/world shape.
+    */
 
-            cards[index]
-                .classList.add(
-                    "active"
-                );
+    function layoutSpatialWall(){
 
-            return;
-        }
+        /*
+           Hand-tuned scattered 3D positions inspired by the
+           reference: many rectangular images surrounding the
+           center, with different depths, sizes and slight tilts.
+        */
 
-
-        const previous =
-            cards[currentIndex];
-
-
-        if(exitTimer){
-
-            clearTimeout(
-                exitTimer
-            );
-
-            exitTimer =
-                null;
-        }
+        const mobileMode =
+            mobile();
 
 
-        if(previous){
-
-            previous.classList.remove(
-                "active"
-            );
-
-            previous.classList.add(
-                "exiting"
-            );
-        }
+        const desktopPositions = [
+            [-520,-270,-220,-5,10], [-250,-320,-60,4,-9], [20,-300,-180,-3,5], [320,-300,-40,5,8], [560,-250,-240,-4,-8],
+            [-610,-100,-120,2,9], [-330,-120,80,-5,-5], [-80,-130,-80,4,7], [210,-130,100,-3,-7], [470,-100,-100,5,8],
+            [-560,80,-180,-4,7], [-290,60,150,5,-6], [-40,60,-160,-3,4], [250,70,130,4,8], [560,90,-150,-5,-9],
+            [-620,250,-220,5,9], [-360,240,-20,-4,-7], [-90,240,100,3,6], [180,240,-50,-5,-5], [450,250,90,4,7],
+            [-470,350,-260,-3,8], [-180,360,-110,5,-6], [120,350,-220,-4,7], [390,360,-120,4,-8], [620,310,-260,-3,9],
+            [-720,-220,-340,3,6], [720,-180,-320,-4,-6], [-700,160,-300,4,7], [700,180,-300,-4,-8], [0,390,-300,3,5]
+        ];
 
 
-        currentIndex =
-            index;
+        const mobilePositions = [
+            [-175,-250,-140,-4,8], [-60,-285,-20,4,-7], [70,-270,-100,-3,6], [180,-230,-160,4,8], [-220,-160,-90,-4,-8],
+            [-120,-125,70,3,-5], [10,-150,-70,-3,5], [130,-135,80,4,7], [220,-120,-110,-5,-8], [-205,-40,-120,3,8],
+            [-105,-25,95,-4,-5], [20,-35,-120,3,5], [125,-15,100,-3,6], [215,-25,-100,4,-7], [-215,80,-140,-4,7],
+            [-110,75,70,4,-5], [10,85,-100,-3,5], [120,90,85,4,6], [215,90,-130,-4,-8], [-200,180,-120,3,8],
+            [-95,170,-20,-4,-6], [20,180,80,3,5], [115,175,-40,-4,-5], [205,175,70,4,7], [-160,275,-160,-3,7],
+            [-45,270,-80,4,-6], [80,265,-150,-4,7], [175,250,-100,4,-8], [-220,245,-180,-3,8], [0,300,-210,3,5]
+        ];
+
+
+        const positions =
+            mobileMode
+                ? mobilePositions
+                : desktopPositions;
 
 
         cards.forEach(
-            function(card,i){
+            function(card,index){
 
-                if(i === currentIndex){
+                const p =
+                    positions[
+                        index %
+                        positions.length
+                    ];
 
-                    card.classList.remove(
-                        "exiting"
-                    );
 
-                    /*
-                       Remove + reflow + add so the paper
-                       entrance animation replays cleanly.
-                    */
+                const px =
+                    p[0];
 
-                    card.classList.remove(
-                        "active"
-                    );
 
-                    void card.offsetWidth;
+                const py =
+                    p[1];
 
-                    card.classList.add(
-                        "active"
-                    );
 
-                }else if(card !== previous){
+                const pz =
+                    p[2];
 
-                    card.classList.remove(
-                        "active"
-                    );
 
-                    card.classList.remove(
-                        "exiting"
-                    );
-                }
+                const rx =
+                    p[3];
+
+
+                const rz =
+                    p[4];
+
+
+                card.dataset.baseX =
+                    px;
+
+                card.dataset.baseY =
+                    py;
+
+                card.dataset.baseZ =
+                    pz;
+
+
+                card.style.transform =
+                    "translate3d(" +
+                    px +
+                    "px," +
+                    py +
+                    "px," +
+                    pz +
+                    "px) " +
+                    "rotateX(" +
+                    rx +
+                    "deg) " +
+                    "rotateY(" +
+                    (
+                        px *
+                        .018
+                    ).toFixed(2) +
+                    "deg) " +
+                    "rotateZ(" +
+                    rz +
+                    "deg)";
             }
         );
+    }
+
+    function updateDepthStyles(){
+
+        /*
+           Use the current overall Y rotation to estimate
+           which cards are nearest to the viewer.
+        */
+
+        const angle =
+            currentRotY *
+            Math.PI /
+            180;
 
 
-        if(previous){
+        const cos =
+            Math.cos(
+                angle
+            );
 
-            exitTimer =
-                setTimeout(
-                    function(){
 
-                        previous.classList.remove(
-                            "exiting"
-                        );
+        const sin =
+            Math.sin(
+                angle
+            );
 
-                    },
-                    360
+
+        cards.forEach(
+            function(card){
+
+                const x =
+                    Number(
+                        card.dataset.baseX ||
+                        0
+                    );
+
+
+                const z =
+                    Number(
+                        card.dataset.baseZ ||
+                        0
+                    );
+
+
+                const rotatedZ =
+                    z *
+                    cos -
+                    x *
+                    sin;
+
+
+                const mobileMode =
+                    mobile();
+
+
+                const radius =
+                    mobileMode
+                        ? 230
+                        : 420;
+
+
+                const normalized =
+                    (
+                        rotatedZ +
+                        radius
+                    ) /
+                    (
+                        radius *
+                        2
+                    );
+
+
+                const opacity =
+                    .26 +
+                    normalized *
+                    .74;
+
+
+                const brightness =
+                    .55 +
+                    normalized *
+                    .55;
+
+
+                card.style.opacity =
+                    Math.max(
+                        .18,
+                        Math.min(
+                            1,
+                            opacity
+                        )
+                    );
+
+
+                card.style.filter =
+                    "brightness(" +
+                    brightness.toFixed(2) +
+                    ")";
+
+
+                card.classList.toggle(
+                    "is-front",
+                    normalized > .7
                 );
-        }
+            }
+        );
     }
 
 
-    function update(){
+    function animate(){
 
-        ticking =
-            false;
+        /*
+           No automatic rotation.
+           Gallery moves only from user interaction.
+        */
 
-
-        const rect =
-            section.getBoundingClientRect();
-
-
-        const viewportHeight =
-            window.innerHeight ||
-            document.documentElement.clientHeight;
+        spinVelocity *=
+            .945;
 
 
-        const scrollableDistance =
-            Math.max(
-                1,
-                section.offsetHeight -
-                viewportHeight
+        currentRotY +=
+            (
+                targetRotY -
+                currentRotY
+            ) *
+            .065;
+
+
+        currentRotY +=
+            spinVelocity;
+
+
+        currentRotX +=
+            (
+                targetRotX -
+                currentRotX
+            ) *
+            .07;
+
+
+        stage.style.transform =
+            "rotateX(" +
+            currentRotX.toFixed(3) +
+            "deg) " +
+            "rotateY(" +
+            currentRotY.toFixed(3) +
+            "deg)";
+
+
+        /*
+           Let the center wordmark bend/tilt with the world,
+           but at a softer amount so it remains readable.
+        */
+        if(center){
+
+            const centerTiltY =
+                currentRotY *
+                .12;
+
+            const centerTiltX =
+                currentRotX *
+                .24;
+
+            center.style.transform =
+                "translate(-50%,-50%) " +
+                "translateZ(" +
+                (
+                    mobile()
+                        ? 120
+                        : 180
+                ) +
+                "px) " +
+                "rotateX(" +
+                centerTiltX.toFixed(2) +
+                "deg) " +
+                "rotateY(" +
+                centerTiltY.toFixed(2) +
+                "deg)";
+        }
+
+
+        updateDepthStyles();
+
+
+        rafId =
+            requestAnimationFrame(
+                animate
             );
+    }
 
 
-        const travelled =
-            Math.min(
-                scrollableDistance,
+    function spinBurst(direction){
+
+        section.classList.remove(
+            "spin-burst"
+        );
+
+        void section.offsetWidth;
+
+        section.classList.add(
+            "spin-burst"
+        );
+
+
+        spinVelocity +=
+            7.5 *
+            direction;
+
+
+        targetRotY +=
+            115 *
+            direction;
+
+
+        setTimeout(
+            function(){
+
+                section.classList.remove(
+                    "spin-burst"
+                );
+
+            },
+            760
+        );
+    }
+
+
+    /* MOUSE MOVEMENT */
+
+    section.addEventListener(
+        "pointermove",
+        function(event){
+
+            if(
+                event.pointerType ===
+                "touch"
+            ){
+                return;
+            }
+
+
+            const rect =
+                section.getBoundingClientRect();
+
+
+            const x =
+                (
+                    event.clientX -
+                    rect.left
+                ) /
+                rect.width;
+
+
+            const y =
+                (
+                    event.clientY -
+                    rect.top
+                ) /
+                rect.height;
+
+
+            targetRotY =
+                (
+                    x -
+                    .5
+                ) *
+                24;
+
+
+            targetRotX =
+                -4 +
+                (
+                    .5 -
+                    y
+                ) *
+                12;
+        }
+    );
+
+
+    /* WHEEL */
+
+    section.addEventListener(
+        "wheel",
+        function(event){
+
+            spinVelocity +=
+                event.deltaY *
+                .0055;
+
+            targetRotY +=
+                event.deltaY *
+                .012;
+        },
+        {
+            passive:true
+        }
+    );
+
+
+    /* DOUBLE CLICK = STRONG ROTATION */
+
+    section.addEventListener(
+        "dblclick",
+        function(event){
+
+            const rect =
+                section.getBoundingClientRect();
+
+
+            const direction =
+                event.clientX <
+                rect.left +
+                rect.width /
+                2
+                    ? -1
+                    : 1;
+
+
+            spinBurst(
+                direction
+            );
+        }
+    );
+
+
+    /* TOUCH / SWIPE / DOUBLE TAP */
+
+    section.addEventListener(
+        "touchstart",
+        function(event){
+
+            if(
+                !event.touches ||
+                !event.touches.length
+            ){
+                return;
+            }
+
+
+            const now =
+                Date.now();
+
+
+            if(
+                now -
+                lastTapTime <
+                330
+            ){
+
+                const rect =
+                    section.getBoundingClientRect();
+
+
+                const direction =
+                    event.touches[0]
+                        .clientX <
+                    rect.left +
+                    rect.width /
+                    2
+                        ? -1
+                        : 1;
+
+
+                spinBurst(
+                    direction
+                );
+            }
+
+
+            lastTapTime =
+                now;
+
+
+            touchX =
+                event.touches[0]
+                    .clientX;
+
+            touchY =
+                event.touches[0]
+                    .clientY;
+        },
+        {
+            passive:true
+        }
+    );
+
+
+    section.addEventListener(
+        "touchmove",
+        function(event){
+
+            if(
+                touchX === null ||
+                touchY === null ||
+                !event.touches ||
+                !event.touches.length
+            ){
+                return;
+            }
+
+
+            const newX =
+                event.touches[0]
+                    .clientX;
+
+
+            const newY =
+                event.touches[0]
+                    .clientY;
+
+
+            const dx =
+                newX -
+                touchX;
+
+
+            const dy =
+                newY -
+                touchY;
+
+
+            targetRotY +=
+                dx *
+                .3;
+
+
+            targetRotX -=
+                dy *
+                .08;
+
+
+            targetRotX =
                 Math.max(
-                    0,
-                    -rect.top
-                )
-            );
+                    -11,
+                    Math.min(
+                        8,
+                        targetRotX
+                    )
+                );
 
 
-        const progress =
-            travelled /
-            scrollableDistance;
+            spinVelocity =
+                dx *
+                .025;
 
 
-        let index =
-            Math.floor(
-                progress *
-                cards.length
-            );
+            touchX =
+                newX;
 
-
-        if(progress >= 1){
-
-            index =
-                cards.length - 1;
+            touchY =
+                newY;
+        },
+        {
+            passive:true
         }
+    );
 
 
-        setCard(
-            index
-        );
-    }
+    section.addEventListener(
+        "touchend",
+        function(){
 
+            touchX =
+                null;
 
-    function requestUpdate(){
-
-        if(ticking){
-
-            return;
-        }
-
-
-        ticking =
-            true;
-
-
-        requestAnimationFrame(
-            update
-        );
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        requestUpdate,
+            touchY =
+                null;
+        },
         {
             passive:true
         }
@@ -10844,147 +13288,351 @@ syncVideoButtons();
 
     window.addEventListener(
         "resize",
-        requestUpdate
+        layoutSpatialWall
     );
 
 
-    window.addEventListener(
-        "orientationchange",
-        function(){
-
-            setTimeout(
-                requestUpdate,
-                180
-            );
-        }
-    );
+    layoutSpatialWall();
 
 
-    document.addEventListener(
-        "visibilitychange",
-        function(){
+    if(!rafId){
 
-            if(!document.hidden){
+        animate();
+    }
 
-                setTimeout(
-                    requestUpdate,
-                    100
+})();
+
+
+/* =========================================================
+   PRODUCT SIGNALS DROPDOWNS
+========================================================= */
+
+(function(){
+
+    const signals =
+        Array.from(
+            document.querySelectorAll(
+                ".product-signal"
+            )
+        );
+
+    if(!signals.length){
+        return;
+    }
+
+
+    signals.forEach(
+        function(signal){
+
+            const trigger =
+                signal.querySelector(
+                    ".product-signal-trigger"
                 );
+
+            if(!trigger){
+                return;
             }
+
+
+            trigger.addEventListener(
+                "click",
+                function(){
+
+                    const isOpen =
+                        signal.classList.contains(
+                            "open"
+                        );
+
+
+                    /*
+                       Keep only one dropdown open at a time.
+                    */
+                    signals.forEach(
+                        function(item){
+
+                            item.classList.remove(
+                                "open"
+                            );
+
+                            const itemTrigger =
+                                item.querySelector(
+                                    ".product-signal-trigger"
+                                );
+
+                            if(itemTrigger){
+
+                                itemTrigger.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+                            }
+                        }
+                    );
+
+
+                    if(!isOpen){
+
+                        signal.classList.add(
+                            "open"
+                        );
+
+                        trigger.setAttribute(
+                            "aria-expanded",
+                            "true"
+                        );
+                    }
+                }
+            );
         }
     );
-
-
-    /*
-       Make sure the first newspaper is visible
-       immediately and sync with current scroll position.
-    */
-
-    cards.forEach(
-        function(card,i){
-
-            card.classList.toggle(
-                "active",
-                i === 0
-            );
-
-            card.classList.remove(
-                "exiting"
-            );
-        }
-    );
-
-
-    requestUpdate();
 
 })();
 
 
 
+
 /* =========================================================
-   MOBILE STABLE VIEWPORT HEIGHT
-   Keeps sticky newspaper section fixed while Chrome's
-   address bar opens/closes during scrolling.
+   CEZONAL PARTICLE CTA — ORIGINAL MOTION, OPTIMIZED
+   Left -> center globe -> right.
 ========================================================= */
 
 (function(){
 
-    const root =
-        document.documentElement;
+    const section = document.getElementById("cezonal-particle-cta");
+    const canvas = document.getElementById("cezonalParticleCanvas");
 
-    let stableHeight =
-        window.innerHeight;
+    if(!section || !canvas) return;
 
-    function setStableViewport(force){
+    const ctx = canvas.getContext("2d", {alpha:true});
+    if(!ctx) return;
 
-        const current =
-            window.innerHeight;
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let particles = [];
+    let raf = 0;
+    let active = false;
+    let lastFrame = 0;
+    let startTime = performance.now();
 
-        /*
-           On mobile, browser chrome can change innerHeight
-           by a small amount while scrolling. Ignore those
-           temporary changes so the sticky section does not jump.
-        */
-        if(
-            force ||
-            Math.abs(
-                current -
-                stableHeight
-            ) > 140
-        ){
-            stableHeight =
-                current;
-        }
+    const reducedMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        root.style.setProperty(
-            "--stable-vh",
-            stableHeight + "px"
-        );
+    function easeInOut(t){
+        return t < .5
+            ? 2*t*t
+            : 1 - Math.pow(-2*t+2,2)/2;
     }
 
-    setStableViewport(
-        true
-    );
+    function clamp(v,min,max){
+        return Math.max(min,Math.min(max,v));
+    }
+
+    function buildParticles(){
+
+        const mobile = width <= 600;
+
+        // Keeps the old dense look but is much lighter.
+        const count = mobile ? 300 : 540;
+
+        const radius =
+            Math.min(
+                width * (mobile ? .43 : .34),
+                height * (mobile ? .35 : .40)
+            );
+
+        particles = new Array(count);
+
+        for(let i=0;i<count;i++){
+
+            const u = Math.random();
+            const v = Math.random();
+
+            const theta = Math.PI * 2 * u;
+            const phi = Math.acos(2*v - 1);
+            const shell = radius * (.76 + Math.random()*.24);
+
+            particles[i] = {
+                x:Math.sin(phi)*Math.cos(theta)*shell,
+                y:Math.cos(phi)*shell,
+                z:Math.sin(phi)*Math.sin(theta)*shell,
+                size:.65 + Math.random()*1.25,
+                alpha:.34 + Math.random()*.56,
+                delay:Math.random()*.12
+            };
+        }
+    }
+
+    function resize(){
+
+        const rect = section.getBoundingClientRect();
+
+        width = Math.max(1,Math.round(rect.width));
+        height = Math.max(1,Math.round(rect.height));
+
+        // Important performance fix.
+        dpr = Math.min(window.devicePixelRatio || 1,1.35);
+
+        canvas.width = Math.round(width*dpr);
+        canvas.height = Math.round(height*dpr);
+        canvas.style.width = width+"px";
+        canvas.style.height = height+"px";
+
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+
+        buildParticles();
+    }
+
+    function draw(now){
+
+        raf = 0;
+
+        if(!active) return;
+
+        // ~30fps instead of rendering unnecessarily at 60/120fps.
+        if(now-lastFrame < 31){
+            raf = requestAnimationFrame(draw);
+            return;
+        }
+
+        lastFrame = now;
+
+        ctx.clearRect(0,0,width,height);
+
+        const cycle = 11500;
+        const raw = ((now-startTime)%cycle)/cycle;
+
+        let formation = 1;
+        let travelX = 0;
+
+        if(reducedMotion){
+            formation = 1;
+        }else if(raw < .24){
+            formation = easeInOut(raw/.24);
+            travelX = -width*.62*(1-formation);
+        }else if(raw < .70){
+            formation = 1;
+        }else{
+            const out = easeInOut((raw-.70)/.30);
+            formation = 1-out;
+            travelX = width*.68*out;
+        }
+
+        const cx = width*.5;
+        const cy = height*.49;
+
+        // Very slow internal depth rotation, same feel as old version.
+        const rot = reducedMotion ? 0 : now*.000085;
+        const cos = Math.cos(rot);
+        const sin = Math.sin(rot);
+
+        const depthBase = Math.min(width,height)*2.15;
+
+        for(let i=0;i<particles.length;i++){
+
+            const p = particles[i];
+
+            const x = p.x*cos - p.z*sin;
+            const z = p.x*sin + p.z*cos;
+
+            const local =
+                clamp(
+                    (formation-p.delay)/(1-p.delay),
+                    0,
+                    1
+                );
+
+            const spread = 1 + (1-local)*1.55;
+            const perspective = 1 + z/depthBase;
+
+            const px =
+                cx +
+                travelX +
+                x*spread*perspective;
+
+            const py =
+                cy +
+                p.y*spread*perspective;
+
+            if(px < -12 || px > width+12 || py < -12 || py > height+12){
+                continue;
+            }
+
+            const depth =
+                clamp(.58 + perspective*.32,.36,1.05);
+
+            ctx.beginPath();
+            ctx.arc(
+                px,
+                py,
+                p.size*(.76+perspective*.36),
+                0,
+                Math.PI*2
+            );
+
+            ctx.fillStyle =
+                "rgba(255,255,255," +
+                clamp(p.alpha*(.28+local*.72)*depth,0,.94).toFixed(3) +
+                ")";
+
+            ctx.fill();
+        }
+
+        raf = requestAnimationFrame(draw);
+    }
+
+    function start(){
+        if(active) return;
+        active = true;
+        if(!raf) raf = requestAnimationFrame(draw);
+    }
+
+    function stop(){
+        active = false;
+        if(raf){
+            cancelAnimationFrame(raf);
+            raf = 0;
+        }
+    }
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) start();
+                    else stop();
+                });
+            },
+            {threshold:.03}
+        );
+
+    observer.observe(section);
+
+    let resizeTimer = 0;
 
     window.addEventListener(
-        "orientationchange",
+        "resize",
         function(){
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resize,140);
+        },
+        {passive:true}
+    );
 
-            setTimeout(
-                function(){
-
-                    stableHeight =
-                        window.innerHeight;
-
-                    setStableViewport(
-                        true
-                    );
-
-                },
-                350
-            );
+    document.addEventListener(
+        "visibilitychange",
+        function(){
+            if(document.hidden){
+                stop();
+            }else{
+                const r = section.getBoundingClientRect();
+                if(r.bottom>0 && r.top<window.innerHeight) start();
+            }
         }
     );
 
-    window.addEventListener(
-        "pageshow",
-        function(){
-
-            setTimeout(
-                function(){
-
-                    stableHeight =
-                        window.innerHeight;
-
-                    setStableViewport(
-                        true
-                    );
-
-                },
-                120
-            );
-        }
-    );
+    resize();
 
 })();
 
