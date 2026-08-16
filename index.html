@@ -332,7 +332,7 @@ a{
 
     text-decoration:none;
 
-    font-size:13px;
+    font-size:12.5px;
     font-weight:500;
 
     border-radius:9px;
@@ -563,7 +563,7 @@ a{
 }
 
 .evolving-label{
-    margin-bottom:8px;
+    margin-bottom:3px;
 
     font-size:10px;
     font-weight:600;
@@ -1728,7 +1728,7 @@ a{
 ========================================================= */
 
 .company-tag{
-    margin-top:10px;
+    margin-top:6px;
 
     font-size:12px;
     font-weight:500;
@@ -1968,7 +1968,7 @@ a{
 
 
     .contact-link{
-        margin-top:8px;
+        margin-top:5px;
 
         justify-content:center;
 
@@ -2076,7 +2076,7 @@ a{
 
 
     .evolving-text{
-        font-size:28px;
+        font-size:21px;
 
         letter-spacing:-1.2px;
     }
@@ -2178,7 +2178,7 @@ a{
 
 
     .build-text{
-        font-size:26px;
+        font-size:23px;
 
         padding:0 10px;
     }
@@ -2200,7 +2200,7 @@ a{
 
 
     .company-private{
-        margin-top:13px;
+        margin-top:7px;
 
         font-size:8px;
 
@@ -2334,7 +2334,7 @@ a{
 
 .product-copy p{
     max-width:660px;
-    margin-top:18px;
+    margin-top:10px;
     font-size:15px;
     line-height:1.65;
     color:#565656;
@@ -2686,7 +2686,7 @@ a{
 
     .product-copy h2{
         max-width:330px;
-        font-size:26px;
+        font-size:20px;
     }
 
     .product-copy p{
@@ -3232,7 +3232,7 @@ a{
     display:inline-flex;
     align-items:center;
     gap:9px;
-    margin-bottom:12px;
+    margin-bottom:8px;
     font-size:9px;
     font-weight:600;
     letter-spacing:2.2px;
@@ -3525,7 +3525,7 @@ a{
     }
 
     .live-products-head{
-        margin-bottom:22px;
+        margin-bottom:14px;
     }
 
     .live-products-label{
@@ -3534,7 +3534,7 @@ a{
     }
 
     .live-products-head h2{
-        font-size:30px;
+        font-size:28px;
         line-height:1.1;
         letter-spacing:-1.1px;
     }
@@ -3791,32 +3791,45 @@ a{
     will-change:transform,opacity;
 }
 
-/* timing */
-.billing-sequence-line.step-one{
+/* timing
+   Animations start only after JS adds .sequence-started.
+*/
+
+.billing-sequence-line.step-one,
+.billing-sequence-line.step-two,
+.billing-sequence-line.step-three,
+.billing-sequence-line.step-four,
+.billing-sequence-line.step-five,
+.billing-sequence-line.step-six,
+.billing-sequence-line.step-seven{
+    animation:none;
+}
+
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-one{
     animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 0s forwards;
 }
 
-.billing-sequence-line.step-two{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-two{
     animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 1.65s forwards;
 }
 
-.billing-sequence-line.step-three{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-three{
     animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 3.3s forwards;
 }
 
-.billing-sequence-line.step-four{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-four{
     animation:billingScene 1.85s cubic-bezier(.22,.7,.2,1) 4.95s forwards;
 }
 
-.billing-sequence-line.step-five{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-five{
     animation:billingScene 2.2s cubic-bezier(.22,.7,.2,1) 6.6s forwards;
 }
 
-.billing-sequence-line.step-six{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-six{
     animation:billingScene 2.05s cubic-bezier(.22,.7,.2,1) 8.65s forwards;
 }
 
-.billing-sequence-line.step-seven{
+.billing-teaser-frame.sequence-started .billing-sequence-line.step-seven{
     animation:billingScene 2.5s cubic-bezier(.22,.7,.2,1) 10.55s forwards;
 }
 
@@ -4034,6 +4047,45 @@ a{
     animation:billingMp4Spin .7s linear infinite;
 }
 
+/* CONTACT BUTTON BELOW BILLING SECTION */
+
+.billing-contact-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:24px;
+}
+
+.billing-contact-button{
+    min-height:44px;
+    padding:0 20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    border:1px solid #dcdde1;
+    border-radius:11px;
+    background:#fff;
+    color:#171717;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+    box-shadow:0 6px 18px rgba(15,23,42,.045);
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.billing-contact-button:hover{
+    transform:translateY(-2px);
+    border-color:#c8c9cd;
+    box-shadow:0 10px 24px rgba(15,23,42,.07);
+}
+
+
+
+
 @keyframes billingMp4Spin{
     to{
         transform:rotate(360deg);
@@ -4077,7 +4129,7 @@ a{
     }
 
     .billing-sequence-line{
-        padding:22px;
+        padding:12px;
     }
 
     .billing-introducing{
@@ -4110,6 +4162,17 @@ a{
         line-height:1.15;
         letter-spacing:-.8px;
     }
+
+    .billing-contact-wrap{
+        margin-top:18px;
+    }
+
+    .billing-contact-button{
+        min-height:41px;
+        padding:0 17px;
+        border-radius:10px;
+        font-size:11px;
+    }
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -4120,6 +4183,1250 @@ a{
         animation-timing-function:linear;
     }
 }
+
+
+
+/* =========================================================
+   CEZONAL APPROACH — LIGHT FLOW SECTION
+========================================================= */
+
+.cezonal-approach{
+    width:100%;
+    padding:36px 24px 74px;
+    background:#fff;
+    overflow:hidden;
+}
+
+.approach-inner{
+    width:100%;
+    max-width:1240px;
+    margin:0 auto;
+}
+
+.approach-head{
+    display:grid;
+    grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);
+    gap:54px;
+    align-items:end;
+    margin-bottom:30px;
+}
+
+.approach-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:2.1px;
+    text-transform:uppercase;
+    color:#888;
+}
+
+.approach-kicker::before{
+    content:"";
+    width:24px;
+    height:1px;
+    background:#c7c7c7;
+}
+
+.approach-head h2{
+    max-width:760px;
+    font-size:45px;
+    font-weight:600;
+    line-height:1.07;
+    letter-spacing:-1.85px;
+    color:#181818;
+}
+
+/* FLOW */
+.approach-flow{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:0;
+    border-top:1px solid #e8e8e8;
+    border-bottom:1px solid #e8e8e8;
+}
+
+.approach-item{
+    position:relative;
+    min-height:260px;
+    padding:28px 28px 26px;
+    background:#fff;
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.approach-item + .approach-item{
+    border-left:1px solid #e8e8e8;
+}
+
+.approach-item:hover{
+    background:#fafafa;
+}
+
+.approach-number{
+    display:block;
+    margin-bottom:46px;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:1.8px;
+    color:#a0a0a0;
+}
+
+.approach-item h3{
+    max-width:300px;
+    font-size:27px;
+    font-weight:600;
+    line-height:1.14;
+    letter-spacing:-.9px;
+    color:#191919;
+}
+
+.approach-item p{
+    max-width:330px;
+    margin-top:12px;
+    font-size:12.5px;
+    line-height:1.65;
+    color:#707070;
+}
+
+/* visual line movement */
+.approach-item::after{
+    content:"";
+    position:absolute;
+    left:28px;
+    right:28px;
+    bottom:20px;
+    height:1px;
+    background:#ededed;
+}
+
+.approach-item::before{
+    content:"";
+    position:absolute;
+    left:28px;
+    bottom:20px;
+    width:0;
+    height:1px;
+    background:#111;
+    z-index:2;
+    transition:width .4s cubic-bezier(.2,.7,.2,1);
+}
+
+.approach-item:hover::before{
+    width:calc(100% - 56px);
+}
+
+/* small note */
+.approach-note{
+    max-width:760px;
+    margin-top:22px;
+    font-size:12.5px;
+    line-height:1.65;
+    color:#777;
+}
+
+/* TABLET */
+@media(max-width:900px){
+
+    .cezonal-approach{
+        padding:32px 20px 64px;
+    }
+
+    .approach-head{
+        grid-template-columns:1fr;
+        gap:14px;
+        margin-bottom:24px;
+    }
+
+    .approach-head h2{
+        font-size:31px;
+        letter-spacing:-1.45px;
+    }
+
+    .approach-flow{
+        grid-template-columns:1fr;
+    }
+
+    .approach-item{
+        min-height:0;
+        padding:24px 22px 28px;
+    }
+
+    .approach-item + .approach-item{
+        border-left:none;
+        border-top:1px solid #e8e8e8;
+    }
+
+    .approach-number{
+        margin-bottom:24px;
+    }
+
+    .approach-item h3{
+        max-width:620px;
+    }
+
+    .approach-item p{
+        max-width:650px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .cezonal-approach{
+        padding:26px 14px 52px;
+    }
+
+    .approach-head{
+        margin-bottom:18px;
+    }
+
+    .approach-kicker{
+        font-size:8px;
+        letter-spacing:1.7px;
+    }
+
+    .approach-head h2{
+        font-size:29px;
+        line-height:1.1;
+        letter-spacing:-1px;
+    }
+
+    .approach-item{
+        padding:20px 16px 26px;
+    }
+
+    .approach-number{
+        margin-bottom:18px;
+        font-size:9px;
+    }
+
+    .approach-item h3{
+        font-size:23px;
+        line-height:1.13;
+        letter-spacing:-.7px;
+    }
+
+    .approach-item p{
+        margin-top:10px;
+        font-size:12px;
+        line-height:1.6;
+    }
+
+    .approach-item::after,
+    .approach-item::before{
+        left:16px;
+        right:16px;
+        bottom:16px;
+    }
+
+    .approach-item:hover::before{
+        width:calc(100% - 32px);
+    }
+
+    .approach-note{
+        margin-top:18px;
+        font-size:11.5px;
+    }
+}
+
+
+
+/* =========================================================
+   CAPABILITIES — VERTICAL SCROLL STORY
+   One card visible at a time.
+========================================================= */
+
+.scroll-cards-section{
+    position:relative;
+    width:100%;
+    height:700vh; /* 7 cards x 100vh */
+    background:#f7f8fa;
+}
+
+.scroll-cards-sticky{
+    position:sticky;
+    top:0;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:42px 24px 10px;
+}
+
+.scroll-cards-inner{
+    width:100%;
+    max-width:1180px;
+    margin:0 auto;
+}
+
+/* HEADER */
+
+.scroll-cards-head{
+    display:grid;
+    grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+    gap:50px;
+    align-items:end;
+    margin-bottom:12px;
+}
+
+.scroll-cards-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:2.1px;
+    text-transform:uppercase;
+    color:#888;
+}
+
+.scroll-cards-kicker::before{
+    content:"";
+    width:24px;
+    height:1px;
+    background:#c7c7c7;
+}
+
+.scroll-cards-head h2{
+    max-width:730px;
+    font-size:42px;
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-1.7px;
+    color:#181818;
+}
+
+/* STAGE */
+
+.scroll-card-stage{
+    position:relative;
+    width:100%;
+    height:min(44vh,365px);
+    min-height:275px;
+}
+
+/* NEWSPAPER PAGE */
+
+.scroll-card-stage{
+    position:relative;
+    width:100%;
+    height:min(50vh,430px);
+    min-height:330px;
+    perspective:1200px;
+}
+
+.scroll-story-card{
+    position:absolute;
+    inset:0;
+
+    display:block;
+
+    padding:20px 24px 22px;
+
+    border:1px solid #d9d5cc;
+    border-radius:2px;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(40,34,25,.018) 0,
+            rgba(40,34,25,.018) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        #fffdf7;
+
+    box-shadow:
+        0 1px 0 rgba(255,255,255,.9) inset,
+        0 13px 30px rgba(36,31,24,.075);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform-origin:50% 0%;
+    transform:
+        translateY(34px)
+        rotateX(-4deg)
+        scale(.988);
+
+    transition:
+        opacity .34s ease,
+        transform .48s cubic-bezier(.2,.75,.2,1),
+        visibility .34s ease;
+}
+
+.scroll-story-card.active{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    animation:
+        newspaperPageIn .52s
+        cubic-bezier(.2,.75,.2,1)
+        both;
+
+    transform:
+        translateY(0)
+        rotateX(0deg)
+        scale(1);
+}
+
+.scroll-story-card.exiting{
+    opacity:0;
+    transform:
+        translateY(-28px)
+        rotateX(3deg)
+        scale(.99);
+}
+
+@keyframes newspaperPageIn{
+    0%{
+        opacity:0;
+        transform:
+            translateY(40px)
+            rotateX(-6deg)
+            scale(.978);
+    }
+
+    65%{
+        opacity:1;
+        transform:
+            translateY(-3px)
+            rotateX(.4deg)
+            scale(1.002);
+    }
+
+    100%{
+        opacity:1;
+        transform:
+            translateY(0)
+            rotateX(0deg)
+            scale(1);
+    }
+}
+
+/* newspaper masthead */
+.scroll-story-meta{
+    display:grid;
+    grid-template-columns:auto 1fr auto auto;
+    align-items:center;
+    gap:12px;
+
+    padding:0 0 9px;
+    margin:0 0 11px;
+
+    border-right:none;
+    border-bottom:3px double #2f2b25;
+}
+
+.scroll-story-number{
+    display:block;
+    font-family:"Inter",sans-serif;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#746f67;
+}
+
+.scroll-story-tag{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+    color:#2f2b25;
+}
+
+.scroll-story-meta::before{
+    content:"CEZONAL DAILY";
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#1f1d19;
+}
+
+.scroll-story-meta::after{
+    content:"DIGITAL EDITION";
+    justify-self:end;
+    font-family:"Inter",sans-serif;
+    font-size:7px;
+    font-weight:600;
+    letter-spacing:1.3px;
+    color:#8b857b;
+}
+
+/* newspaper article */
+.scroll-story-content{
+    min-width:0;
+}
+
+.scroll-story-content h3{
+    max-width:900px;
+
+    margin:0;
+
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:40px;
+    font-weight:700;
+
+    line-height:.98;
+
+    letter-spacing:-1.25px;
+
+    color:#221f1a;
+}
+
+.scroll-story-content p{
+    max-width:none;
+
+    margin:12px 0 0;
+
+    columns:2;
+    column-gap:32px;
+    column-rule:1px solid #e2ddd4;
+
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:12.5px;
+    line-height:1.58;
+
+    color:#5e584f;
+}
+
+.scroll-story-content p::first-letter{
+    float:left;
+    margin:2px 5px 0 0;
+    font-size:34px;
+    line-height:.82;
+    font-weight:700;
+    color:#2b2722;
+}
+
+.scroll-story-keywords{
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:5px 12px;
+
+    margin-top:11px;
+    padding-top:8px;
+
+    border-top:1px solid #dcd7ce;
+}
+
+.scroll-story-keywords span{
+    position:relative;
+
+    padding-left:10px;
+
+    font-family:"Inter",sans-serif;
+    font-size:8.5px;
+    font-weight:600;
+
+    letter-spacing:.3px;
+    text-transform:uppercase;
+
+    color:#6f685f;
+}
+
+.scroll-story-keywords span::before{
+    content:"•";
+    position:absolute;
+    left:0;
+    top:-1px;
+    color:#8f887e;
+}
+
+/* slight paper stock difference per article */
+.scroll-story-card:nth-child(2){
+    background:
+        repeating-linear-gradient(0deg,rgba(35,60,90,.016) 0 1px,transparent 1px 4px),
+        #fbfcff;
+}
+
+.scroll-story-card:nth-child(3){
+    background:
+        repeating-linear-gradient(0deg,rgba(0,0,0,.014) 0 1px,transparent 1px 4px),
+        #fefefa;
+}
+
+.scroll-story-card:nth-child(4){
+    background:
+        repeating-linear-gradient(0deg,rgba(95,70,20,.016) 0 1px,transparent 1px 4px),
+        #fffdf5;
+}
+
+.scroll-story-card:nth-child(5){
+    background:
+        repeating-linear-gradient(0deg,rgba(90,55,120,.014) 0 1px,transparent 1px 4px),
+        #fdfbff;
+}
+
+.scroll-story-card:nth-child(6){
+    background:
+        repeating-linear-gradient(0deg,rgba(35,85,50,.014) 0 1px,transparent 1px 4px),
+        #fbfefb;
+}
+
+.scroll-story-card:nth-child(7){
+    background:
+        repeating-linear-gradient(0deg,rgba(30,50,75,.014) 0 1px,transparent 1px 4px),
+        #fbfcfe;
+}
+
+/* TABLET */
+@media(max-width:900px){
+
+    .scroll-card-stage{
+        height:min(47vh,400px);
+        min-height:310px;
+    }
+
+    .scroll-story-card{
+        padding:18px 20px 20px;
+    }
+
+    .scroll-story-content h3{
+        font-size:34px;
+    }
+
+    .scroll-story-content p{
+        column-gap:22px;
+        font-size:12px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .scroll-card-stage{
+        height:255px !important;
+        min-height:0 !important;
+
+        display:flex;
+        align-items:flex-start;
+
+        margin-top:0 !important;
+    }
+
+    .scroll-story-card{
+        inset:auto 0 !important;
+
+        top:0 !important;
+        bottom:auto !important;
+
+        height:auto !important;
+        min-height:0 !important;
+
+        padding:12px 13px 13px !important;
+
+        border-radius:1px !important;
+
+        box-shadow:
+            0 9px 20px rgba(36,31,24,.065) !important;
+
+        transform-origin:50% 0% !important;
+
+        transform:
+            translateY(24px)
+            rotateX(-4deg)
+            scale(.992) !important;
+    }
+
+    .scroll-story-card.active{
+        transform:
+            translateY(0)
+            rotateX(0deg)
+            scale(1) !important;
+    }
+
+    .scroll-story-card.exiting{
+        transform:
+            translateY(-16px)
+            rotateX(2deg)
+            scale(.994) !important;
+    }
+
+    .scroll-story-meta{
+        grid-template-columns:1fr auto !important;
+
+        gap:8px !important;
+
+        padding:0 0 6px !important;
+        margin:0 0 7px !important;
+
+        border-bottom:2px double #2f2b25 !important;
+    }
+
+    .scroll-story-meta::before{
+        content:"CEZONAL DAILY" !important;
+        font-size:12px !important;
+    }
+
+    .scroll-story-tag{
+        display:none !important;
+    }
+
+    .scroll-story-meta::after{
+        font-size:6px !important;
+        letter-spacing:1px !important;
+    }
+
+    .scroll-story-content h3{
+        margin:0 !important;
+
+        font-size:24px !important;
+        line-height:.98 !important;
+        letter-spacing:-.65px !important;
+    }
+
+    .scroll-story-content p{
+        margin:7px 0 0 !important;
+
+        columns:1 !important;
+
+        font-size:10px !important;
+        line-height:1.45 !important;
+    }
+
+    .scroll-story-content p::first-letter{
+        margin-right:4px !important;
+        font-size:28px !important;
+    }
+
+    .scroll-story-keywords{
+        margin:7px 0 0 !important;
+        padding-top:6px !important;
+
+        gap:4px 9px !important;
+    }
+
+    .scroll-story-keywords span{
+        font-size:7.2px !important;
+        letter-spacing:.15px !important;
+    }
+
+    .scroll-story-progress{
+        margin-top:4px !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-card-stage{
+        height:240px !important;
+    }
+
+    .scroll-story-card{
+        padding:11px 11px 12px !important;
+    }
+
+    .scroll-story-content h3{
+        font-size:22px !important;
+    }
+
+    .scroll-story-content p{
+        font-size:9.5px !important;
+    }
+}
+
+/* PROGRESS */
+
+.scroll-story-progress{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.scroll-story-progress-track{
+    position:relative;
+    flex:1;
+    height:1px;
+    background:#dfe1e4;
+    overflow:hidden;
+}
+
+.scroll-story-progress-fill{
+    position:absolute;
+    inset:0 auto 0 0;
+    width:14.2857%;
+    background:#111;
+    transition:width .35s ease;
+}
+
+.scroll-story-progress-text{
+    display:none !important;
+}
+
+/* TABLET */
+
+@media(max-width:900px){
+
+    .scroll-cards-sticky{
+        padding:68px 20px 16px;
+    }
+
+    .scroll-cards-head{
+        grid-template-columns:1fr;
+        gap:13px;
+        margin-bottom:22px;
+    }
+
+    .scroll-cards-head h2{
+        font-size:36px;
+        letter-spacing:-1.35px;
+    }
+
+    .scroll-card-stage{
+        height:min(43vh,350px);
+        min-height:270px;
+    }
+
+    .scroll-story-card{
+        grid-template-columns:180px 1fr;
+        gap:30px;
+        padding:30px;
+    }
+
+    .scroll-story-content h3{
+        font-size:36px;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .scroll-cards-section{
+        height:700svh;
+    }
+
+    .scroll-cards-sticky{
+        height:100svh;
+        padding:34px 12px 2px;
+        align-items:flex-start;
+    }
+
+    .scroll-cards-head{
+        gap:0;
+        margin-bottom:0;
+    }
+
+    .scroll-cards-kicker{
+        font-size:8px;
+        letter-spacing:1.7px;
+    }
+
+    .scroll-cards-head h2{
+        font-size:28px;
+        line-height:1.09;
+        letter-spacing:-.95px;
+    }
+
+    .scroll-card-stage{
+        height:calc(100svh - 190px);
+        min-height:245px;
+        max-height:none;
+    }
+
+    .scroll-story-card{
+        grid-template-columns:1fr;
+        grid-template-rows:auto 1fr;
+        gap:20px;
+        padding:22px 20px;
+        border-radius:19px;
+    }
+
+    .scroll-story-meta{
+        min-height:54px;
+        padding:0 0 16px;
+        border-right:none;
+        border-bottom:1px solid #ececec;
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .scroll-story-number{
+        font-size:10px;
+    }
+
+    .scroll-story-tag{
+        font-size:8px;
+    }
+
+    .scroll-story-content{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    .scroll-story-content h3{
+        font-size:29px;
+        line-height:1.1;
+        letter-spacing:-1px;
+    }
+
+    .scroll-story-content p{
+        margin-top:12px;
+        font-size:12px;
+        line-height:1.6;
+    }
+
+    .scroll-story-keywords{
+        gap:8px 14px;
+        margin-top:17px;
+    }
+
+    .scroll-story-keywords span{
+        font-size:9px;
+    }
+
+    .scroll-story-progress{
+        margin-top:8px;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-cards-head h2{
+        font-size:26px;
+    }
+
+    .scroll-card-stage{
+        height:calc(100svh - 184px);
+        min-height:230px;
+    }
+
+    .scroll-story-card{
+        padding:12px 11px 10px;
+    }
+
+    .scroll-story-content h3{
+        font-size:26px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE SCROLL CARD — COMPACT CONTENT FIX
+   Removes the large blank area above/below the text.
+========================================================= */
+
+@media(max-width:600px){
+
+    .scroll-card-stage{
+        height:310px !important;
+        min-height:0 !important;
+        display:flex;
+        align-items:center;
+    }
+
+    .scroll-story-card{
+        inset:auto 0 !important;
+        top:50% !important;
+        bottom:auto !important;
+
+        min-height:0 !important;
+        height:auto !important;
+
+        grid-template-columns:1fr !important;
+        grid-template-rows:auto auto !important;
+        align-items:start !important;
+
+        gap:7px !important;
+        padding:13px 14px 14px !important;
+
+        transform:
+            translateY(calc(-50% + 24px))
+            scale(.994) !important;
+    }
+
+    .scroll-story-card.active{
+        transform:
+            translateY(-50%)
+            scale(1) !important;
+    }
+
+    .scroll-story-card.exiting{
+        transform:
+            translateY(calc(-50% - 24px))
+            scale(.994) !important;
+    }
+
+    .scroll-story-meta{
+        min-height:0 !important;
+        height:auto !important;
+
+        padding:0 0 7px !important;
+        margin:0 !important;
+
+        flex-direction:row !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+
+        border-right:none !important;
+        border-bottom:1px solid #ececec !important;
+    }
+
+    .scroll-story-card:nth-child(1) .scroll-story-meta,
+    .scroll-story-card:nth-child(5) .scroll-story-meta,
+    .scroll-story-card:nth-child(6) .scroll-story-meta{
+        min-height:0 !important;
+        padding:6px 8px !important;
+        margin:0 0 2px !important;
+    }
+
+    .scroll-story-card:nth-child(2) .scroll-story-meta,
+    .scroll-story-card:nth-child(3) .scroll-story-meta,
+    .scroll-story-card:nth-child(4) .scroll-story-meta,
+    .scroll-story-card:nth-child(7) .scroll-story-meta{
+        min-height:0 !important;
+    }
+
+    .scroll-story-content{
+        display:block !important;
+        min-height:0 !important;
+        height:auto !important;
+        padding:0 !important;
+        margin:0 !important;
+    }
+
+    .scroll-story-content h3{
+        margin:0 !important;
+        font-size:21px !important;
+        line-height:1.08 !important;
+    }
+
+    .scroll-story-content p{
+        margin:6px 0 0 !important;
+        font-size:10.5px !important;
+        line-height:1.48 !important;
+    }
+
+    .scroll-story-keywords{
+        margin:8px 0 0 !important;
+        gap:4px 10px !important;
+    }
+
+    .scroll-story-keywords span{
+        font-size:8px !important;
+        line-height:1.35 !important;
+    }
+
+    .scroll-story-progress{
+        margin-top:6px !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-card-stage{
+        height:285px !important;
+    }
+
+    .scroll-story-card{
+        padding:11px 12px 12px !important;
+    }
+
+    .scroll-story-content h3{
+        font-size:19px !important;
+    }
+
+    .scroll-story-content p{
+        font-size:10px !important;
+    }
+}
+
+
+/* Progress bar removed — card count is shown inside each newspaper page. */
+.scroll-story-progress{
+    display:none !important;
+}
+
+
+/* =========================================================
+   MOBILE NEWSPAPER — CLEAN COMPACT VERSION
+========================================================= */
+
+@media(max-width:600px){
+
+    .scroll-cards-head{
+        margin-bottom:0 !important;
+    }
+
+    .scroll-cards-kicker{
+        margin-bottom:2px !important;
+    }
+
+    .scroll-cards-head h2{
+        margin:0 !important;
+        max-width:330px;
+        font-size:20px !important;
+        line-height:1.04 !important;
+        letter-spacing:-.65px !important;
+    }
+
+    .scroll-card-stage{
+        height:248px !important;
+        margin-top:5px !important;
+    }
+
+    .scroll-story-card{
+        padding:10px 11px 11px !important;
+        border:1px solid #d9d5cc !important;
+        background:#fffdf8 !important;
+        box-shadow:0 7px 16px rgba(36,31,24,.055) !important;
+    }
+
+    .scroll-story-meta{
+        display:grid !important;
+        grid-template-columns:1fr auto auto !important;
+        gap:7px !important;
+        align-items:center !important;
+
+        padding:0 0 5px !important;
+        margin:0 0 6px !important;
+
+        border-bottom:2px solid #2f2b25 !important;
+    }
+
+    .scroll-story-meta::before{
+        content:"CEZONAL DAILY" !important;
+        font-size:10.5px !important;
+        letter-spacing:.4px !important;
+    }
+
+    .scroll-story-meta::after{
+        display:none !important;
+    }
+
+    .scroll-story-number{
+        display:block !important;
+        font-size:7px !important;
+        letter-spacing:.5px !important;
+        white-space:nowrap;
+    }
+
+    .scroll-story-tag{
+        display:block !important;
+        font-family:"Inter",sans-serif !important;
+        font-size:6.8px !important;
+        font-weight:600 !important;
+        letter-spacing:.8px !important;
+        text-transform:uppercase !important;
+        white-space:nowrap;
+        color:#817b72 !important;
+    }
+
+    .scroll-story-content h3{
+        font-size:21px !important;
+        line-height:1 !important;
+        letter-spacing:-.55px !important;
+    }
+
+    .scroll-story-content p{
+        margin-top:5px !important;
+        font-size:9.4px !important;
+        line-height:1.38 !important;
+
+        /* Mobile newspaper should not look crowded/glitchy */
+        columns:1 !important;
+
+        display:-webkit-box;
+        -webkit-line-clamp:6;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+    }
+
+    .scroll-story-content p::first-letter{
+        float:none !important;
+        margin:0 !important;
+        font-size:inherit !important;
+        line-height:inherit !important;
+        font-weight:inherit !important;
+    }
+
+    .scroll-story-keywords{
+        margin-top:6px !important;
+        padding-top:5px !important;
+        gap:3px 8px !important;
+    }
+
+    .scroll-story-keywords span{
+        font-size:6.8px !important;
+        line-height:1.2 !important;
+        letter-spacing:0 !important;
+    }
+}
+
+@media(max-width:380px){
+
+    .scroll-card-stage{
+        height:232px !important;
+    }
+
+    .scroll-cards-head h2{
+        font-size:19px !important;
+    }
+
+    .scroll-story-content h3{
+        font-size:19.5px !important;
+    }
+
+    .scroll-story-content p{
+        -webkit-line-clamp:5;
+        font-size:9px !important;
+    }
+}
+
+
+/* Newspaper masthead ordering */
+.scroll-story-meta::before{
+    grid-column:1;
+}
+
+.scroll-story-tag{
+    grid-column:2;
+}
+
+.scroll-story-number{
+    grid-column:3;
+    white-space:nowrap;
+}
+
+.scroll-story-meta::after{
+    grid-column:4;
+}
+
+/* Mobile masthead: CEZONAL DAILY | Desk | 1/7 */
+@media(max-width:600px){
+
+    .scroll-story-meta{
+        grid-template-columns:1fr auto auto !important;
+    }
+
+    .scroll-story-meta::before{
+        grid-column:1 !important;
+    }
+
+    .scroll-story-tag{
+        grid-column:2 !important;
+    }
+
+    .scroll-story-number{
+        grid-column:3 !important;
+    }
+}
+
+
+.product-nav{display:none !important;}
 </style>
 
 </head>
@@ -5279,7 +6586,7 @@ a{
 
                 <video
                     id="billingProductVideo"
-                    src="app/bill.mp4"
+                    src="mage/sample.mp4"
                     muted
                     playsinline
                     preload="auto"
@@ -5402,9 +6709,476 @@ a{
 
         </div>
 
+
+        <div class="billing-contact-wrap">
+
+            <a
+                href="#contact"
+                class="billing-contact-button"
+            >
+                Contact Now
+
+            </a>
+
+        </div>
+
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     CEZONAL APPROACH
+========================================================= -->
+
+<section class="cezonal-approach" id="cezonal-approach">
+
+    <div class="approach-inner">
+
+        <div class="approach-head">
+
+            <span class="approach-kicker">
+                Our Approach
+            </span>
+
+            <h2>
+                Clear thinking before code. Better outcomes after launch.
+            </h2>
+
+        </div>
+
+
+        <div class="approach-flow">
+
+
+            <article class="approach-item">
+
+                <span class="approach-number">
+                    01 — Understand
+                </span>
+
+                <h3>
+                    Start with the real need.
+                </h3>
+
+                <p>
+                    We focus on the problem, the user and the business goal
+                    before deciding what the product should become.
+                </p>
+
+            </article>
+
+
+            <article class="approach-item">
+
+                <span class="approach-number">
+                    02 — Build
+                </span>
+
+                <h3>
+                    Keep the experience simple.
+                </h3>
+
+                <p>
+                    Design and engineering move together so the product
+                    stays useful, fast and easy to operate.
+                </p>
+
+            </article>
+
+
+            <article class="approach-item">
+
+                <span class="approach-number">
+                    03 — Improve
+                </span>
+
+                <h3>
+                    Learn from real usage.
+                </h3>
+
+                <p>
+                    After launch, we keep refining what matters as users,
+                    teams and business needs continue to change.
+                </p>
+
+            </article>
+
+
+        </div>
+
+
+        <p class="approach-note">
+            The process stays practical from the first idea to the product people use every day.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CAPABILITIES — VERTICAL SCROLL STORY
+========================================================= -->
+
+<section class="scroll-cards-section" id="scroll-capabilities">
+
+    <div class="scroll-cards-sticky">
+
+        <div class="scroll-cards-inner">
+
+            <div class="scroll-cards-head">
+
+                <span class="scroll-cards-kicker">
+                    What we can create
+                </span>
+
+                <h2>
+                    Scroll through the ways we turn ideas into products.
+                </h2>
+
+            </div>
+
+
+            <div class="scroll-card-stage">
+
+
+                <!-- 1 -->
+
+                <article class="scroll-story-card active" data-scroll-card="0">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            1 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Business Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            Custom Business Software
+                        </h3>
+
+                        <p>
+                            Purpose-built applications shaped around business
+                            operations, teams and everyday workflows. From internal
+                            approvals and stock movement to staff activity, billing
+                            and reporting, the system can be structured around how
+                            the business already works instead of forcing teams into
+                            a fixed process. The result is software that feels more
+                            natural to use, easier to manage and simpler to expand.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>Custom workflows</span>
+                            <span>Operations</span>
+                            <span>Automation</span>
+                            <span>Role-based access</span>
+                            <span>Reports</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 2 -->
+
+                <article class="scroll-story-card" data-scroll-card="1">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            2 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Mobile Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            Mobile Applications
+                        </h3>
+
+                        <p>
+                            Modern mobile experiences designed around speed,
+                            clarity and everyday customer use. We focus on smooth
+                            navigation, fast interactions and interfaces that remain
+                            easy to understand even as the product grows. Mobile apps
+                            can connect with live data, payments, notifications,
+                            location services and business systems in the background.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>iOS</span>
+                            <span>Android</span>
+                            <span>Connected experiences</span>
+                            <span>Notifications</span>
+                            <span>Live data</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 3 -->
+
+                <article class="scroll-story-card" data-scroll-card="2">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            3 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Commerce Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            E-Commerce Platforms
+                        </h3>
+
+                        <p>
+                            Product discovery, checkout, orders and operations
+                            connected into one smooth shopping experience. Customers
+                            can move from browsing to purchase with fewer steps while
+                            business teams manage products, availability, pricing,
+                            orders and fulfilment from a connected operational layer.
+                            The platform can scale across web and mobile experiences.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>Shopping</span>
+                            <span>Checkout</span>
+                            <span>Orders</span>
+                            <span>Inventory</span>
+                            <span>Fulfilment</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 4 -->
+
+                <article class="scroll-story-card" data-scroll-card="3">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            4 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Retail Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            Billing & Retail Systems
+                        </h3>
+
+                        <p>
+                            Faster billing, receipts, inventory and sales
+                            visibility built into a practical business system.
+                            Products can be added quickly, totals calculated instantly
+                            and receipts prepared without slowing down the counter.
+                            Sales history, stock movement and day-to-day billing data
+                            stay connected so owners can understand operations better.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>Billing</span>
+                            <span>Receipts</span>
+                            <span>Inventory</span>
+                            <span>Sales history</span>
+                            <span>Quick checkout</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 5 -->
+
+                <article class="scroll-story-card" data-scroll-card="4">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            5 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            AI Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            AI Assistants
+                        </h3>
+
+                        <p>
+                            Smart automated conversations that answer questions,
+                            support customers and stay available around the clock.
+                            AI assistants can handle common enquiries, guide users
+                            through services, collect useful details and reduce the
+                            amount of repetitive support work handled manually. The
+                            experience can be connected to business information and
+                            existing customer workflows.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>AI replies</span>
+                            <span>Support</span>
+                            <span>Automation</span>
+                            <span>Lead capture</span>
+                            <span>24/7 assistance</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 6 -->
+
+                <article class="scroll-story-card" data-scroll-card="5">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            6 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Operations Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            Internal Dashboards
+                        </h3>
+
+                        <p>
+                            Clear operational views for teams, orders,
+                            performance and faster everyday decisions. Dashboards
+                            bring important activity into one place so teams can
+                            monitor status, compare performance and act without
+                            jumping between multiple systems. Views can be tailored
+                            for managers, staff and different operational roles.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>Dashboards</span>
+                            <span>Insights</span>
+                            <span>Team tools</span>
+                            <span>Live status</span>
+                            <span>Performance</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- 7 -->
+
+                <article class="scroll-story-card" data-scroll-card="6">
+
+                    <div class="scroll-story-meta">
+<span class="scroll-story-number">
+                            7 / 7
+                        </span>
+
+<span class="scroll-story-tag">
+                            Platform Desk
+                        </span>
+
+                    </div>
+
+                    <div class="scroll-story-content">
+
+                        <h3>
+                            Connected Digital Products
+                        </h3>
+
+                        <p>
+                            Web, mobile and backend systems working together
+                            as one connected product experience. Customer-facing
+                            interfaces, admin tools, databases and operational systems
+                            can share the same underlying information so updates move
+                            across the product without repeated work. This creates a
+                            stronger foundation for future features, integrations and
+                            larger-scale growth.
+                        </p>
+
+                        <div class="scroll-story-keywords">
+                            <span>Web</span>
+                            <span>Mobile</span>
+                            <span>Backend</span>
+                            <span>Integrations</span>
+                            <span>Scalable systems</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <div class="scroll-story-progress">
+
+                <div class="scroll-story-progress-track">
+                    <span
+                        class="scroll-story-progress-fill"
+                        id="scrollStoryProgressFill"
+                    ></span>
+                </div>
+</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 
@@ -7391,6 +9165,7 @@ syncVideoButtons();
 
 /* =========================================================
    BILLING SOFTWARE TEASER
+   MOBILE CHROME SAFE
 ========================================================= */
 
 (function(){
@@ -7430,6 +9205,12 @@ syncVideoButtons();
     let started =
         false;
 
+    let revealTimer =
+        null;
+
+    let sectionVisible =
+        false;
+
 
     function videoLoaded(){
 
@@ -7453,28 +9234,154 @@ syncVideoButtons();
     }
 
 
-    video.addEventListener(
+    [
         "loadeddata",
-        videoLoaded
-    );
-
-    video.addEventListener(
         "canplay",
-        videoLoaded
+        "playing"
+    ].forEach(
+        function(eventName){
+
+            video.addEventListener(
+                eventName,
+                videoLoaded
+            );
+        }
     );
 
-    video.addEventListener(
-        "playing",
-        videoLoaded
-    );
 
-    video.addEventListener(
+    [
         "waiting",
-        videoLoading
+        "stalled"
+    ].forEach(
+        function(eventName){
+
+            video.addEventListener(
+                eventName,
+                videoLoading
+            );
+        }
     );
+
+
+    /*
+       After the MP4 finishes, return to the beginning:
+       Introducing -> Fast -> Secure -> Smart -> Billing Software
+       -> company text -> video again.
+    */
+
+    video.addEventListener(
+        "ended",
+        function(){
+
+            restartWholeSequence();
+
+        }
+    );
+
+
+    function clearRevealTimer(){
+
+        if(revealTimer){
+
+            clearTimeout(
+                revealTimer
+            );
+
+            revealTimer =
+                null;
+        }
+    }
+
+
+    function isSectionOnScreen(){
+
+        const rect =
+            section.getBoundingClientRect();
+
+        const viewportHeight =
+            window.innerHeight ||
+            document.documentElement.clientHeight;
+
+        return (
+            rect.bottom >
+            viewportHeight * .15
+        ) &&
+        (
+            rect.top <
+            viewportHeight * .85
+        );
+    }
+
+
+    function restartCssAnimations(){
+
+        /*
+           This remove -> reflow -> add pattern reliably
+           restarts CSS animation in mobile Chrome.
+        */
+
+        frame.classList.remove(
+            "sequence-started"
+        );
+
+        void frame.offsetWidth;
+
+        frame.classList.add(
+            "sequence-started"
+        );
+    }
+
+
+    function restartWholeSequence(){
+
+        clearRevealTimer();
+
+        video.pause();
+
+        try{
+
+            video.currentTime =
+                0;
+
+        }catch(error){}
+
+
+        frame.classList.remove(
+            "video-ready"
+        );
+
+
+        started =
+            false;
+
+
+        /*
+           Restart from "Introducing" only while the user
+           is still on/near the billing section.
+        */
+
+        if(
+            !document.hidden &&
+            isSectionOnScreen()
+        ){
+
+            setTimeout(
+                function(){
+
+                    startTeaser(
+                        true
+                    );
+
+                },
+                450
+            );
+        }
+    }
 
 
     function revealVideo(){
+
+        clearRevealTimer();
 
         frame.classList.add(
             "video-ready"
@@ -7499,11 +9406,17 @@ syncVideoButtons();
             ""
         );
 
-        video.currentTime =
-            0;
+        try{
+
+            video.currentTime =
+                0;
+
+        }catch(error){}
+
 
         const playPromise =
             video.play();
+
 
         if(
             playPromise &&
@@ -7512,31 +9425,140 @@ syncVideoButtons();
         ){
 
             playPromise.catch(
-                function(){}
+                function(){
+
+                    video.addEventListener(
+                        "canplay",
+                        function(){
+
+                            if(
+                                !document.hidden &&
+                                frame.classList.contains(
+                                    "video-ready"
+                                )
+                            ){
+
+                                video.play()
+                                    .catch(
+                                        function(){}
+                                    );
+                            }
+                        },
+                        {
+                            once:true
+                        }
+                    );
+                }
             );
         }
     }
 
 
-    function startTeaser(){
+    function startTeaser(forceRestart){
 
-        if(started){
+        if(
+            document.hidden ||
+            !isSectionOnScreen()
+        ){
             return;
         }
+
+
+        if(
+            started &&
+            !forceRestart
+        ){
+            return;
+        }
+
+
+        clearRevealTimer();
 
         started =
             true;
 
+
+        frame.classList.remove(
+            "video-ready"
+        );
+
+
+        video.pause();
+
+        try{
+
+            video.currentTime =
+                0;
+
+        }catch(error){}
+
+
+        restartCssAnimations();
+
+
         /*
-          Preload the MP4 while the text teaser
-          is running, but do not show/play it yet.
+           Preload your mage/sample.mp4 while
+           the teaser is playing.
         */
 
-        video.load();
+        if(video.readyState === 0){
 
-        setTimeout(
-            revealVideo,
-            TEASER_TIME
+            try{
+                video.load();
+            }catch(error){}
+        }
+
+
+        revealTimer =
+            setTimeout(
+                revealVideo,
+                TEASER_TIME
+            );
+    }
+
+
+    function handleReturnToPage(){
+
+        if(
+            document.hidden ||
+            !isSectionOnScreen()
+        ){
+            return;
+        }
+
+
+        /*
+           If teaser already completed, just resume video.
+        */
+
+        if(
+            frame.classList.contains(
+                "video-ready"
+            )
+        ){
+
+            video.muted =
+                true;
+
+            video.play()
+                .catch(
+                    function(){}
+                );
+
+            return;
+        }
+
+
+        /*
+           If browser/app was minimized before teaser completed,
+           restart the teaser from the beginning.
+        */
+
+        started =
+            false;
+
+        startTeaser(
+            true
         );
     }
 
@@ -7549,15 +9571,31 @@ syncVideoButtons();
                     function(entry){
 
                         if(
+                            entry.target !==
+                            section
+                        ){
+                            return;
+                        }
+
+
+                        sectionVisible =
                             entry.isIntersecting &&
-                            entry.intersectionRatio >= .3
+                            entry.intersectionRatio >= .22;
+
+
+                        if(sectionVisible){
+
+                            startTeaser(
+                                false
+                            );
+
+                        }else if(
+                            frame.classList.contains(
+                                "video-ready"
+                            )
                         ){
 
-                            startTeaser();
-
-                            observer.unobserve(
-                                section
-                            );
+                            video.pause();
                         }
                     }
                 );
@@ -7565,8 +9603,9 @@ syncVideoButtons();
             {
                 threshold:[
                     0,
-                    .3,
-                    .6
+                    .22,
+                    .4,
+                    .65
                 ]
             }
         );
@@ -7576,13 +9615,399 @@ syncVideoButtons();
         section
     );
 
+
+    /*
+       Mobile Chrome minimize / app switch.
+    */
+
+    document.addEventListener(
+        "visibilitychange",
+        function(){
+
+            if(document.hidden){
+
+                clearRevealTimer();
+
+                video.pause();
+
+                return;
+            }
+
+
+            setTimeout(
+                handleReturnToPage,
+                120
+            );
+        }
+    );
+
+
+    /*
+       Chrome can restore a page from memory/bfcache.
+    */
+
+    window.addEventListener(
+        "pageshow",
+        function(){
+
+            setTimeout(
+                handleReturnToPage,
+                140
+            );
+        }
+    );
+
+
+    /*
+       Mobile orientation / maximize / resize safety.
+    */
+
+    window.addEventListener(
+        "orientationchange",
+        function(){
+
+            setTimeout(
+                handleReturnToPage,
+                320
+            );
+        }
+    );
+
+
+    let resizeTimer =
+        null;
+
+
+    window.addEventListener(
+        "resize",
+        function(){
+
+            clearTimeout(
+                resizeTimer
+            );
+
+            resizeTimer =
+                setTimeout(
+                    function(){
+
+                        if(
+                            !document.hidden &&
+                            isSectionOnScreen() &&
+                            !frame.classList.contains(
+                                "video-ready"
+                            )
+                        ){
+
+                            started =
+                                false;
+
+                            startTeaser(
+                                true
+                            );
+                        }
+
+                    },
+                    300
+                );
+        }
+    );
+
 })();
+
+
+
+
+
+/* =========================================================
+   7-CARD VERTICAL SCROLL STORY
+   Normal page scroll moves through one sticky newspaper at a time.
+   After paper 7, normal page scrolling continues.
+========================================================= */
+
+(function(){
+
+    const section =
+        document.getElementById(
+            "scroll-capabilities"
+        );
+
+    const cards =
+        Array.from(
+            document.querySelectorAll(
+                "[data-scroll-card]"
+            )
+        );
+
+    if(
+        !section ||
+        !cards.length
+    ){
+        return;
+    }
+
+    let currentIndex =
+        0;
+
+    let ticking =
+        false;
+
+    let exitTimer =
+        null;
+
+
+    function setCard(index){
+
+        index =
+            Math.max(
+                0,
+                Math.min(
+                    cards.length - 1,
+                    index
+                )
+            );
+
+
+        if(index === currentIndex){
+
+            cards[index]
+                .classList.add(
+                    "active"
+                );
+
+            return;
+        }
+
+
+        const previous =
+            cards[currentIndex];
+
+
+        if(exitTimer){
+
+            clearTimeout(
+                exitTimer
+            );
+
+            exitTimer =
+                null;
+        }
+
+
+        if(previous){
+
+            previous.classList.remove(
+                "active"
+            );
+
+            previous.classList.add(
+                "exiting"
+            );
+        }
+
+
+        currentIndex =
+            index;
+
+
+        cards.forEach(
+            function(card,i){
+
+                if(i === currentIndex){
+
+                    card.classList.remove(
+                        "exiting"
+                    );
+
+                    /*
+                       Remove + reflow + add so the paper
+                       entrance animation replays cleanly.
+                    */
+
+                    card.classList.remove(
+                        "active"
+                    );
+
+                    void card.offsetWidth;
+
+                    card.classList.add(
+                        "active"
+                    );
+
+                }else if(card !== previous){
+
+                    card.classList.remove(
+                        "active"
+                    );
+
+                    card.classList.remove(
+                        "exiting"
+                    );
+                }
+            }
+        );
+
+
+        if(previous){
+
+            exitTimer =
+                setTimeout(
+                    function(){
+
+                        previous.classList.remove(
+                            "exiting"
+                        );
+
+                    },
+                    520
+                );
+        }
+    }
+
+
+    function update(){
+
+        ticking =
+            false;
+
+
+        const rect =
+            section.getBoundingClientRect();
+
+
+        const viewportHeight =
+            window.innerHeight ||
+            document.documentElement.clientHeight;
+
+
+        const scrollableDistance =
+            Math.max(
+                1,
+                section.offsetHeight -
+                viewportHeight
+            );
+
+
+        const travelled =
+            Math.min(
+                scrollableDistance,
+                Math.max(
+                    0,
+                    -rect.top
+                )
+            );
+
+
+        const progress =
+            travelled /
+            scrollableDistance;
+
+
+        let index =
+            Math.floor(
+                progress *
+                cards.length
+            );
+
+
+        if(progress >= 1){
+
+            index =
+                cards.length - 1;
+        }
+
+
+        setCard(
+            index
+        );
+    }
+
+
+    function requestUpdate(){
+
+        if(ticking){
+
+            return;
+        }
+
+
+        ticking =
+            true;
+
+
+        requestAnimationFrame(
+            update
+        );
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        requestUpdate,
+        {
+            passive:true
+        }
+    );
+
+
+    window.addEventListener(
+        "resize",
+        requestUpdate
+    );
+
+
+    window.addEventListener(
+        "orientationchange",
+        function(){
+
+            setTimeout(
+                requestUpdate,
+                180
+            );
+        }
+    );
+
+
+    document.addEventListener(
+        "visibilitychange",
+        function(){
+
+            if(!document.hidden){
+
+                setTimeout(
+                    requestUpdate,
+                    100
+                );
+            }
+        }
+    );
+
+
+    /*
+       Make sure the first newspaper is visible
+       immediately and sync with current scroll position.
+    */
+
+    cards.forEach(
+        function(card,i){
+
+            card.classList.toggle(
+                "active",
+                i === 0
+            );
+
+            card.classList.remove(
+                "exiting"
+            );
+        }
+    );
+
+
+    requestUpdate();
+
+})();
+
 
 </script>
 
 </body>
 </html>
-<style>
-/* Product slider dots removed completely */
-.product-nav{display:none !important;}
-</style>
